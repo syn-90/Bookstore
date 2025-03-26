@@ -16,7 +16,7 @@ class CategoryModel(models.Model):
 class AuthorModel(models.Model):
     image = models.ImageField(upload_to='authors/', verbose_name="تصویر")
     name = models.CharField(max_length=50, verbose_name="نام و نام خانوادگی")
-    birth = models.DateField(auto_now_add=False, verbose_name="تریخ تولد ")
+    birth = models.DateField(auto_now_add=False, verbose_name="تآریخ تولد ")
     language = models.CharField(max_length=50, verbose_name="زبان")
     number_books = models.IntegerField(verbose_name="تعداد کتاب های نویسنده")
     number_awards = models.IntegerField(verbose_name="تعداد جوایز نویسنده")
