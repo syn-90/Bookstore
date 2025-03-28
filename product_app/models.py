@@ -16,7 +16,7 @@ class CategoryModel(models.Model):
 class AuthorModel(models.Model):
     image = models.ImageField(upload_to='authors/', verbose_name="تصویر")
     name = models.CharField(max_length=50, verbose_name="نام و نام خانوادگی")
-    birth = models.DateField(auto_now_add=False, verbose_name="تآریخ تولد ")
+    birth = models.IntegerField( verbose_name="تاریخ تولد(سال) ")
     language = models.CharField(max_length=50, verbose_name="زبان")
     number_books = models.IntegerField(verbose_name="تعداد کتاب های نویسنده")
     number_awards = models.IntegerField(verbose_name="تعداد جوایز نویسنده")
@@ -47,9 +47,11 @@ class ProductModel(models.Model) :
     category = models.ForeignKey(to=CategoryModel, on_delete=models.CASCADE, verbose_name="دسته بندی کتاب")
     description = models.TextField(verbose_name="توضیحات")
     seller = models.CharField(max_length=50, verbose_name="فروشنده")
-    is_off = models.IntegerField(blank=False, verbose_name="تخفیف(بصورت درصد)")
+    is_off = models.IntegerField(blank=True, verbose_name="تخفیف(بصورت درصد)")
     is_active = models.BooleanField(default=True, verbose_name="فعال/غیر فعال")
     slug = models.SlugField(verbose_name="عنوان در مرورگر")
+    def seprator(self):
+        return "{:,}".format(self.price)
 
     def __str__(self):
         return self.title
