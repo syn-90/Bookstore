@@ -42,18 +42,18 @@
                 <div class="col-xl-9">
                     <div class="bj_book_single me-xl-3">
                         <div class="bj_book_img flip">
-                            <div class="front"><img class="img-fluid" src="/static/img/book-single1.jpg" alt="">
+                            <div class="front"><img class="img-fluid" src="{{ product.image.url }}" alt="">
                             </div>
-                            <div class="back"><img class="img-fluid" src="/static/img/book-single.jpg" alt=""></div>
+                            <div class="back"><img class="img-fluid" src="{{ product.image.url }}" alt=""></div>
                             <div class="pr_ribbon">
                                 <span class="product-badge">جدید</span>
                             </div>
                         </div>
                         <div class="bj_book_details">
-                            <h2>کتاب کار داستان سرایی</h2>
+                            <h2>{{ product.title }}</h2>
                             <ul class="list-unstyled book_meta">
-                                <li>اثری از:<a href="author-single.html">فرهاد نادری</a></li>
-                                <li>دسته بندی:<a href="shop-sidebar.html">درام</a></li>
+                                <li>اثری از:<a href="author-single.html">{{ product.author.name }}</a></li>
+                                <li>دسته بندی:<a href="{% url 'category_page' product.category.slug %}">{{ product.category }}</a></li>
                                 <li>برچسب بزنید:<a href="shop-sidebar.html">پرفروش ترین ها</a></li>
                             </ul>
                             <div class="ratting review">
@@ -69,15 +69,15 @@
                                     <span class="count"> 50 </span>بررسی ها
                                 </a>
                             </div>
-                            <div class="price">100تومان</div>
-                            <p>آنچه گفته شد را توضیح خواهم داد. زیرا هیچ کس از خود لذت متنفر نیست و از آن فرار نمی کند
-                                چون موفق می شوند</p>
+                            <div class="price">{{ product.seprator }}تومان</div>
+                            <p>{{ product.description}}
+                                </p>
                             <ul class="product_meta list-unstyled">
-                                <li><span>ناشر:</span>آرین مهری</li>
-                                <li><span>تاریخ انتشار:</span>دی 20, 1403</li>
-                                <li><span>طول چاپ:</span>320 صفحه</li>
-                                <li><span>شابک:</span>3288365629</li>
-                                <li><span>زبان:</span>انگلیسی</li>
+                                <li><span>ناشر:</span> {{ product.publisher }}</li>
+                                <li><span>تاریخ انتشار:</span>{{ product.publication_date }}</li>
+                                <li><span>طول چاپ:</span>{{ product.length }} صفحه</li>
+                                <li><span>شابک:</span>{{ product.ISBN }}</li>
+                                <li><span>زبان:</span>{{ product.language }}</li>
                             </ul>
                             <div class="d-flex">
                                 <a href="#" class="bj_theme_btn strock_btn flip_btn">برگشت به عقب</a>
@@ -481,7 +481,7 @@
                 </div>
                 <div class="col-xl-3">
                     <div class="product_sidbar">
-                        <div class="price_head">خرید جدید: <span class="price">100تومان</span></div>
+                        <div class="price_head">خرید جدید: <span class="price">{{ product.seprator }}تومان</span></div>
                         <div class="discount_price">لیست قیمت:
                             <del>150.000&nbsp;تومان</del>
                         </div>
