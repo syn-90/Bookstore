@@ -246,7 +246,7 @@
                                         </button>
                                     </div>
                                     <div class="bj_new_pr_content">
-                                        <a href="product-single.html">
+                                        <a href="{% url 'products_details' product.slug %}">
                                             <h4 class="bj_new_pr_title">{{ product.title }}</h4>
                                         </a>
                                         <div class="bj_pr_meta d-flex">
