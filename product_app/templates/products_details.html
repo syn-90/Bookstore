@@ -52,8 +52,8 @@
                         <div class="bj_book_details">
                             <h2>{{ product.title }}</h2>
                             <ul class="list-unstyled book_meta">
-                                <li>اثری از:<a href="author-single.html">{{ product.author.name }}</a></li>
-                                <li>دسته بندی:<a href="{% url 'category_page' product.category.slug %}">{{ product.category }}</a></li>
+                                <li>اثری از:<a href="{% url 'authors_page' product.author.slug %}">{{ product.author.name }}</a></li>
+                                <li>دسته بندی:<a href="{% url 'category_page' product.category.slug %}">{{ product.category.title }}</a></li>
                                 <li>برچسب بزنید:<a href="shop-sidebar.html">پرفروش ترین ها</a></li>
                             </ul>
                             <div class="ratting review">

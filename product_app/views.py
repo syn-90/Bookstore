@@ -32,3 +32,16 @@ class CategoryView(View):
 
         else :
             redirect('home_page')
+
+class AuthorsView(View):
+    def get(self, request, slug):
+        author = AuthorModel.objects.filter(slug=slug).first()
+
+        if author is not None:
+            return render(request, 'authors_page.html',{
+                'author':author
+            })
+
+        else :
+            redirect('home_page')
+
