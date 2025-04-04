@@ -20,7 +20,7 @@ class AuthorModel(models.Model):
     language = models.CharField(max_length=50, verbose_name="زبان")
     number_books = models.IntegerField(verbose_name="تعداد کتاب های نویسنده")
     number_awards = models.IntegerField(verbose_name="تعداد جوایز نویسنده")
-    category = models.ManyToManyField(to=CategoryModel, verbose_name="ژانر کتاب های  نویسنده")
+    category = models.ManyToManyField(to=CategoryModel, verbose_name= "ژانر کتاب های  نویسنده")
     description = models.TextField(verbose_name="توضیحات")
     slug = models.SlugField(verbose_name="عنوان در مرورگر")
     def __str__(self) :
