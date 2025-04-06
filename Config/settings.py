@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'user_app',
     'home_app',
     'product_app',
+    'contact_app',
 ]
 
 MIDDLEWARE = [
