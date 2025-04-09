@@ -52,7 +52,13 @@
                             <ul class="book_info">
                                 <li><span>موقعیت:</span>نویسنده کتاب</li>
                                 <li><span>متولد:</span>{{ author.birth }}</li>
-                                <li><span>دسته بندی:</span><a href="#">بیوگرافی,</a><a href="#">فانتزی,</a><a href="#">درام</a>
+                                <li><span>دسته بندی:</span>
+                                {% for category in categories %}
+                                    <a href="{% url 'category_page' category.slug %}">{{ category.title }},</a>
+
+                                {% endfor %}
+
+
                                 </li>
                                 <li><span>زبان:</span><a href="#">فارسی,</a><a href="#">المانی</a></li>
                             </ul>
@@ -62,7 +68,7 @@
                                 <li><a href="#"><i class="social_googleplus"></i></a></li>
                                 <li><a href="#"><i class="social_pinterest"></i></a></li>
                             </ul>
-                            <a href="#" class="bj_theme_btn">تماس با ما</a>
+                            <a href="{% url 'contact_page' %}" class="bj_theme_btn">تماس با ما</a>
                         </div>
                     </div>
                     <div class="row award_inner">

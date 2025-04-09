@@ -46,6 +46,12 @@
                                     {#                                              placeholder="پیام خودرا یادداشت کنید"></textarea>#}
 
                                 </div>
+                                {% if form.errors %}
+                                    <div style="color: red">{{ form.name.errors }}
+                                    {{ form.email.errors }}
+                                    </div>
+
+                                {% endif %}
                             </div>
                             {#                            {% if form.name.errors %}#}
                             {#                                نام و نام خانوادگی اجباری است#}
