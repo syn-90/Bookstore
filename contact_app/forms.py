@@ -21,3 +21,4 @@ class ContactForm(forms.Form):
     message = forms.CharField(widget=forms.Textarea(attrs={
     'class' :"form-control", 'id' : "message",  'name':"message", 'rows':"5",'placeholder': "پیام خودرا یادداشت کنید"
     }))
+

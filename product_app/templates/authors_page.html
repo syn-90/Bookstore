@@ -52,14 +52,9 @@
                             <ul class="book_info">
                                 <li><span>موقعیت:</span>نویسنده کتاب</li>
                                 <li><span>متولد:</span>{{ author.birth }}</li>
-                                <li><span>دسته بندی:</span>
-                                    {% for category in categories %}
-                                        <a href="{% url 'category_page' category.slug %}">{{ category.title }},</a>
-
-                                    {% endfor %}
-
+                                <li><span>دسته بندی:</span><a href="#">بیوگرافی,</a><a href="#">فانتزی,</a><a href="#">درام</a>
                                 </li>
-                                <li><span>زبان:</span><a href="#">فارسی,</a><a href="#">{{ author.language }}</a></li>
+                                <li><span>زبان:</span><a href="#">فارسی,</a><a href="#">المانی</a></li>
                             </ul>
                             <ul class="list-unstyled f_social_round">
                                 <li><a href="#"><i class="social_twitter"></i></a></li>

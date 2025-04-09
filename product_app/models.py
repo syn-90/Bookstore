@@ -17,12 +17,13 @@ class AuthorModel(models.Model):
     image = models.ImageField(upload_to='authors/', verbose_name="تصویر")
     name = models.CharField(max_length=50, verbose_name="نام و نام خانوادگی")
     birth = models.IntegerField( verbose_name="تاریخ تولد(سال) ")
-    language = models.CharField(max_length=50, verbose_name="زبان")
+    language = models.CharField(max_length=50, verbose_name="زبان", null=True)
     number_books = models.IntegerField(verbose_name="تعداد کتاب های نویسنده")
     number_awards = models.IntegerField(verbose_name="تعداد جوایز نویسنده")
-    category = models.ManyToManyField(to=CategoryModel, verbose_name= "ژانر کتاب های  نویسنده")
+    category = models.ManyToManyField(to=CategoryModel, verbose_name="ژانر کتاب های  نویسنده")
     description = models.TextField(verbose_name="توضیحات")
     slug = models.SlugField(verbose_name="عنوان در مرورگر")
+
     def __str__(self) :
         return self.name
     class Meta:

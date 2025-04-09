@@ -36,12 +36,10 @@ class CategoryView(View):
 class AuthorsView(View):
     def get(self, request, slug):
         author = AuthorModel.objects.filter(slug=slug).first()
-        categories =CategoryModel.objects.filter(authormodel=author).all()
 
         if author is not None:
             return render(request, 'authors_page.html',{
-                'author':author,
-                'categories':categories
+                'author':author
             })
 
         else :

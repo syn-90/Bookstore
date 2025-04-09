@@ -8,7 +8,9 @@
     <section class="contact-area rtl">
         <!--Google map-->
         <div class="contact-map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d414.1907592634913!2d57.683632672533896!3d36.21041996449709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f724b94639b1a79%3A0x93cac72a0f236a41!2z2YXYrNiq2YXYuSDZgdmG24wg2KrZh9ix2KfZhiDZhtmF2KfbjNmG2K_ar9uMINiz2KjYstmI2KfYsQ!5e0!3m2!1sfa!2s!4v1743955569328!5m2!1sfa!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d414.1907592634913!2d57.683632672533896!3d36.21041996449709!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3f724b94639b1a79%3A0x93cac72a0f236a41!2z2YXYrNiq2YXYuSDZgdmG24wg2KrZh9ix2KfZhiDZhtmF2KfbjNmG2K_ar9uMINiz2KjYstmI2KfYsQ!5e0!3m2!1sfa!2s!4v1743955569328!5m2!1sfa!2s"
+                    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
         <!--Google Maps-->
         <div class="container">
@@ -17,40 +19,40 @@
                     <div class="contact-form wow fadeInLeft" data-wow-delay="0.4s">
                         <h3 class="title">با ما تماس بگیرید</h3>
                         <p class="mb-35">برای ما پیام بگذارید</p>
-                        <form  method="post" id="contactForm">
+                        <form id="contactForm" method="post">
                             {% csrf_token %}
                             <div class="row">
                                 <div class="col-md-6">
                                     <label for="name" class="form-label">نام *</label>
                                     <div class="input-group ">
-{#                                        <i class="input-icon fa-solid fa-user"></i>#}
+                                        {#                                        <i class="input-icon fa-solid fa-user"></i>#}
                                         {{ form.name }}
-{#                                        <input class="form-control" type="text" id="name" name="name" placeholder=""/>#}
+                                        {#                                        <input class="form-control" type="text" id="name" name="name" placeholder=""/>#}
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="email" class="form-label">ایمیل *</label>
                                     <div class="input-group">
-{#                                        <i class="input-icon fa-solid fa-envelope-open"></i>#}
+                                        {#                                        <i class="input-icon fa-solid fa-envelope-open"></i>#}
                                         {{ form.email }}
-{#                                        <input class="form-control" type="email" id="email" name="email"#}
-{#                                               placeholder=""/>#}
+                                        {#                                        <input class="form-control" type="email" id="email" name="email"#}
+                                        {#                                               placeholder=""/>#}
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <label for="message" class="form-label">پیام</label>
                                     {{ form.message }}
-{#                                    <textarea class="form-control" id="message" name="message" rows="5"#}
-{#                                              placeholder="پیام خودرا یادداشت کنید"></textarea>#}
+                                    {#                                    <textarea class="form-control" id="message" name="message" rows="5"#}
+                                    {#                                              placeholder="پیام خودرا یادداشت کنید"></textarea>#}
 
                                 </div>
                             </div>
-{#                            {% if form.name.errors %}#}
-{#                                نام و نام خانوادگی اجباری است#}
-{#                            {% endif %}#}
-{#                           {% if form.email.errors %}#}
-{#                                ایمیل اجباری است#}
-{#                            {% endif %}#}
+                            {#                            {% if form.name.errors %}#}
+                            {#                                نام و نام خانوادگی اجباری است#}
+                            {#                            {% endif %}#}
+                            {#                           {% if form.email.errors %}#}
+                            {#                                ایمیل اجباری است#}
+                            {#                            {% endif %}#}
 
                             <button type="submit" class="bj_theme_btn"><i class="fa-solid fa-paper-plane"></i>ارسال پیام
                             </button>
