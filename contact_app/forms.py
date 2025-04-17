@@ -13,12 +13,12 @@ from .models import ContactModel
 #
 #         }
 class ContactForm(forms.Form):
-    name = forms.CharField(max_length=50, widget=forms.TextInput(attrs={
-        'class': "form-control", 'type': "text", 'id': "name", 'name': "name", 'required': "required", 'minlength' : '5'
+    name = forms.CharField(max_length=50,min_length=5, widget=forms.TextInput(attrs={
+        'class': "form-control", 'type': "text", 'id': "name", 'name': "name", 'required': "required"
     }),
         error_messages={
             'required' : 'نام و نام خانوادگی اجباری است ',
-            'minlength': 'نام و نام خانوادگی حداقل پنج کارکتر باشد '
+            'min_length': 'نام و نام خانوادگی حداقل پنج کارکتر باشد '
         })
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'class': "form-control", 'type': "email", 'id': "email", 'name': "email", 'required': "required"
