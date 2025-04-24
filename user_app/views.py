@@ -3,9 +3,10 @@ from django.shortcuts import render, redirect
 from django.utils.crypto import get_random_string
 from django.views import View
 from .models import UserModel
-from .forms import RegisterForm
+from .forms import RegisterForm, LoginForm
 from utils.check_pattern import CheckPattern
 from utils.utils import create_ranom_code
+from services.email_sender_service import send_email
 
 
 # Create your views here.
@@ -44,8 +45,15 @@ class RegisterView(View):
                                     user = UserModel(username=name, email=email, phone=phone_num, is_active=False, active_code=create_ranom_code(6), token=get_random_string(50))
                                     user.set_password(password)
                                     user.save()
-                                    request.session['otp']=user.token
-                                    return redirect('otp_page')
+                                    response = send_email(subject="فعال سازی حساب کاربری ", to=user.email, context={"user":user}, template_name="template_service/otp_send_email.html")
+                                    if response:
+                                        request.session['otp']=user.token
+                                        return redirect('otp_page')
+                                    else:
+                                        return render(request, 'register_page.html', {
+                                            'form' : form,
+                                            'error_net': True
+                                        })
                                 else:
                                     return render(request, 'register_page.html', {
                                         'form': form,
@@ -99,6 +107,7 @@ class OtpView(View):
                 number = f"{num1}{num2}{num3}{num4}{num5}{num6}"
                 if number== user.active_code:
                     user.is_active = True
+                    user.active_code = create_ranom_code(6)
                     user.save()
                     return redirect('home_page')
                 else:
@@ -113,3 +122,10 @@ class OtpView(View):
                 raise Http404
         else:
             raise Http404
+class Login(View):
+    def get(self, request):
+        form = LoginForm()
+        return render(request, 'login_page.html', {
+            'form': form
+
+        })

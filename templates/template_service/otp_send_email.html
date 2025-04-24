@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ایمیل به کاربر</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .email-header {
+            background-color: #4a6baf;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .email-logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .email-body {
+            padding: 30px;
+        }
+
+        .greeting {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .content {
+            margin-bottom: 25px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .action-button {
+            display: inline-block;
+            background-color: #4a6baf;
+            color: white !important;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            color: #777;
+            border-top: 1px solid #eee;
+        }
+
+        .signature {
+            margin-top: 30px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+<div class="email-container">
+    <div class="email-header">
+        <div class="email-logo">کتاب فروشی بوک جار</div>
+        <div>کد فعال سازی حساب</div>
+    </div>
+
+    <div class="email-body">
+        <div class="greeting">سلام {{ user.username }}،</div>
+
+        <div class="content">
+            <p> کد فعال سازی شما بصورت زیر میباشد.</p>
+
+            <p>{{ user.active_code }}</p>
+        </div>
+
+        <div class="button-container">
+{#            <a href="#" class="action-button">اقدام کنید</a>#}
+        </div>
+
+{#        <div class="content">#}
+{#            <p>اگر دکمه بالا کار نمی‌کند، می‌توانید لینک زیر را در مرورگر خود کپی کنید:</p>#}
+{#            <p style="word-break: break-all; font-size: 12px; color: #4a6baf;">#}
+{#                https://example.com/verify?token=abc123</p>#}
+{#        </div>#}
+
+        <div class="signature">
+            <p>با احترام،</p>
+{#            <p><strong>تیم پشتیبانی شرکت شما</strong></p>#}
+        </div>
+    </div>
+
+{#    <div class="footer">#}
+{#        <p>© 2023 نام شرکت شما. تمام حقوق محفوظ است.</p>#}
+{#        <p>#}
+{#            <a href="#" style="color: #4a6baf; text-decoration: none;">حریم خصوصی</a> |#}
+{#            <a href="#" style="color: #4a6baf; text-decoration: none;">شرایط استفاده</a> |#}
+{#            <a href="#" style="color: #4a6baf; text-decoration: none;">تماس با ما</a>#}
+{#        </p>#}
+{#        <p>این ایمیل به صورت خودکار ارسال شده است، لطفاً به آن پاسخ ندهید.</p>#}
+{#    </div>#}
+</div>
+</body>
+</html>

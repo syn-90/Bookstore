@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/static/img/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link href="/static/vendors/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/vendors/elagent-icon/style.css" rel="stylesheet">
+    <link href="/static/vendors/font-awesome/css/all.min.css" rel="stylesheet">
+    <link href="/static/vendors/animation/animate.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <title>کتاب باز</title>
+</head>
+<body data-scroll-animation="true">
+<div id="preloader" class="" style="display: none;">
+    <div id="ctn-preloader" class="ctn-preloader">
+        <div class="round_spinner">
+            <div class="spinner"></div>
+            <div class="text">
+                <img src="/static/img/favicon.png" alt="Image">
+                <h4><span>کتاب باز</span></h4>
+            </div>
+        </div>
+        <h2 class="head">آیا میدانستید؟</h2>
+        <p>میزبان رویدادهای چهره به چهره در شهرهای مختلف است</p>
+    </div>
+</div>
+
+<div class="body_wrapper rtl">
+    <div class="login-area">
+        <div class="bg-shapes">
+            <img class="wow fadeIn" src="/static/img/login/heart-shape-01.png" alt="Image"
+                 style="visibility: visible; animation-name: fadeIn;">
+            <img class="wow fadeInLeft" src="/static/img/login/heart-shape-02.png" alt="Image"
+                 style="visibility: visible; animation-name: fadeInLeft;">
+            <img class="wow fadeInLeft" src="/static/img/login/heart-shape-03.png" alt="Image"
+                 style="visibility: visible; animation-name: fadeInLeft;">
+            <img class="wow  animated" src="/static/img/login/heart-shape-04.png" alt="Image"
+                 style="visibility: visible;">
+        </div>
+        <div class="login-wrapper">
+            <div class="login-left">
+                <a href="index.html" class="logo"><img src="/static/img/home-two/logo-dark.svg" alt="Image"></a>
+                <h2 class="title">صفحه ورود به حساب کاربری</h2>
+                <div class="sibtitle">به بازگشت خوش آمدید! روش را برای ورود انتخاب کنید:</div>
+
+                <div class="social-links">
+                    <a href="#"><img src="/static/img/login/google-icon.svg" alt="Image"></a>
+                    <a href="#"><img src="/static/img/login/fb-icon.svg" alt="Image"></a>
+                    <a href="#"><img src="/static/img/login/apple-icon.png" alt="Image"></a>
+                </div>
+                <div class="divider"><span>یا</span></div>
+                <form method="post">
+                    {% csrf_token %}
+
+                    <div class="input-field">
+{#                        <input type="email" class="form-control" placeholder="ایمیل">#}
+                        {{ form.email }}
+                    </div>
+                    <div class="input-field pass-field-with-icon">
+                        {{ form.password }}
+                    </div>
+                    <div class="d-flex justify-content-between input-field">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                            <label class="form-check-label" for="flexCheckChecked">
+                                یادآوری
+                            </label>
+                        </div>
+                        <a href="#" class="forget-password"></a>فراموشی رمز
+                    </div>
+                    <button type="submit" class="bj_theme_btn w-100 border-0">ورود</button>
+                </form>
+                <div class="new-user">
+                    کاربری جدید&nbsp;<a href="{% url 'register_page' %}">ساخت حساب کاربری</a>
+                </div>
+            </div>
+            <div class="login-right">
+                <img src="/static/img/login/login-img.png" alt="Image">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Optional JavaScript; choose one of the two! -->
+<script src="/static/js/jquery-3.6.0.min.js"></script>
+
+<!-- Option 2: Separate Popper and Bootstrap JS -->
+
+<script src="/static/js/preloader.js"></script>
+<script src="/static/vendors/bootstrap/js/popper.min.js"></script>
+<script src="/static/vendors/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/vendors/wow/wow.min.js"></script>
+<script src="/static/js/custom.js"></script>
+
+
+</body>
+</html>

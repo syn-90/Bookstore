@@ -70,6 +70,10 @@
                         <div style="color: red">
                             لطفا شماره تلفن معتبر وارد کنید
                         </div>
+                    {% elif error_net %}
+                        <div style="color: red">
+                            لطفا اتصال به اینترنت را بررسی کنید
+                        </div>
                     {% elif email_error %}
                         <div style="color: red">
                             لطفا ایمیل معتبر وارد کنید
@@ -114,7 +118,7 @@
                     <button type="submit" class="bj_theme_btn w-100 border-0">ورود</button>
                 </form>
                 <div class="new-user">
-                    از قبل حساب کاربری دارید؟&nbsp;<a href="login.html">اینجا وارد شوید</a>
+                    از قبل حساب کاربری دارید؟&nbsp;<a href="{% url 'login_page' %}">اینجا وارد شوید</a>
                 </div>
             </div>
             <div class="login-right">
