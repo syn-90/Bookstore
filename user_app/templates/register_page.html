@@ -82,6 +82,16 @@
                         <div style="color: red">
                             رمز عبور و تکرار ان با یکدیگر همخوانی ندارد
                         </div>
+                    {% elif is_register_user %}
+                        <div style="color: red">
+                            شما قبلا ثبت نام کرده اید لطفا ار صفحه ی ورود وارد شوید
+                        </div>
+                    {% elif name_error %}
+                        <div style="color: red">
+                            این نام کاربری قبلا استفاده شده است لطفا از یک نام دیگر استفاده کنید
+                        </div>
+
+
                     {% endif %}
                     {% if form.errors %}
                         <div style="color: red">

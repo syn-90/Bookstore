@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OTP Verification</title>
+    {#    <link rel="stylesheet" href="/static/css/otp.css">#}
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .otp-container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        .otp-title {
+            font-size: 28px;
+            color: #333333;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .otp-message {
+            color: #666666;
+            margin-bottom: 40px;
+            font-size: 18px;
+            line-height: 1.5;
+        }
+
+        .otp-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .otp-input {
+            width: 60px;
+            height: 70px;
+            text-align: center;
+            font-size: 28px;
+            border: 2px solid #dddddd;
+            border-radius: 8px;
+            outline: none;
+            transition: all 0.3s;
+            -webkit-appearance: none;
+            -moz-appearance: textfield;
+            appearance: none;
+        }
+
+        .otp-input::-webkit-outer-spin-button,
+        .otp-input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+
+        .otp-input:focus {
+            border-color: #42A5F5;
+            box-shadow: 0 0 8px rgba(66, 165, 245, 0.4);
+            transform: scale(1.05);
+        }
+
+        .otp-button {
+            background-color: #42A5F5;
+            color: white;
+            border: none;
+            padding: 16px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            width: 100%;
+            transition: background-color 0.3s;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        .otp-button:hover {
+            background-color: #1E88E5;
+        }
+
+        .otp-resend {
+            margin-top: 30px;
+            font-size: 16px;
+            color: #666666;
+        }
+
+        .otp-resend a {
+            color: #42A5F5;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .otp-resend a:hover {
+            color: #0D47A1;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="otp-container">
+{#    <div class="otp-title">Enter Verification Code</div>#}
+    <div class="otp-message">We've sent a 6-digit verification code to your email {{ user_email }}. Please enter it
+        below.
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {% if error %}
+            <div class="otp-title" style="color: red">Incorrect otp code !!!</div>
+         {% else %}
+            <div class="otp-title">Enter Verification Code</div>
+
+        {% endif %}
+        <div class="otp-inputs">
+            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num1">
+            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num2">
+            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num3">
+            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num4">
+            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num5">
+            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num6">
+        </div>
+        <button type="submit" class="otp-button">VERIFY & CONTINUE</button>
+    </form>
+
+    {#    <div class="otp-resend">#}
+    {#        Didn't receive the code? <a href="#">Resend Code</a>#}
+    {#    </div>#}
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputs = document.querySelectorAll('.otp-input');
+
+        // Auto-focus between fields
+        inputs.forEach((input, index) => {
+            input.addEventListener('input', function () {
+                if (this.value.length === 1) {
+                    if (index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                }
+            });
+
+            // Support for pasting full code
+            input.addEventListener('paste', function (e) {
+                e.preventDefault();
+                const pasteData = e.clipboardData.getData('text').trim();
+
+                if (pasteData.length === 6 && /^\d+$/.test(pasteData)) {
+                    for (let i = 0; i < 6; i++) {
+                        inputs[i].value = pasteData[i];
+                    }
+                    inputs[5].focus();
+                }
+            });
+
+            // Support for backspace
+            input.addEventListener('keydown', function (e) {
+                if (e.key === 'Backspace' && this.value === '') {
+                    if (index > 0) {
+                        inputs[index - 1].focus();
+                    }
+                }
+
+                // Support for arrow keys
+                if (e.key === 'ArrowLeft' && index > 0) {
+                    inputs[index - 1].focus();
+                }
+                if (e.key === 'ArrowRight' && index < inputs.length - 1) {
+                    inputs[index + 1].focus();
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>

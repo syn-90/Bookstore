@@ -4,7 +4,8 @@ class RegisterForm(forms.Form):
     name = forms.CharField(max_length=50, min_length=5, widget=forms.TextInput(attrs={
         'type': "text",  'class': "form-control", 'placeholder': "نام کاربری", 'required': "required", 'name' : "name"}),
         error_messages={
-            'required': "نام کاربری اجباری میباشد"
+            'required': "نام کاربری اجباری میباشد",
+            'min_length' : "نام کاربری شما باید حداقل پنج کارکتر باشد"
         })
     email = forms.EmailField(widget=forms.EmailInput(attrs={
         'type': "email", 'class': "form-control", 'placeholder': "ایمیل", 'required': "required", 'name' : "email" }),
@@ -17,10 +18,11 @@ class RegisterForm(forms.Form):
     error_messages={
         'required' : "شماره تماس اجباری میباشد"
     })
-    password = forms.CharField(widget=forms.PasswordInput(attrs={
+    password = forms.CharField(max_length=50, min_length=5, widget=forms.PasswordInput(attrs={
         'type': "password", 'class': "form-control", 'id': "toggle_passowrd_field", 'placeholder': "رمز", 'required': "required", 'name' : "password"}),
     error_messages={
-        'required': "رمز عبور اجباری میباشد"
+        'required': "رمز عبور اجباری میباشد",
+        'min_length': "رمز عبور  شما باید حداقل پنج کارکتر باشد"
     })
     confirm_password = forms.CharField(widget=forms.PasswordInput(attrs={
         'type':  "password", 'class': "form-control", 'id': "toggle_passowrd_field02", 'placeholder': "تکرار رمز", 'required': "required", 'name' : "confirm_password"}),
