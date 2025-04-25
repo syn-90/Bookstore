@@ -1,3 +1,4 @@
+from django.contrib.auth import login, logout
 from django.http import HttpRequest, Http404
 from django.shortcuts import render, redirect
 from django.utils.crypto import get_random_string
@@ -129,3 +130,48 @@ class Login(View):
             'form': form
 
         })
+    def post(self, request):
+        if request.method == 'POST':
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                email = form.cleaned_data.get('email')
+                password = form.cleaned_data.get('password')
+                email_valid = CheckPattern(email)
+                if email_valid.check_email_pattern():
+                    user = UserModel.objects.filter(email=email ).first()
+                    if user is not None and user.is_active == True:
+                        if user.check_password(password):
+                            login(request, user)
+                            return redirect('home_page')
+                        else :
+                            return render(request, 'login_page.html', {
+                                'form' : form ,
+                                "password_error" : True
+                            })
+                    else:
+                        return render(request, 'login_page.html', {
+                            'form': form,
+                            'user_error'  :True
+                        })
+
+                else :
+                    return render(request, 'login_page.html', {
+                        'form': form,
+                        'email_error' : True
+                    })
+            else :
+                return render(request, 'login_page.html', {
+                    'form': form,
+                    'errors' : True
+                })
+
+
+class Logout(View):
+    def get(self, request):
+        logout(request)
+        return redirect('login_page')
+
+
+
+
+

@@ -129,7 +129,7 @@
                                 </ul>
                             </li>
 
-                            <a href="my-ebook-library.html" class="nav-link">کتاب الکترونیکی</a>
+{#                            <a href="my-ebook-library.html" class="nav-link">کتاب الکترونیکی</a>#}
 
 
                             <li class="nav-item dropdown submenu">
@@ -218,23 +218,37 @@
                                                  aria-labelledby="v-pills-tour-tab">
                                                 <div class="d-flex">
                                                     <ul class="list-unstyled tab_list w_100">
-                                                        <li>
-                                                            <a href="{% url 'login_page' %}">واردشوید</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="{% url 'register_page' %}">ثبت نام کنید</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="typography.html">تایپوگرافی</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="page-banner-style-2.html">سبک بنر
-                                                                02</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="page-banner-style-3.html">سبک بنر
-                                                                03</a>
-                                                        </li>
+                                                        {% if request.user.is_authenticated %}
+                                                            <li>
+                                                                <a href="typography.html">تایپوگرافی</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="page-banner-style-2.html">سبک بنر
+                                                                    02</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="page-banner-style-3.html">سبک بنر
+                                                                    03</a>
+                                                            </li>
+                                                        {% else %}
+                                                            <li>
+                                                                <a href="{% url 'login_page' %}">واردشوید</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="{% url 'register_page' %}">ثبت نام کنید</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="typography.html">تایپوگرافی</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="page-banner-style-2.html">سبک بنر
+                                                                    02</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="page-banner-style-3.html">سبک بنر
+                                                                    03</a>
+                                                            </li>
+                                                        {% endif %}
                                                     </ul>
                                                 </div>
                                             </div>
@@ -461,10 +475,21 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item user ms-3">
-                            <a class="bj_theme_btn strock_btn hidden-sm hidden-xs" href="{% url 'login_page' %}"><i
-                                    class="fa-regular fa-user"></i>ورود</a>
-                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item user ms-3">
+                                <a class="bj_theme_btn strock_btn hidden-sm hidden-xs" href="{% url 'logout' %}"><i
+                                        class="fa fa-sign-out"></i>خروج</a>
+                            </li>
+                        {% else %}
+                            <li class="nav-item user ms-3">
+                                <a class="bj_theme_btn strock_btn hidden-sm hidden-xs" href="{% url 'login_page' %}"><i
+                                        class="fa-regular fa-user"></i>ورود</a>
+                            </li>
+                        {% endif %}
+                        {#                        <li class="nav-item user ms-3">#}
+                        {#                            <a class="bj_theme_btn strock_btn hidden-sm hidden-xs" href="{% url 'login_page' %}"><i#}
+                        {#                                    class="fa-regular fa-user"></i>ورود</a>#}
+                        {#                        </li>#}
                     </ul>
                 </div>
             </div>
