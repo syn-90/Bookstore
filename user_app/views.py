@@ -1,6 +1,7 @@
 from django.contrib.auth import login, logout
 from django.http import HttpRequest, Http404
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.utils.crypto import get_random_string
 from django.views import View
 from .models import UserModel
@@ -48,8 +49,8 @@ class RegisterView(View):
                                     user.save()
                                     response = send_email(subject="فعال سازی حساب کاربری ", to=user.email, context={"user":user}, template_name="template_service/otp_send_email.html")
                                     if response:
-                                        request.session['otp']=user.token
-                                        return redirect('otp_page')
+                                        request.session[f'{user.id}otp']=user.token
+                                        return redirect(reverse('otp_page', args=[user.id]))
                                     else:
                                         return render(request, 'register_page.html', {
                                             'form' : form,
@@ -81,11 +82,18 @@ class RegisterView(View):
                     'errors': True
                 })
 class OtpView(View):
-    def get(self, request:HttpRequest):
-        otp_session = request.session.get('otp')
+    def get_user(self, token):
+        user = UserModel.objects.filter(token=token).first()
+        if user is not None:
+            return user
+        else:
+            return False
+
+    def get(self, request:HttpRequest, id):
+        otp_session = request.session.get(f'{id}otp')
         if otp_session:
-            user = UserModel.objects.filter(token=otp_session).first()
-            if user is not None:
+            user = self.get_user(otp_session)
+            if user:
                 return render(request, 'otp_page.html', {
                     'user_email' : user.email
 
@@ -94,11 +102,11 @@ class OtpView(View):
                 raise Http404
         else:
             raise Http404
-    def post(self,request:HttpRequest):
-        otp_session = request.session.get('otp')
+    def post(self,request:HttpRequest, id):
+        otp_session = request.session.get(f'{id}otp')
         if otp_session:
-            user = UserModel.objects.filter(token=otp_session).first()
-            if user is not None:
+            user = self.get_user(otp_session)
+            if user:
                 num1 = request.POST['num1']
                 num2 = request.POST['num2']
                 num3 = request.POST['num3']
@@ -110,7 +118,8 @@ class OtpView(View):
                     user.is_active = True
                     user.active_code = create_ranom_code(6)
                     user.save()
-                    return redirect('home_page')
+                    del request.session[f'{id}otp']
+                    return redirect('login_page')
                 else:
                     return render(request, 'otp_page.html', {
                         "error" : True
@@ -169,7 +178,7 @@ class Login(View):
 class Logout(View):
     def get(self, request):
         logout(request)
-        return redirect('login_page')
+        return redirect('home_page')
 
 
 
