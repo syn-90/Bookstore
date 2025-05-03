@@ -1,5 +1,7 @@
 {% extends '_layout.html' %}
 
+{% load poll_extras %}
+
 
 
 {% block title %}
@@ -46,216 +48,217 @@
             <div class="row">
                 <div class="col-xl-8">
                     <div class="row gy-4">
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-01.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>10 روش ساخت سند پلاگین</h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
+                        {#                        <div class="col-md-6">#}
+                        {#                            <div class="blog-widget wow fadeInUp bs-sm">#}
+                        {#                                <img src="/static/img/blog/blog-01.png" alt="Restaurants"/>#}
+                        {#                                <div class="blog-content">#}
+                        {#                                    <p class="blog-text dot-sep">#}
+                        {#                                        <i class="icon_tag_alt"></i>سفر کنید#}
+                        {#                                        <span class="sep">ویدیو ها</span>#}
+                        {#                                    </p>#}
+                        {#                                    <a href="blog-details.html">#}
+                        {#                                        <h5>10 روش ساخت سند پلاگین</h5>#}
+                        {#                                    </a>#}
+                        {#                                    <div class="blog-sub-text">#}
+                        {#                                        <img src="/static/img/blog/face-04.png" alt="Face"/>#}
+                        {#                                        <a href="author-single.html">سهراب نادری</a>#}
+                        {#                                        <i class="fa-solid fa-calendar-days"></i>#}
+                        {#                                        <span>08 آبان1403</span>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="col-md-6">#}
+                        {#                            <div class="blog-widget wow fadeInUp bs-sm">#}
+                        {#                                <img src="/static/img/blog/blog-02.png" alt="Restaurants"/>#}
+                        {#                                <div class="blog-content">#}
+                        {#                                    <p class="blog-text dot-sep">#}
+                        {#                                        <i class="icon_tag_alt"></i>سفر کنید#}
+                        {#                                        <span class="sep">ویدیو ها</span>#}
+                        {#                                    </p>#}
+                        {#                                    <a href="blog-details.html">#}
+                        {#                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>#}
+                        {#                                    </a>#}
+                        {#                                    <div class="blog-sub-text">#}
+                        {#                                        <img src="/static/img/blog/face-04.png" alt="Face"/>#}
+                        {#                                        <a href="author-single.html">سهراب نادری</a>#}
+                        {#                                        <i class="fa-solid fa-calendar-days"></i>#}
+                        {#                                        <span>08 آبان1403</span>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="col-md-6">#}
+                        {#                            <div class="blog-widget wow fadeInUp bs-sm">#}
+                        {#                                <img src="/static/img/blog/blog-03.png" alt="Restaurants"/>#}
+                        {#                                <div class="blog-content">#}
+                        {#                                    <p class="blog-text dot-sep">#}
+                        {#                                        <i class="icon_tag_alt"></i>سفر کنید#}
+                        {#                                        <span class="sep">ویدیو ها</span>#}
+                        {#                                    </p>#}
+                        {#                                    <a href="blog-details.html">#}
+                        {#                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>#}
+                        {#                                    </a>#}
+                        {#                                    <div class="blog-sub-text">#}
+                        {#                                        <img src="/static/img/blog/face-04.png" alt="Face"/>#}
+                        {#                                        <a href="author-single.html">سهراب نادری</a>#}
+                        {#                                        <i class="fa-solid fa-calendar-days"></i>#}
+                        {#                                        <span>08 آبان1403</span>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="col-md-6">#}
+                        {#                            <div class="blog-widget wow fadeInUp bs-sm">#}
+                        {#                                <img src="/static/img/blog/blog-04.png" alt="Restaurants"/>#}
+                        {#                                <div class="blog-content">#}
+                        {#                                    <p class="blog-text dot-sep">#}
+                        {#                                        <i class="icon_tag_alt"></i>سفر کنید#}
+                        {#                                        <span class="sep">ویدیو ها</span>#}
+                        {#                                    </p>#}
+                        {#                                    <a href="blog-details.html">#}
+                        {#                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>#}
+                        {#                                    </a>#}
+                        {#                                    <div class="blog-sub-text">#}
+                        {#                                        <img src="/static/img/blog/face-04.png" alt="Face"/>#}
+                        {#                                        <a href="author-single.html">سهراب نادری</a>#}
+                        {#                                        <i class="fa-solid fa-calendar-days"></i>#}
+                        {#                                        <span>08 آبان1403</span>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="col-md-6">#}
+                        {#                            <div class="blog-widget wow fadeInUp bs-sm">#}
+                        {#                                <img src="/static/img/blog/blog-05.png" alt="Restaurants"/>#}
+                        {#                                <div class="blog-content">#}
+                        {#                                    <p class="blog-text dot-sep">#}
+                        {#                                        <i class="icon_tag_alt"></i>سفر کنید#}
+                        {#                                        <span class="sep">ویدیو ها</span>#}
+                        {#                                    </p>#}
+                        {#                                    <a href="blog-details.html">#}
+                        {#                                        <h5>#}
+                        {#                                            تجربه غذا و نوشیدنی های جدید#}
+                        {#                                        </h5>#}
+                        {#                                    </a>#}
+                        {#                                    <div class="blog-sub-text">#}
+                        {#                                        <img src="/static/img/blog/face-04.png" alt="Face"/>#}
+                        {#                                        <a href="author-single.html">سهراب نادری</a>#}
+                        {#                                        <i class="fa-solid fa-calendar-days"></i>#}
+                        {#                                        <span>08 آبان1403</span>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="col-md-6">#}
+                        {#                            <div class="blog-widget wow fadeInUp bs-sm">#}
+                        {#                                <img src="/static/img/blog/blog-06.png" alt="Restaurants"/>#}
+                        {#                                <div class="blog-content">#}
+                        {#                                    <p class="blog-text dot-sep">#}
+                        {#                                        <i class="icon_tag_alt"></i>سفر کنید#}
+                        {#                                        <span class="sep">ویدیو ها</span>#}
+                        {#                                    </p>#}
+                        {#                                    <a href="blog-details.html">#}
+                        {#                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>#}
+                        {#                                    </a>#}
+                        {#                                    <div class="blog-sub-text">#}
+                        {#                                        <img src="/static/img/blog/face-04.png" alt="Face"/>#}
+                        {#                                        <a href="author-single.html">سهراب نادری</a>#}
+                        {#                                        <i class="fa-solid fa-calendar-days"></i>#}
+                        {#                                        <span>08 آبان1403</span>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="col-md-6">#}
+                        {#                            <div class="blog-widget wow fadeInUp bs-sm">#}
+                        {#                                <img src="/static/img/blog/blog-07.png" alt="Restaurants"/>#}
+                        {#                                <div class="blog-content">#}
+                        {#                                    <p class="blog-text dot-sep">#}
+                        {#                                        <i class="icon_tag_alt"></i>سفر کنید#}
+                        {#                                        <span class="sep">ویدیو ها</span>#}
+                        {#                                    </p>#}
+                        {#                                    <a href="blog-details.html">#}
+                        {#                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>#}
+                        {#                                    </a>#}
+                        {#                                    <div class="blog-sub-text">#}
+                        {#                                        <img src="/static/img/blog/face-04.png" alt="Face"/>#}
+                        {#                                        <a href="author-single.html">سهراب نادری</a>#}
+                        {#                                        <i class="fa-solid fa-calendar-days"></i>#}
+                        {#                                        <span>08 آبان1403</span>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="col-md-6">#}
+                        {#                            <div class="blog-widget wow fadeInUp bs-sm">#}
+                        {#                                <img src="/static/img/blog/blog-08.png" alt="Restaurants"/>#}
+                        {#                                <div class="blog-content">#}
+                        {#                                    <p class="blog-text dot-sep">#}
+                        {#                                        <i class="icon_tag_alt"></i>سفر کنید#}
+                        {#                                        <span class="sep">ویدیو ها</span>#}
+                        {#                                    </p>#}
+                        {#                                    <a href="blog-details.html">#}
+                        {#                                        <h5>#}
+                        {#                                            بهترین برای سایت های آموزش الکترونیکی#}
+                        {#                                        </h5>#}
+                        {#                                    </a>#}
+                        {#                                    <div class="blog-sub-text">#}
+                        {#                                        <img src="/static/img/blog/face-04.png" alt="Face"/>#}
+                        {#                                        <a href="author-single.html">سهراب نادری</a>#}
+                        {#                                        <i class="fa-solid fa-calendar-days"></i>#}
+                        {#                                        <span>08 آبان1403</span>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {#                        <div class="col-md-6">#}
+                        {#                            <div class="blog-widget wow fadeInUp bs-sm">#}
+                        {#                                <img src="/static/img/blog/blog-09.png" alt="Restaurants"/>#}
+                        {#                                <div class="blog-content">#}
+                        {#                                    <p class="blog-text dot-sep">#}
+                        {#                                        <i class="icon_tag_alt"></i>سفر کنید#}
+                        {#                                        <span class="sep">ویدیو ها</span>#}
+                        {#                                    </p>#}
+                        {#                                    <a href="blog-details.html">#}
+                        {#                                        <h5>#}
+                        {#                                            آشنایی با انواع اسناد و بهترین شیوه ها#}
+                        {#                                        </h5>#}
+                        {#                                    </a>#}
+                        {#                                    <div class="blog-sub-text">#}
+                        {#                                        <img src="/static/img/blog/face-04.png" alt="Face"/>#}
+                        {#                                        <a href="author-single.html">سهراب نادری</a>#}
+                        {#                                        <i class="fa-solid fa-calendar-days"></i>#}
+                        {#                                        <span>08 آبان1403</span>#}
+                        {#                                    </div>#}
+                        {#                                </div>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
+                        {% for article in articels %}
+                            <div class="col-md-6">
+                                <div class="blog-widget wow fadeInUp bs-sm">
+                                    <img src="{{ article.img1.url }}" alt="Restaurants"/>
+                                    <div class="blog-content">
+                                        <p class="blog-text dot-sep">
+                                            <i class="icon_tag_alt"></i>سفر کنید
+                                            <span class="sep">ویدیو ها</span>
+                                        </p>
+                                        <a href="blog-details.html">
+                                            <h5>
+                                                {{ article.title }}
+                                            </h5>
+                                        </a>
+                                        <div class="blog-sub-text">
+                                            <img src="/static/img/blog/face-04.png" alt="Face"/>
+                                            <a href="author-single.html">سهراب نادری</a>
+                                            <i class="fa-solid fa-calendar-days"></i>
+                                            <span>{{ article.craete_at|persian_time }}</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-02.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
-                                    </div>
-                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-03.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-04.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-05.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>
-                                            تجربه غذا و نوشیدنی های جدید
-                                        </h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-06.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-07.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>تبلیغات بنری اینترنتی قابل اطمینان ترین</h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-08.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>
-                                            بهترین برای سایت های آموزش الکترونیکی
-                                        </h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-09.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>
-                                            آشنایی با انواع اسناد و بهترین شیوه ها
-                                        </h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="blog-widget wow fadeInUp bs-sm">
-                                <img src="/static/img/blog/blog-10.png" alt="Restaurants"/>
-                                <div class="blog-content">
-                                    <p class="blog-text dot-sep">
-                                        <i class="icon_tag_alt"></i>سفر کنید
-                                        <span class="sep">ویدیو ها</span>
-                                    </p>
-                                    <a href="blog-details.html">
-                                        <h5>
-                                            درخود بینش عمیقی به دست آورید
-                                            عملکرد
-                                        </h5>
-                                    </a>
-                                    <div class="blog-sub-text">
-                                        <img src="/static/img/blog/face-04.png" alt="Face"/>
-                                        <a href="author-single.html">سهراب نادری</a>
-                                        <i class="fa-solid fa-calendar-days"></i>
-                                        <span>08 آبان1403</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        {% endfor %}
                     <nav aria-label="...">
                         <ul class="pagination pagi-content">
                             <li class="page-item">
