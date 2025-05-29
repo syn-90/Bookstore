@@ -12,3 +12,10 @@ class ArticleView(View):
             'articels' : articels
 
         })
+class ArticleDetailView(View):
+    def get(self, request, slug):
+        article = ArticleModel.objects.filter(slug=slug).first()
+        return render(request, 'details_article.html', {
+            'article' : article
+
+        })

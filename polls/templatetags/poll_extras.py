@@ -6,4 +6,8 @@ register = template.Library()
 
 @register.filter(name='persian_time')
 def persian_time(time):
-    return jdatetime.datetime.fromgregorian(datetime=time).strftime('%Y/%m/%d')
+    result = jdatetime.datetime.fromgregorian(datetime=time).strftime('%Y %B %d')
+    if 'Khordad' in result:
+        result = result.replace('Khordad', 'خرداد')
+    return result
+
