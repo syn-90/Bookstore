@@ -116,6 +116,7 @@ class OtpView(View):
                 number = f"{num1}{num2}{num3}{num4}{num5}{num6}"
                 if number== user.active_code:
                     user.is_active = True
+                    user.token = get_random_string(50)
                     user.active_code = create_ranom_code(6)
                     user.save()
                     del request.session[f'{id}otp']
