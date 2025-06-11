@@ -5352,6 +5352,7 @@ ppppppppppppppppppppp .bj_home_blog_area {
 }
 
 .blog-widget {
+  margin-bottom: 30px;
   background: #f7f7f7;
   border-radius: 15px;
   transition: all 0.3s ease-in-out;
