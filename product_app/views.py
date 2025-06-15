@@ -47,3 +47,4 @@ class AuthorsView(View):
         else :
             redirect('home_page')
 
+

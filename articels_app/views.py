@@ -11,3 +11,11 @@ class ArticelsPage(View):
             'articels' : articels
 
         })
+
+
+class DetailView(View):
+    def get(self, request, slug):
+        article = ArticleModel.objects.filter(slug=slug).first()
+        return render(request, 'article_details.html', {
+            'article' : article
+        })
