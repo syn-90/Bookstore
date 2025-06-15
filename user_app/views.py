@@ -44,12 +44,12 @@ class RegisterView(View):
                         if phone_valid.check_iranian_phone():
                             if email_valid.check_email_pattern():
                                 if password_valid.check_password_letter_number():
-                                    user = UserModel(username=name, email=email, phone=phone_num, is_active=False, active_code=create_ranom_code(6), token=get_random_string(50))
+                                    user = UserModel(username=name, email=email, phone=phone_num, is_active=False, active_code=create_ranom_code(6))
                                     user.set_password(password)
                                     user.save()
                                     response = send_email(subject="فعال سازی حساب کاربری ", to=user.email, context={"user":user}, template_name="template_service/otp_send_email.html")
                                     if response:
-                                        request.session[f'{user.id}otp']=user.token
+                                        request.session[f'{user.id}otp']=user.email
                                         return redirect(reverse('otp_page', args=[user.id]))
                                     else:
                                         return render(request, 'register_page.html', {
@@ -82,8 +82,8 @@ class RegisterView(View):
                     'errors': True
                 })
 class OtpView(View):
-    def get_user(self, token):
-        user = UserModel.objects.filter(token=token).first()
+    def get_user(self, email):
+        user = UserModel.objects.filter(email=email).last()
         if user is not None:
             return user
         else:
@@ -104,6 +104,7 @@ class OtpView(View):
             raise Http404
     def post(self,request:HttpRequest, id):
         otp_session = request.session.get(f'{id}otp')
+        print(id)
         if otp_session:
             user = self.get_user(otp_session)
             if user:
@@ -114,9 +115,9 @@ class OtpView(View):
                 num5 = request.POST['num5']
                 num6 = request.POST['num6']
                 number = f"{num1}{num2}{num3}{num4}{num5}{num6}"
-                if number== user.active_code:
+                print(user.id)
+                if number == user.active_code:
                     user.is_active = True
-                    user.token = get_random_string(50)
                     user.active_code = create_ranom_code(6)
                     user.save()
                     del request.session[f'{id}otp']
@@ -148,7 +149,7 @@ class Login(View):
                 password = form.cleaned_data.get('password')
                 email_valid = CheckPattern(email)
                 if email_valid.check_email_pattern():
-                    user = UserModel.objects.filter(email=email ).first()
+                    user = UserModel.objects.filter(email=email ).last()
                     if user is not None and user.is_active == True:
                         if user.check_password(password):
                             login(request, user)
