@@ -18,3 +18,17 @@ class ArticleModel(models.Model):
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
+
+
+
+class ArticleCommentModel(models.Model):
+    user = models.ForeignKey(to = UserModel, on_delete=models.CASCADE, verbose_name='کاربر', editable=False)
+    article = models.ForeignKey(to = ArticleModel, on_delete=models.CASCADE, verbose_name='مقاله')
+    text = models.TextField(verbose_name='متن')
+    create_at =models.DateTimeField(auto_now_add=True, verbose_name='تاریخ')
+    is_publish = models.BooleanField(default=False, verbose_name="انتشار")
+    class Meta:
+        verbose_name = 'کامنت'
+        verbose_name_plural = 'کامنت ها '
+        def __str__(self):
+            return f'{self.user}_{self.article}'

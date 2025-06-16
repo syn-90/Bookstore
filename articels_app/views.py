@@ -1,6 +1,7 @@
+from django.http import Http404
 from django.shortcuts import render
 from django.views import View
-from .models import ArticleModel
+from .models import ArticleModel, ArticleCommentModel
 # Create your views here.
 
 
@@ -14,8 +15,27 @@ class ArticelsPage(View):
 
 
 class DetailView(View):
+    def get_article(self, slug):
+        article = ArticleModel.objects.prefetch_related('articlecommentmodel_set').filter(slug=slug).first()
+        if article is not None:
+            return article
+        else:raise Http404
+
     def get(self, request, slug):
-        article = ArticleModel.objects.filter(slug=slug).first()
+        article = self.get_article(slug)
         return render(request, 'article_details.html', {
             'article' : article
         })
+    def post(self, request, slug):
+        article = self.get_article(slug=slug)
+        user = request.user
+        text = request.POST.get('message')
+        if len(text.strip()) > 3 :
+            new_comment = ArticleCommentModel(user=user, article=article, text=text, is_publish=False)
+            new_comment.save()
+            print('ok')
+            return render(request, 'article_details.html', {
+                'article' : article
+            })
+
+

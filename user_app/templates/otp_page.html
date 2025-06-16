@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OTP Verification</title>
-    {#    <link rel="stylesheet" href="/static/css/otp.css">#}
+    {#
+    <link rel="stylesheet" href="/static/css/otp.css">#}
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -112,82 +114,90 @@
         }
     </style>
 </head>
-<body>
-<div class="otp-container">
-{#    <div class="otp-title">Enter Verification Code</div>#}
-    <div class="otp-message">We've sent a 6-digit verification code to your email {{ user_email }}. Please enter it
-        below.
-    </div>
 
-    <form method="post">
-        {% csrf_token %}
-        {% if error %}
+<body>
+    <div class="otp-container">
+        {# <div class="otp-title">Enter Verification Code</div>#}
+        <div class="otp-message">We've sent a 6-digit verification code to your email {{ user_email }}. Please enter it
+            below.
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            {% if error %}
             <div class="otp-title" style="color: red">Incorrect otp code !!!</div>
-         {% else %}
+            {% else %}
             <div class="otp-title">Enter Verification Code</div>
 
-        {% endif %}
-        <div class="otp-inputs">
-            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num1" required="required" >
-            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num2" required="required">
-            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num3" required="required">
-            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num4" required="required">
-            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num5" required="required">
-            <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num6" required="required">
-        </div>
-        <button type="submit" class="otp-button">VERIFY & CONTINUE</button>
-    </form>
+            {% endif %}
+            <div class="otp-inputs">
+                <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num1"
+                    required="required">
+                <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num2"
+                    required="required">
+                <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num3"
+                    required="required">
+                <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num4"
+                    required="required">
+                <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num5"
+                    required="required">
+                <input type="number" class="otp-input" maxlength="1" pattern="\d" inputmode="numeric" name="num6"
+                    required="required">
+            </div>
+            <button type="submit" class="otp-button">VERIFY & CONTINUE</button>
+        </form>
 
-    {#    <div class="otp-resend">#}
-    {#        Didn't receive the code? <a href="#">Resend Code</a>#}
-    {#    </div>#}
-</div>
+        {# <div class="otp-resend">#}
+            {# Didn't receive the code? <a href="#">Resend Code</a>#}
+            {# </div>#}
+    </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const inputs = document.querySelectorAll('.otp-input');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const inputs = document.querySelectorAll('.otp-input');
 
-        // Auto-focus between fields
-        inputs.forEach((input, index) => {
-            input.addEventListener('input', function () {
-                if (this.value.length === 1) {
-                    if (index < inputs.length - 1) {
-                        inputs[index + 1].focus();
+            // Auto-focus between fields
+            inputs.forEach((input, index) => {
+                input.addEventListener('input', function () {
+                    if (this.value.length === 1) {
+                        if (index < inputs.length - 1) {
+                            inputs[index + 1].focus();
+                        }
                     }
-                }
-            });
+                });
 
-            // Support for pasting full code
-            input.addEventListener('paste', function (e) {
-                e.preventDefault();
-                const pasteData = e.clipboardData.getData('text').trim();
+                // Support for pasting full code
+                input.addEventListener('paste', function (e) {
+                    e.preventDefault();
+                    const pasteData = e.clipboardData.getData('text').trim();
 
-                if (pasteData.length === 6 && /^\d+$/.test(pasteData)) {
-                    for (let i = 0; i < 6; i++) {
-                        inputs[i].value = pasteData[i];
+                    if (pasteData.length === 6 && /^\d+$/.test(pasteData)) {
+                        for (let i = 0; i < 6; i++) {
+                            inputs[i].value = pasteData[i];
+                        }
+                        inputs[5].focus();
                     }
-                    inputs[5].focus();
-                }
-            });
+                });
 
-            // Support for backspace
-            input.addEventListener('keydown', function (e) {
-                if (e.key === 'Backspace' && this.value === '') {
-                    if (index > 0) {
+                // Support for backspace
+                input.addEventListener('keydown', function (e) {
+                    if (e.key === 'Backspace' && this.value === '') {
+                        if (index > 0) {
+                            inputs[index - 1].focus();
+                        }
+                    }
+
+                    // Support for arrow keys
+                    if (e.key === 'ArrowLeft' && index > 0) {
                         inputs[index - 1].focus();
                     }
-                }
-
-                // Support for arrow keys
-                if (e.key === 'ArrowLeft' && index > 0) {
-                    inputs[index - 1].focus();
-                }
-                if (e.key === 'ArrowRight' && index < inputs.length - 1) {
-                    inputs[index + 1].focus();
-                }
+                    if (e.key === 'ArrowRight' && index < inputs.length - 1) {
+                        inputs[index + 1].focus();
+                    }
+                });
             });
         });
-    });
-</script>
+    </script>
 </body>
+
 </html>
