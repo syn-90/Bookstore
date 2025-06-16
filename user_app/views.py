@@ -36,6 +36,11 @@ class RegisterView(View):
                         'form': form,
                         'name_error': True
                     })
+                elif UserModel.objects.filter(email = email).first() is not None:
+                    return render(request, 'register_page.html', {
+                        'form': form,
+                        'email_unique_error': True
+                    })
                 else:
                     if password == confirm_password:
                         phone_valid = CheckPattern(phone_num)
@@ -83,7 +88,7 @@ class RegisterView(View):
                 })
 class OtpView(View):
     def get_user(self, email):
-        user = UserModel.objects.filter(email=email).last()
+        user = UserModel.objects.filter(email=email).first()
         if user is not None:
             return user
         else:
