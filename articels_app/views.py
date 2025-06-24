@@ -31,11 +31,26 @@ class DetailView(View):
         user = request.user
         text = request.POST.get('message')
         if len(text.strip()) > 3 :
-            new_comment = ArticleCommentModel(user=user, article=article, text=text, is_publish=False)
-            new_comment.save()
-            print('ok')
+            # if request.user.is_athenticated():
+
+                new_comment = ArticleCommentModel(user=user, article=article, text=text, is_publish=False)
+                new_comment.save()
+                print('ok')
+                return render(request, 'article_details.html', {
+                    'article' : article ,
+                    'status' : 'seccess'
+                })
+            # else:
+            #     return render(request, 'article_details.html', {
+            #         'article': article,
+            #         'login_error': 'True'
+            #     })
+
+        else :
             return render(request, 'article_details.html', {
-                'article' : article
+                'article' : article ,
+                'message_error' : True
             })
+
 
 

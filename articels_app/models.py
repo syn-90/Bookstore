@@ -18,6 +18,7 @@ class ArticleModel(models.Model):
     class Meta:
         verbose_name = 'مقاله'
         verbose_name_plural = 'مقالات'
+        ordering = ['id']
 
 
 
@@ -30,5 +31,6 @@ class ArticleCommentModel(models.Model):
     class Meta:
         verbose_name = 'کامنت'
         verbose_name_plural = 'کامنت ها '
-        def __str__(self):
-            return f'{self.user}_{self.article}'
+        ordering = ['id']
+    def __str__(self):
+        return f'{self.user}_{self.article}'

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import ArticleModel
+from .models import ArticleModel, ArticleCommentModel
 # Register your models here.
 
 
@@ -15,5 +15,9 @@ class ArticleAdmin(admin.ModelAdmin):
             obj.save()
         return super(ArticleAdmin, self).save_model(request, obj, form, change)
 
+class ArticleCommentAdmin(admin.ModelAdmin):
+    list_display = ("user", "text", "is_publish")
+    list_editable = ("is_publish",)
 
 admin.site.register(ArticleModel,ArticleAdmin)
+admin.site.register(ArticleCommentModel,ArticleCommentAdmin)

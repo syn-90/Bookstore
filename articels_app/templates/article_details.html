@@ -1,5 +1,5 @@
 {% extends '_layout.html' %}
-
+{% load poll_extras %}
 {% block title %}
     جزِییات مقالات
 {% endblock %}
@@ -46,7 +46,7 @@
             <div class="row">
                 <div class="col-xl-8 mb-50">
                     <div class="details-content round-box wow fadeIn">
-                        <img class="rounded-5 mb-30 img-fluid" src="{{ article.img1.url}}" alt="Images">
+                        <img class="rounded-5 mb-30 img-fluid" src="{{ article.img1.url }}" alt="Images">
                         <p>{{ article.para1 }}</p>
                         <p>در تحمل دردها به تو هدیه ای بزرگ خواهم داد، مثل دهلیز زمین، با نفرت از حال، اولام کورپر
                             آیا لایه‌های انبوه در حال سقوط هستند، بچه‌های ما، پروژه‌ها؟ ساکنان ما
@@ -64,15 +64,15 @@
                         <p class="details-text mb-30">با استفاده از طراحان گرافیک است مورد نیاز،<span class="deco-text">داوود رستمی
                                 لبا استفاده از طراحان گرافیک است مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
                         </p>
-{#                        <ul>#}
-{#                            <li class="d-flex"><span></span> تنظیمات فروشگاه</li>#}
-{#                            <li class="d-flex"><span></span> نصب فروشگاه تجارت الکترونیک</li>#}
-{#                            <li class="d-flex"><span></span> سیستم مورد نیاز را بررسی کنید</li>#}
-{#                            <li class="d-flex"><span></span> راه اندازی پایگاه داده</li>#}
-{#                            <li class="d-flex"><span></span> بارگیری داده های نمونه برای محیط</li>#}
-{#                            <li class="d-flex"><span></span> نصب دارایی‌ها</li>#}
-{#                        </ul>#}
-                        <img class="rounded-5 mb-35 img-fluid" src="{{ article.img2.url}}" alt="Images">
+                        {#                        <ul>#}
+                        {#                            <li class="d-flex"><span></span> تنظیمات فروشگاه</li>#}
+                        {#                            <li class="d-flex"><span></span> نصب فروشگاه تجارت الکترونیک</li>#}
+                        {#                            <li class="d-flex"><span></span> سیستم مورد نیاز را بررسی کنید</li>#}
+                        {#                            <li class="d-flex"><span></span> راه اندازی پایگاه داده</li>#}
+                        {#                            <li class="d-flex"><span></span> بارگیری داده های نمونه برای محیط</li>#}
+                        {#                            <li class="d-flex"><span></span> نصب دارایی‌ها</li>#}
+                        {#                        </ul>#}
+                        <img class="rounded-5 mb-35 img-fluid" src="{{ article.img2.url }}" alt="Images">
                         <h5 class="mb-30">این پاسخ برای توانایی ما از اشتباهات مهم است، اما باعث انتقاد از خود نیز می
                             شود.</h5>
                         <p class="details-text">لبا استفاده از طراحان گرافیک است مورد نیاز، و کاربردهای متنوع با هدف
@@ -138,149 +138,172 @@
                             </div>
                         </div>
                     </div>
+                {% if request.user.is_authenticated %}
                     <div class="comments-item round-box mb-30 wow fadeInUp">
-                        <h4 class="mb-35">{{ article.articlecommentmodel_set.count }} نظر داده شده</h4>
+                        <h4 class="mb-35">{{ article.articlecommentmodel_set|filter_by_publish}} نظر داده شده</h4>
                         {% for comment in  article.articlecommentmodel_set.all %}
-                        <div class="comments-content">
-                            <div>
-                                <img src="/static/img/blog/face-01.png" alt="Face">
-                            </div>
-                            <div class="comments-text">
-
+                            {% if comment.is_publish %}
+                            <div class="comments-content">
+                                <div>
+                                    <img src="/static/img/blog/face-03.png" alt="Face">
+                                </div>
+                                <div class="comments-text">
                                     <div class="d-flex flex-wrap justify-content-between mb-20">
-                                    <div>
-                                        <a href="#" class="admin-title">{{ comment.user }} </a>
-                                        <p class="post-time">02 بهمن 1402 ساعت 12 ظهر</p>
+                                        <div>
+                                            <a href="#" class="admin-title"> {{ comment.user }}</a>
+                                            <p class="post-time">13 مهر 1403</p>
+                                        </div>
+                                        <a class="sub-bold-1 comment-reply" data-bs-toggle="collapse"
+                                           href="#replyColllapse03" role="button" aria-expanded="false"
+                                           aria-controls="replyColllapse03">پاسخ دادن<i
+                                                class="fa-solid fa-arrow-right"></i></a>
                                     </div>
-                                    <a class="sub-bold-1 comment-reply" data-bs-toggle="collapse"
-                                       href="#replyColllapse01" role="button" aria-expanded="false"
-                                       aria-controls="replyColllapse01">پاسخ دادن<i class="fa-solid fa-arrow-right"></i></a>
-                                </div>
-                                <p class="text-area small-2">{{ comment.text }}</p>
-                                <div class="collapse" id="replyColllapse01">
-                                    <div class="reply-box">
-                                        <input type="text" class="form-control" placeholder="نظرات خود را وارد کنید">
-                                        <button><img src="/static/img/blog/Send-Icon.svg" alt=""></button>
+                                    <p class="small-2">
+                                        {{ comment.text }}
+                                    </p>
+                                    <div class="collapse" id="replyColllapse03">
+                                        <div class="reply-box">
+                                            <input type="text" class="form-control" placeholder="نظرات خودرا وارد کنید">
+                                            <button><img src="/static/img/blog/Send-Icon.svg" alt=""></button>
+                                        </div>
                                     </div>
                                 </div>
+                            {% endif %}
+
+                            </div>
+{#                        {% else %}#}
+
                         {% endfor %}
 
-                        </div>
                     </div>
-                    <div class="reply-item round-box wow fadeInUp">
-                        <h4>پاسخ دادن</h4>
-
-                        <form class="get_quote_form row"  method="post">
-                            {% csrf_token %}
-                            <div class="col-md-12 form-group">
-                                <textarea class="form-control message" required name="message"></textarea>
-                                <label class="floating-label" >نوع نظر...</label>
-                            </div>
-                            <div class="col-md-12 form-group reply-text d-flex">
-                            </div>
-                            <div class="col-md-12 form-group">
-                                <button class="thm_btn" type="submit">ارسال نظر</button>
-                            </div>
-                        </form>
-                    </div>
+                {% else %}
+                            <div class="col-sm-12 alert alert-danger">برای ثبت نظر باید وارد <a href="{% url 'login_page' %}">حساب کاربری </a>خود شوید</div>
+                {% endif %}
+                {% if status %}
+                                    <div class="col-sm-12 alert-success">کامنت شما با موفقیت ثبت شد و بعد از تایید ادمین منتشر خواهد شد</div>
+                {% endif %}
                 </div>
-                <div class="col-xl-4 col-lg-6 col-md-8">
-                    <div class="blog-right-content mb-50 px-lg-4 wow fadeInLeft">
-{#                        <div class="input-group mb-50">#}
-{#                            <input type="text" name="search" id="search" placeholder="جستجو">#}
-{#                            <span class="search-icon"><i class="las la-search"></i></span>#}
-{#                        </div>#}
+                <div class="reply-item round-box wow fadeInUp">
+                    <h4>پاسخ دادن</h4>
 
-{#                        <h4 class="blog-title mb-30">دسته بندی صفحات</h4>#}
-{##}
-{#                        <ul class="list-unstyled category_list">#}
-{#                            <li><a href="#">خلاق <span>(12)</span></a></li>#}
-{#                            <li><a href="#">الهام <span>(8)</span></a></li>#}
-{#                            <li><a href="#">سبک زندگی <span>(3)</span></a></li>#}
-{#                            <li><a href="#">اخبار <span>(4)</span></a></li>#}
-{#                            <li><a href="#">عکاسی <span>(12)</span></a></li>#}
-{#                            <li><a href="#">مهارت <span>(15)</span></a></li>#}
-{#                            <li><a href="#">تورهای گردشگری <span>(10)</span></a></li>#}
-{#                            <li><a href="#">الهام بخش <span>(5)</span></a></li>#}
-{#                        </ul>#}
+                    <form class="get_quote_form row" method="post">
+                        {% csrf_token %}
+                        <div class="col-md-12 form-group">
+                            <textarea class="form-control message" required name="message"></textarea>
+                            <label class="floating-label">نوع نظر...</label>
+                        </div>
+                        <div class="col-md-12 form-group reply-text d-flex">
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <a  onclick="send_comment({{ article.id }})" class="thm_btn" >ارسال نظر</a>
+                        </div>
+{#                        {% if login_error %}#}
 
-{#                        <h4 class="blog-title mb-30">اخبار اخیر</h4>#}
-{#                        <div class="recent-news mb-50">#}
-{#                            <div class="news-item">#}
-{#                                <img src="/static/img/blog/news-01.png" alt="Images">#}
-{#                                <div>#}
-{#                                    <a class="news-title" href="blog-details.html">آیا ارزش خرید یک فرم ساز ممتاز را#}
-{#                                        دارد؟</a>#}
-{#                                    <p class="news-date"><i class="fa-solid fa-calendar-days"></i>&nbsp;12 آذر 1403#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="news-item">#}
-{#                                <img src="/static/img/blog/news-02.png" alt="Images">#}
-{#                                <div>#}
-{#                                    <a class="news-title" href="blog-details.html">ساخت وبسایت خودرا به مابسپارید</a>#}
-{#                                    <p class="news-date"><i class="fa-solid fa-calendar-days"></i>&nbsp;12 آذر 1403#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="news-item">#}
-{#                                <img src="/static/img/blog/news-03.png" alt="Images">#}
-{#                                <div>#}
-{#                                    <a class="news-title" href="blog-details.html">آنها گفتند که آنها فقط نمی دانند#}
-{#                                        چگونه از خود مراقبت کنند#}
-{#                                        پیچ و تاب</a>#}
-{#                                    <p class="news-date"><i class="fa-solid fa-calendar-days"></i>&nbsp;12 آذر 1403#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                            <div class="news-item">#}
-{#                                <img src="/static/img/blog/news-04.png" alt="Images">#}
-{#                                <div>#}
-{#                                    <a class="news-title" href="blog-details.html">من هرگز چنین لبخند نرم دردناکی ندیده#}
-{#                                        بودم#}
-{#                                        همیشه</a>#}
-{#                                    <p class="news-date"><i class="fa-solid fa-calendar-days"></i>&nbsp;12 آذر 1403#}
-{#                                    </p>#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <h4 class="blog-title mb-30">برچسب ها</h4>#}
-{#                        <div class="tags-item d-flex flex-wrap mb-50">#}
-{#                            <a class="tags-btn" href="#">مسافرت</a>#}
-{#                            <a class="tags-btn" href="#">میز ​​کمک</a>#}
-{#                            <a class="tags-btn" href="#">عکاسی</a>#}
-{#                            <a class="tags-btn" href="#">سبک زندگی</a>#}
-{#                            <a class="tags-btn" href="#">وردپرس</a>#}
-{#                            <a class="tags-btn" href="#">توسعه</a>#}
-{#                            <a class="tags-btn" href="#">پشتیبانی</a>#}
-{#                            <a class="tags-btn" href="#">جاوا اسکریپت</a>#}
-{#                            <a class="tags-btn" href="#">تجارت الکترونیک</a>#}
-{#                            <a class="tags-btn" href="#">وردپرس</a>#}
-{#                        </div>#}
-{#                        <h4 class="blog-title mb-30">اینستاگرام</h4>#}
-{#                        <div class="instagram-gallery-widget ">#}
-{#                            <a href="#" class="instagram-item">#}
-{#                                <img src="/static/img/blog/Instagram-01.png" alt="">#}
-{#                            </a>#}
-{#                            <a href="#" class="instagram-item">#}
-{#                                <img src="/static/img/blog/Instagram-02.png" alt="">#}
-{#                            </a>#}
-{#                            <a href="#" class="instagram-item">#}
-{#                                <img src="/static/img/blog/Instagram-03.png" alt="">#}
-{#                            </a>#}
-{#                            <a href="#" class="instagram-item">#}
-{#                                <img src="/static/img/blog/Instagram-04.png" alt="">#}
-{#                            </a>#}
-{#                            <a href="#" class="instagram-item">#}
-{#                                <img src="/static/img/blog/Instagram-05.png" alt="">#}
-{#                            </a>#}
-{#                            <a href="#" class="instagram-item">#}
-{#                                <img src="/static/img/blog/Instagram-06.png" alt="">#}
-{#                            </a>#}
-{#                        </div>#}
-{#                    </div>#}
+{#                        {% endif %}#}
+                    </form>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-6 col-md-8">
+                <div class="blog-right-content mb-50 px-lg-4 wow fadeInLeft">
+                    {#                        <div class="input-group mb-50">#}
+                    {#                            <input type="text" name="search" id="search" placeholder="جستجو">#}
+                    {#                            <span class="search-icon"><i class="las la-search"></i></span>#}
+                    {#                        </div>#}
+
+                    {#                        <h4 class="blog-title mb-30">دسته بندی صفحات</h4>#}
+                    {##}
+                    {#                        <ul class="list-unstyled category_list">#}
+                    {#                            <li><a href="#">خلاق <span>(12)</span></a></li>#}
+                    {#                            <li><a href="#">الهام <span>(8)</span></a></li>#}
+                    {#                            <li><a href="#">سبک زندگی <span>(3)</span></a></li>#}
+                    {#                            <li><a href="#">اخبار <span>(4)</span></a></li>#}
+                    {#                            <li><a href="#">عکاسی <span>(12)</span></a></li>#}
+                    {#                            <li><a href="#">مهارت <span>(15)</span></a></li>#}
+                    {#                            <li><a href="#">تورهای گردشگری <span>(10)</span></a></li>#}
+                    {#                            <li><a href="#">الهام بخش <span>(5)</span></a></li>#}
+                    {#                        </ul>#}
+
+                    {#                        <h4 class="blog-title mb-30">اخبار اخیر</h4>#}
+                    {#                        <div class="recent-news mb-50">#}
+                    {#                            <div class="news-item">#}
+                    {#                                <img src="/static/img/blog/news-01.png" alt="Images">#}
+                    {#                                <div>#}
+                    {#                                    <a class="news-title" href="blog-details.html">آیا ارزش خرید یک فرم ساز ممتاز را#}
+                    {#                                        دارد؟</a>#}
+                    {#                                    <p class="news-date"><i class="fa-solid fa-calendar-days"></i>&nbsp;12 آذر 1403#}
+                    {#                                    </p>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="news-item">#}
+                    {#                                <img src="/static/img/blog/news-02.png" alt="Images">#}
+                    {#                                <div>#}
+                    {#                                    <a class="news-title" href="blog-details.html">ساخت وبسایت خودرا به مابسپارید</a>#}
+                    {#                                    <p class="news-date"><i class="fa-solid fa-calendar-days"></i>&nbsp;12 آذر 1403#}
+                    {#                                    </p>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="news-item">#}
+                    {#                                <img src="/static/img/blog/news-03.png" alt="Images">#}
+                    {#                                <div>#}
+                    {#                                    <a class="news-title" href="blog-details.html">آنها گفتند که آنها فقط نمی دانند#}
+                    {#                                        چگونه از خود مراقبت کنند#}
+                    {#                                        پیچ و تاب</a>#}
+                    {#                                    <p class="news-date"><i class="fa-solid fa-calendar-days"></i>&nbsp;12 آذر 1403#}
+                    {#                                    </p>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                            <div class="news-item">#}
+                    {#                                <img src="/static/img/blog/news-04.png" alt="Images">#}
+                    {#                                <div>#}
+                    {#                                    <a class="news-title" href="blog-details.html">من هرگز چنین لبخند نرم دردناکی ندیده#}
+                    {#                                        بودم#}
+                    {#                                        همیشه</a>#}
+                    {#                                    <p class="news-date"><i class="fa-solid fa-calendar-days"></i>&nbsp;12 آذر 1403#}
+                    {#                                    </p>#}
+                    {#                                </div>#}
+                    {#                            </div>#}
+                    {#                        </div>#}
+                    {#                        <h4 class="blog-title mb-30">برچسب ها</h4>#}
+                    {#                        <div class="tags-item d-flex flex-wrap mb-50">#}
+                    {#                            <a class="tags-btn" href="#">مسافرت</a>#}
+                    {#                            <a class="tags-btn" href="#">میز ​​کمک</a>#}
+                    {#                            <a class="tags-btn" href="#">عکاسی</a>#}
+                    {#                            <a class="tags-btn" href="#">سبک زندگی</a>#}
+                    {#                            <a class="tags-btn" href="#">وردپرس</a>#}
+                    {#                            <a class="tags-btn" href="#">توسعه</a>#}
+                    {#                            <a class="tags-btn" href="#">پشتیبانی</a>#}
+                    {#                            <a class="tags-btn" href="#">جاوا اسکریپت</a>#}
+                    {#                            <a class="tags-btn" href="#">تجارت الکترونیک</a>#}
+                    {#                            <a class="tags-btn" href="#">وردپرس</a>#}
+                    {#                        </div>#}
+                    {#                        <h4 class="blog-title mb-30">اینستاگرام</h4>#}
+                    {#                        <div class="instagram-gallery-widget ">#}
+                    {#                            <a href="#" class="instagram-item">#}
+                    {#                                <img src="/static/img/blog/Instagram-01.png" alt="">#}
+                    {#                            </a>#}
+                    {#                            <a href="#" class="instagram-item">#}
+                    {#                                <img src="/static/img/blog/Instagram-02.png" alt="">#}
+                    {#                            </a>#}
+                    {#                            <a href="#" class="instagram-item">#}
+                    {#                                <img src="/static/img/blog/Instagram-03.png" alt="">#}
+                    {#                            </a>#}
+                    {#                            <a href="#" class="instagram-item">#}
+                    {#                                <img src="/static/img/blog/Instagram-04.png" alt="">#}
+                    {#                            </a>#}
+                    {#                            <a href="#" class="instagram-item">#}
+                    {#                                <img src="/static/img/blog/Instagram-05.png" alt="">#}
+                    {#                            </a>#}
+                    {#                            <a href="#" class="instagram-item">#}
+                    {#                                <img src="/static/img/blog/Instagram-06.png" alt="">#}
+                    {#                            </a>#}
+                    {#                        </div>#}
+                    {#                    </div>#}
                 </div>
             </div>
         </div>
     </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/js/article_details.js"></script>
 {% endblock %}
