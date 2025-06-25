@@ -63,7 +63,7 @@
 
                         <p class="details-text mb-30">با استفاده از طراحان گرافیک است مورد نیاز،<span class="deco-text">داوود رستمی
                                 لبا استفاده از طراحان گرافیک است مورد نیاز، و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد،
-                        </p>
+                        </span></p>
                         {#                        <ul>#}
                         {#                            <li class="d-flex"><span></span> تنظیمات فروشگاه</li>#}
                         {#                            <li class="d-flex"><span></span> نصب فروشگاه تجارت الکترونیک</li>#}
@@ -189,13 +189,13 @@
                     <form class="get_quote_form row" method="post">
                         {% csrf_token %}
                         <div class="col-md-12 form-group">
-                            <textarea class="form-control message" required name="message"></textarea>
+                            <textarea id="text_content" class="form-control message" required name="message"></textarea>
                             <label class="floating-label">نوع نظر...</label>
                         </div>
                         <div class="col-md-12 form-group reply-text d-flex">
                         </div>
                         <div class="col-md-12 form-group">
-                            <a  onclick="send_comment({{ article.id }})" class="thm_btn" >ارسال نظر</a>
+                            <a  onclick="send_comment({{ article.id }})"  class="thm_btn" >ارسال نظر</a>
                         </div>
 {#                        {% if login_error %}#}
 

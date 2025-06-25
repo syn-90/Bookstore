@@ -4,5 +4,6 @@ from.views import *
 
 urlpatterns = [
     path('', ArticelsPage.as_view(), name = 'article_page'),
-    path('details/<slug>/',DetailView.as_view(), name = 'article_details')
+    path('details/<slug>/',DetailView.as_view(), name = 'article_details'),
+    path('send_comment/', send_comment)
 ]

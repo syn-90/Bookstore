@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.views import View
 from .models import ArticleModel, ArticleCommentModel
@@ -53,4 +53,11 @@ class DetailView(View):
             })
 
 
+
+def send_comment(request):
+    article_id = request.GET.get('article_uid')
+    text = request.GET.get('text')
+    print(article_id)
+    print(text)
+    return JsonResponse({'status': 'success'})
 
