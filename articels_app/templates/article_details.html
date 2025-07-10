@@ -138,50 +138,55 @@
                             </div>
                         </div>
                     </div>
-                {% if request.user.is_authenticated %}
-                    <div class="comments-item round-box mb-30 wow fadeInUp">
-                        <h4 class="mb-35">{{ article.articlecommentmodel_set|filter_by_publish}} نظر داده شده</h4>
-                        {% for comment in  article.articlecommentmodel_set.all %}
-                            {% if comment.is_publish %}
-                            <div class="comments-content">
-                                <div>
-                                    <img src="/static/img/blog/face-03.png" alt="Face">
-                                </div>
-                                <div class="comments-text">
-                                    <div class="d-flex flex-wrap justify-content-between mb-20">
-                                        <div>
-                                            <a href="#" class="admin-title"> {{ comment.user }}</a>
-                                            <p class="post-time">13 مهر 1403</p>
-                                        </div>
-                                        <a class="sub-bold-1 comment-reply" data-bs-toggle="collapse"
-                                           href="#replyColllapse03" role="button" aria-expanded="false"
-                                           aria-controls="replyColllapse03">پاسخ دادن<i
-                                                class="fa-solid fa-arrow-right"></i></a>
+                    {% if request.user.is_authenticated %}
+                        <div class="comments-item round-box mb-30 wow fadeInUp">
+                            <h4 class="mb-35">{{ article.articlecommentmodel_set|filter_by_publish }} نظر داده شده</h4>
+                            {% for comment in  article.articlecommentmodel_set.all %}
+                                {% if comment.is_publish %}
+                                    <div class="comments-content">
+                                    <div>
+                                        <img src="/static/img/blog/face-03.png" alt="Face">
                                     </div>
-                                    <p class="small-2">
-                                        {{ comment.text }}
-                                    </p>
-                                    <div class="collapse" id="replyColllapse03">
-                                        <div class="reply-box">
-                                            <input type="text" class="form-control" placeholder="نظرات خودرا وارد کنید">
-                                            <button><img src="/static/img/blog/Send-Icon.svg" alt=""></button>
+                                    <div class="comments-text">
+                                        <div class="d-flex flex-wrap justify-content-between mb-20">
+                                            <div>
+                                                <a href="#" class="admin-title"> {{ comment.user }}</a>
+                                                <p class="post-time">13 مهر 1403</p>
+                                            </div>
+                                            <a class="sub-bold-1 comment-reply" data-bs-toggle="collapse"
+                                               href="#replyColllapse03" role="button" aria-expanded="false"
+                                               aria-controls="replyColllapse03">پاسخ دادن<i
+                                                    class="fa-solid fa-arrow-right"></i></a>
+                                        </div>
+                                        <p class="small-2">
+                                            {{ comment.text }}
+                                        </p>
+                                        <div class="collapse" id="replyColllapse03">
+                                            <div class="reply-box">
+                                                <input type="text" class="form-control"
+                                                       placeholder="نظرات خودرا وارد کنید">
+                                                <button><img src="/static/img/blog/Send-Icon.svg" alt=""></button>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            {% endif %}
+                                {% endif %}
 
                             </div>
-{#                        {% else %}#}
+                                {#                        {% else %}#}
 
-                        {% endfor %}
+                            {% endfor %}
 
-                    </div>
-                {% else %}
-                            <div class="col-sm-12 alert alert-danger">برای ثبت نظر باید وارد <a href="{% url 'login_page' %}">حساب کاربری </a>خود شوید</div>
-                {% endif %}
-                {% if status %}
-                                    <div class="col-sm-12 alert-success">کامنت شما با موفقیت ثبت شد و بعد از تایید ادمین منتشر خواهد شد</div>
-                {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="col-sm-12 alert alert-danger">برای ثبت نظر باید وارد <a
+                                href="{% url 'login_page' %}">حساب کاربری </a>خود شوید
+                        </div>
+                    {% endif %}
+                    {% if status %}
+                        <div class="col-sm-12 alert-success">کامنت شما با موفقیت ثبت شد و بعد از تایید ادمین منتشر خواهد
+                            شد
+                        </div>
+                    {% endif %}
                 </div>
                 <div class="reply-item round-box wow fadeInUp">
                     <h4>پاسخ دادن</h4>
@@ -195,11 +200,11 @@
                         <div class="col-md-12 form-group reply-text d-flex">
                         </div>
                         <div class="col-md-12 form-group">
-                            <a  onclick="send_comment({{ article.id }})"  class="thm_btn" >ارسال نظر</a>
+                            <a onclick="send_comment({{article.id }})" class="thm_btn">ارسال نظر</a>
                         </div>
-{#                        {% if login_error %}#}
+                        {#                        {% if login_error %}#}
 
-{#                        {% endif %}#}
+                        {#                        {% endif %}#}
                     </form>
                 </div>
             </div>
@@ -304,6 +309,6 @@
     </section>
 {% endblock %}
 
-{% block scripts %}
-    <script src="/static/js/article_details.js"></script>
-{% endblock %}
+{#{% block scripts %}#}
+{#        <script>function send_comment(article_id) {    return alert('آیدی مقاله: ' + article_id);}</script>#}
+{#{% endblock %}#}

@@ -59,5 +59,6 @@ def send_comment(request):
     text = request.GET.get('text')
     print(article_id)
     print(text)
+    print('hello')
     return JsonResponse({'status': 'success'})
 
