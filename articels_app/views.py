@@ -55,10 +55,13 @@ class DetailView(View):
 
 
 def send_comment(request):
-    article_id = request.GET.get('article_uid')
-    text = request.GET.get('text')
-    print(article_id)
-    print(text)
-    print('hello')
-    return JsonResponse({'status': 'success'})
+    try:
+        print('hi')
+        article_id = request.GET.get('article_id')
+        text = request.GET.get('text')
+        new_comment = ArticleCommentModel(article_id=article_id,user_id=request.user.id , text=text )
+        new_comment.save()
+        return JsonResponse({'status': 'success'})
+    except Exception as err:
+        return JsonResponse({'status': 'field'})
 

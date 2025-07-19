@@ -53,21 +53,25 @@
                         <div class="widget shop_category_widget">
                             <h4 class="shop_sidebar_title_small"><i class="icon-category-icon"></i>دسته بندی</h4>
                             <ul class="list-unstyled shop_category_list">
-                                <li><a href="#">همه دسته بندی ها</a></li>
-                                <li><a href="#">درام</a></li>
-                                <li><a href="#">رمز و راز</a></li>
-                                <li><a href="#">رمان ها</a></li>
-                                <li><a href="#">کتاب های دستور غذا</a></li>
+                                {% for category in categories %}
+                                    <li><a href="{% url 'category_page' category.slug %}">{{ category.title }}</a></li>
+                                {% endfor %}
+                                
+{#                                <li><a href="#">همه دسته بندی ها</a></li>#}
+{#                                <li><a href="#">درام</a></li>#}
+{#                                <li><a href="#">رمز و راز</a></li>#}
+{#                                <li><a href="#">رمان ها</a></li>#}
+{#                                <li><a href="#">کتاب های دستور غذا</a></li>#}
                             </ul>
-                            <div class="collapse" id="collapseExample">
-                                <ul class="list-unstyled shop_category_list">
-                                    <li><a href="#">همه دسته بندی ها</a></li>
-                                    <li><a href="#">درام</a></li>
-                                    <li><a href="#">رمز و راز</a></li>
-                                    <li><a href="#">رمان ها</a></li>
-                                    <li><a href="#">کتاب های دستور غذا</a></li>
-                                </ul>
-                            </div>
+{#                            <div class="collapse" id="collapseExample">#}
+{#                                <ul class="list-unstyled shop_category_list">#}
+{#                                    <li><a href="#">همه دسته بندی ها</a></li>#}
+{#                                    <li><a href="#">درام</a></li>#}
+{#                                    <li><a href="#">رمز و راز</a></li>#}
+{#                                    <li><a href="#">رمان ها</a></li>#}
+{#                                    <li><a href="#">کتاب های دستور غذا</a></li>#}
+{#                                </ul>#}
+{#                            </div>#}
                             <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
                                aria-expanded="false" aria-controls="collapseExample">
                                 مشاهده بیشتر <i class="ti-angle-down"></i>
@@ -198,7 +202,7 @@
                         <button type="submit"><i class="ti-search"></i></button>
                     </form>
                     <div class="shop_top d-flex align-items-center justify-content-between">
-                        <div class="shop_menu_left">500 کتاب</div>
+                        <div class="shop_menu_left">{{ products.count }} کتاب</div>
                         <div class="shop_menu_right d-flex align-items-center justify-content-end">
                             ترتیب براساس
                             <form class="woocommerce-ordering" method="get">
@@ -728,18 +732,25 @@
                         <div class="text-center">
                             <nav aria-label="...">
                                 <ul class="pagination pagi-content">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#"><i class="ti-angle-left"></i>قبلی</a>
-                                    </li>
-                                    <li class="page-item active" aria-current="page"><span class="page-link">1</span>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">...</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#">بعدی<i class="ti-angle-right"></i></a>
-                                    </li>
+                                    {% if products.has_previous %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ products.previous_page_number }}"><i class="ti-angle-left"></i>قبلی</a>
+                                        </li>
+                                    {% endif %}
+
+{#                                    <li class="page-item active" aria-current="page"><span class="page-link">1</span>#}
+{#                                    </li>#}
+                                    {% for page in products.paginator.page_range %}
+                                        <li class="{% if products.number == page%}page-item active{% endif %} "><a class="page-link " href="?page={{ page }}">{{ page }}</a></li>
+
+                                    {% endfor %}
+
+                                    {% if products.has_next %}
+                                        <li class="page-item">
+                                            <a class="page-link" href="?page={{ products.next_page_number }}">بعدی<i class="ti-angle-right"></i></a>
+                                        </li>
+                                    {% endif %}
+
                                 </ul>
                             </nav>
                         </div>

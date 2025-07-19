@@ -140,7 +140,7 @@
                     </div>
                     {% if request.user.is_authenticated %}
                         <div class="comments-item round-box mb-30 wow fadeInUp">
-                            <h4 class="mb-35">{{ article.articlecommentmodel_set|filter_by_publish }} نظر داده شده</h4>
+                            <h4 class="mb-35">{{ article.articlecommentmodel_set|filter_by_publish:article.id }} نظر داده شده</h4>
                             {% for comment in  article.articlecommentmodel_set.all %}
                                 {% if comment.is_publish %}
                                     <div class="comments-content">
@@ -309,6 +309,20 @@
     </section>
 {% endblock %}
 
-{#{% block scripts %}#}
-{#        <script>function send_comment(article_id) {    return alert('آیدی مقاله: ' + article_id);}</script>#}
-{#{% endblock %}#}
+{% block scripts %}
+{#    <script src="/static/js/article_details.js"></script>#}
+        <script>function send_comment(article_id){
+                   let text = $("#text_content")
+                        $.get('/articels/send_comment/',{
+                        'article_id' : article_id,
+                        'text':text.val()
+                    }).then(res =>{
+                        if(res.status ==='success'){
+                            alert('کامنت شما ثبت شد')
+                        }else if (res.status ==='field'){
+                             alert('مشکلی پیش امده لطفا دوباره تلاش کنید')
+                        }
+                    })
+                        ;}
+        </script>
+{% endblock %}
