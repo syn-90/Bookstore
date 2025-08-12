@@ -136,3 +136,6 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = "jfrysayna2@gmail.com"
 EMAIL_HOST_PASSWORD = "puya dgks vsig lewu"
 EMAIL_PORT = '587'
+
+
+LOGIN_URL = 'users/login/'

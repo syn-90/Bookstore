@@ -79,12 +79,12 @@
                                 <li><span>شابک:</span>{{ product.ISBN }}</li>
                                 <li><span>زبان:</span>{{ product.language }}</li>
                             </ul>
-                            <div class="d-flex">
-                                <a href="#" class="bj_theme_btn strock_btn flip_btn">برگشت به عقب</a>
-                                <a href="http://www.googleguide.com/print/adv_op_ref.pdf"
-                                   class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i>
-                                    به داخل نگاه کن</a>
-                            </div>
+{#                            <div class="d-flex">#}
+{#                                <a href="#" class="bj_theme_btn strock_btn flip_btn">برگشت به عقب</a>#}
+{#                                <a href="http://www.googleguide.com/print/adv_op_ref.pdf"#}
+{#                                   class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i>#}
+{#                                    به داخل نگاه کن</a>#}
+{#                            </div>#}
 
 
                             <div class="single_product_price_variation">
@@ -511,19 +511,19 @@
                         <div class="product-qty">
                             تعداد:
                             <div class="cart_quantity">
-                                <button class="quantity_btn minus"><i class="icon_minus-06"></i></button>
-                                <input type="number" min="1" max="99" step="1" value="1">
-                                <button class="quantity_btn plus"><i class="icon_plus"></i></button>
+                                <a onclick="count_product({{ product.id }},'minus')" class="quantity_btn minus" ><i class="icon_minus-06"></i></a>
+                                <input id="count_product" type="number" min="1" max="99" step="1" value="{{ response.count }}">
+                                <a onclick="count_product({{ product.id }},'plus')" class="quantity_btn plus" ><i class="icon_plus"></i></a>
                             </div>
                         </div>
 
                         <div class="d-flex flex-column gap-3">
-                            <a href="checkout.html" class="bj_theme_btn"> اکنون خرید کنید</a>
-                            <button class="bj_theme_btn add-to-cart-automated" type="button"
+                            <a class="bj_theme_btn" href="{% url 'order_page' %}"> اکنون خرید کنید</a>
+                            <a onclick="add_to_basket({{ product.id }})" class="bj_theme_btn add-to-cart-automated" type="button"
                                     data-name="کتاب کار داستان سرایی" data-price="10"
                                     data-img="/static/img/book-single1.jpg" data-mrp="15"><i class="icon_cart_alt"></i>اضافه
                                 کردن به سبد خرید
-                            </button>
+                            </a>
                         </div>
                     </div>
 
@@ -739,4 +739,8 @@
     </section>
 
 
+{% endblock %}
+
+{% block scripts %}
+    <script src="/static/js/ordering.js"></script>
 {% endblock %}

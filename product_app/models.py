@@ -50,6 +50,7 @@ class ProductModel(models.Model) :
     seller = models.CharField(max_length=50, verbose_name="فروشنده")
     is_off = models.IntegerField(blank=True, verbose_name="تخفیف(بصورت درصد)")
     is_active = models.BooleanField(default=True, verbose_name="فعال/غیر فعال")
+    count = models.PositiveIntegerField(null=True , verbose_name='تعداد')
     slug = models.SlugField(verbose_name= "عنوان در مرورگر", allow_unicode=True)
     def seprator(self):
         return "{:,}".format(self.price)

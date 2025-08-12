@@ -68,7 +68,7 @@
                                 {#                                </ul>#}
                             </li>
                             <li class="nav-item dropdown submenu">
-                                <a class="nav-link dropdown-toggle" href="cart.html" role="button"
+                                <a class="nav-link dropdown-toggle" href="{% url 'order_page' %}" role="button"
                                    data-bs-toggle="dropdown" aria-expanded="false">
                                     سبد خرید
                                 </a>
@@ -469,7 +469,7 @@
                                         </p>
                                     </div>
                                     <div class="cart-button text-center">
-                                        <a href="cart.html" class="btn btn-cart get_btn pink">سبد خرید</a>
+                                        <a href="{% url 'order_page' %}" class="btn btn-cart get_btn pink">سبد خرید</a>
                                         <a href="checkout.html" class="btn btn-cart get_btn dark">تسویه حساب</a>
                                     </div>
                                 </li>

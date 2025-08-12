@@ -51,9 +51,10 @@ class RegisterView(View):
                                 if password_valid.check_password_letter_number():
                                     user = UserModel(username=name, email=email, phone=phone_num, is_active=False, active_code=create_ranom_code(6))
                                     user.set_password(password)
-                                    user.save()
+                                    # user.save()
                                     response = send_email(subject="فعال سازی حساب کاربری ", to=user.email, context={"user":user}, template_name="template_service/otp_send_email.html")
                                     if response:
+                                        user.save()
                                         request.session[f'{user.id}otp']=user.email
                                         return redirect(reverse('otp_page', args=[user.id]))
                                     else:

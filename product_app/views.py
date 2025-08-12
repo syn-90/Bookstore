@@ -7,9 +7,10 @@ from django.views import View
 
 
 class ProductView(View):
+    categories = CategoryModel.objects.all()
     def get(self, request):
         products = ProductModel.objects.all()
-        categories = CategoryModel.objects.all()
+        categories = ProductView.categories
         paginator = Paginator(products,4)
         page_number = request.GET.get('page')
         try:
@@ -44,9 +45,11 @@ class ProductDetailsView(View):
 class CategoryView(View):
     def get(self, request, slug):
         products = ProductModel.objects.filter(category__slug=slug)
+        categories = ProductView.categories
         if products is not None:
             return render(request, 'product_list.html',{
-                'products':products
+                'products':products ,
+                'categories' : categories
             })
 
         else :

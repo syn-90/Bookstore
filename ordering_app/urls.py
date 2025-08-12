@@ -7,5 +7,7 @@ from.views import *
 
 
 urlpatterns = [
-    path("", OrderView.as_view() , name = 'order_page')
+    path("", OrderView.as_view() , name = 'order_page'),
+    path('add_order/' , add_to_order),
+    path('change_count/' , change_count_basket)
 ]
