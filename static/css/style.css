@@ -8717,7 +8717,9 @@ input::-webkit-inner-spin-button {
   margin-bottom: 0;
 }
 .account_dashboard_content .content_body {
-  padding: 15px 20px 20px;
+  padding: 1px 20px 20px;
+
+
 }
 .account_dashboard_content .account_dashboard_content_title {
   padding: 5px 0 20px 0;

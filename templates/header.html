@@ -129,7 +129,7 @@
                                 </ul>
                             </li>
 
-{#                            <a href="my-ebook-library.html" class="nav-link">کتاب الکترونیکی</a>#}
+                            {#                            <a href="my-ebook-library.html" class="nav-link">کتاب الکترونیکی</a>#}
 
 
                             <li class="nav-item dropdown submenu">
@@ -396,20 +396,20 @@
                             وبلاگ
                         </a>
 
-{#                        <ul class="dropdown-menu">#}
-{#                            <li class="nav-item">#}
-{#                                <a href="blog-grid.html" class="nav-link">شبکه ووبلاگ</a>#}
-{#                            </li>#}
-{#                            <li class="nav-item">#}
-{#                                <a href="blog-extend-grid.html" class="nav-link">شبکه گسترده</a>#}
-{#                            </li>#}
-{#                            <li class="nav-item">#}
-{#                                <a href="blog-list.html" class="nav-link">لیست وبلاگ</a>#}
-{#                            </li>#}
-{#                            <li class="nav-item">#}
-{#                                <a href="blog-details.html" class="nav-link">جزیئات وبلاگ</a>#}
-{#                            </li>#}
-{#                        </ul>#}
+                        {#                        <ul class="dropdown-menu">#}
+                        {#                            <li class="nav-item">#}
+                        {#                                <a href="blog-grid.html" class="nav-link">شبکه ووبلاگ</a>#}
+                        {#                            </li>#}
+                        {#                            <li class="nav-item">#}
+                        {#                                <a href="blog-extend-grid.html" class="nav-link">شبکه گسترده</a>#}
+                        {#                            </li>#}
+                        {#                            <li class="nav-item">#}
+                        {#                                <a href="blog-list.html" class="nav-link">لیست وبلاگ</a>#}
+                        {#                            </li>#}
+                        {#                            <li class="nav-item">#}
+                        {#                                <a href="blog-details.html" class="nav-link">جزیئات وبلاگ</a>#}
+                        {#                            </li>#}
+                        {#                        </ul>#}
                     </li>
                 </ul>
 
@@ -426,55 +426,64 @@
                                 </div>
                             </form>
                         </li>
-                        <li class="nav-item shpping-cart dropdown submenu">
-                            <a class="cart-btn nav-link dropdown-toggle" href="#" role="button"
-                               data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="icon-shopping-basket"></i><span class="num">2</span></a>
-                            <ul class="dropdown-menu">
-                                <li class="cart-single-item clearfix">
-                                    <div class="cart-img">
-                                        <img src="/static/img/cart1.jpg" alt="styler"/>
-                                    </div>
-                                    <div class="cart-content text-left">
-                                        <p class="cart-title">
-                                            <a href="product-single.html">صورتی کم رنگ و مشکی دکمه دار</a>
-                                        </p>
-                                        <p>
-                                            <del>تومان400.000</del>
-                                            -تومان350.000
-                                        </p>
-                                    </div>
-                                    <div class="cart-remove">
-                                        <a href="#" class="action"><span class="ti-close"></span></a>
-                                    </div>
-                                </li>
-                                <li class="cart-single-item clearfix">
-                                    <div class="cart-img">
-                                        <img src="/static/img/cart1.jpg" alt="styler"/>
-                                    </div>
-                                    <div class="cart-content text-left">
-                                        <p class="cart-title">
-                                            <a href="product-single.html">ورا بردلی چمدان بزرگ</a>
-                                        </p>
-                                        <p>تومان350.000</p>
-                                    </div>
-                                    <div class="cart-remove">
-                                        <a href="#" class="action"><span class="ti-close"></span></a>
-                                    </div>
-                                </li>
-                                <li class="cart_f">
-                                    <div class="cart-pricing">
-                                        <p class="total">
-                                            جمع فرعی :<span class="p-total text-end">تومان358.00</span>
-                                        </p>
-                                    </div>
-                                    <div class="cart-button text-center">
-                                        <a href="{% url 'order_page' %}" class="btn btn-cart get_btn pink">سبد خرید</a>
-                                        <a href="checkout.html" class="btn btn-cart get_btn dark">تسویه حساب</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
+                        {% if request.user.is_authenticated %}
+                            <li class="nav-item shpping-cart dropdown submenu">
+                                <a class="cart-btn nav-link dropdown-toggle" href="{% url "order_page" %}" role="button"
+                                   data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="icon-shopping-basket"></i><span
+                                        class="num">{{ basket.orderdetailmodel_set.all.count }}</span></a>
+                                <ul class="dropdown-menu">
+                                    {% for detail in basket.orderdetailmodel_set.all %}
+                                        <li class="cart-single-item clearfix">
+                                            <div class="cart-img">
+                                                <img src="{{ detail.product.image.url }}" alt="styler"/>
+                                            </div>
+                                            <div class="cart-content text-left">
+                                                <p class="cart-title">
+                                                    <a href="{% url 'products_details' detail.product.slug %}">{{ detail.product.title }}</a>
+                                                </p>
+                                                    {{ detail.product.price }}تومان
+                                                <p>
+                                                </p>
+                                            </div>
+                                            <div class="cart-remove">
+                                                <a href="#" class="action"><span class="ti-close"></span></a>
+                                            </div>
+                                        </li>
+                                    {% endfor %}
+
+{#                                    <li class="cart-single-item clearfix">#}
+{#                                        <div class="cart-img">#}
+{#                                            <img src="/static/img/cart1.jpg" alt="styler"/>#}
+{#                                        </div>#}
+{#                                        <div class="cart-content text-left">#}
+{#                                            <p class="cart-title">#}
+{#                                                <a href="product-single.html">صورتی کم رنگ و مشکی دکمه دار</a>#}
+{#                                            </p>#}
+{#                                            <p>#}
+{#                                                <del>تومان400.000</del>#}
+{#                                                -تومان350.000#}
+{#                                            </p>#}
+{#                                        </div>#}
+{#                                        <div class="cart-remove">#}
+{#                                            <a href="#" class="action"><span class="ti-close"></span></a>#}
+{#                                        </div>#}
+{#                                    </li>#}
+                                    <li class="cart_f">
+                                        <div class="cart-pricing">
+                                            <p class="total">
+                                                جمع فرعی :<span class="p-total text-end">تومان{{ basket.sum_basket }}</span>
+                                            </p>
+                                        </div>
+                                        <div class="cart-button text-center">
+                                            <a href="{% url 'order_page' %}" class="btn btn-cart get_btn pink">سبد
+                                                خرید</a>
+                                            <a href="checkout.html" class="btn btn-cart get_btn dark">تسویه حساب</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        {% endif %}
                         {% if request.user.is_authenticated %}
                             <li class="nav-item user ms-3">
                                 <a class="bj_theme_btn strock_btn hidden-sm hidden-xs" href="{% url 'logout' %}"><i

@@ -507,15 +507,15 @@
                                 موقعیت تحویل را انتخاب کنید
                             </li>
                         </ul>
-                        <h3>در انبار.</h3>
-                        <div class="product-qty">
-                            تعداد:
-                            <div class="cart_quantity">
-                                <a onclick="count_product({{ product.id }},'minus')" class="quantity_btn minus" ><i class="icon_minus-06"></i></a>
-                                <input id="count_product" type="number" min="1" max="99" step="1" value="{{ response.count }}">
-                                <a onclick="count_product({{ product.id }},'plus')" class="quantity_btn plus" ><i class="icon_plus"></i></a>
-                            </div>
-                        </div>
+{#                        <h3>در انبار.</h3>#}
+{#                        <div class="product-qty">#}
+{#                            تعداد:#}
+{#                            <div class="cart_quantity">#}
+{#                                <a onclick="count_product({{ product.id }},'minus')" class="quantity_btn minus" ><i class="icon_minus-06"></i></a>#}
+{#                                <input id="count_product" type="number" min="1" max="99" step="1" value="{{ response.count }}">#}
+{#                                <a onclick="count_product({{ product.id }},'plus')" class="quantity_btn plus" ><i class="icon_plus"></i></a>#}
+{#                            </div>#}
+{#                        </div>#}
 
                         <div class="d-flex flex-column gap-3">
                             <a class="bj_theme_btn" href="{% url 'order_page' %}"> اکنون خرید کنید</a>

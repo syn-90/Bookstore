@@ -5,6 +5,10 @@
 {% endblock %}
 
 {% block content %}
+    <div class="cart-header-separator"></div>
+
+
+    <!-- Cart area  -->
     <div class="cart-header-alert pt-3" data-bg-color="#f5f5f5">
         <div class="container rtl">
             <div class="alert alert-warning alert-dismissible fade show  mb-0" role="alert">
@@ -39,141 +43,40 @@
                             <span class="cart_total_price">1,243 میلیون تومان</span>
                         </div>
                     </div>
-                    {% for detail in details %}
-                        <div class="cart_item_wrapper">
-                        <div class="single_cart_item">
-                                                    <div class="cart_item_select">
-                                                        <input class="form-check-input" type="checkbox" checked>
-                                                    </div>
-                                                    <div class="cart_item_image">
-                                                        <img src="{{ detail.product.image.url }}" alt="cart">
-                                                    </div>
+                    <div class="cart_item_wrapper">
+                        {% for detail in details %}
+                            <div class="single_cart_item">
+                                <div class="cart_item_select">
+                                    <input class="form-check-input" type="checkbox" checked>
+                                </div>
+                                <div class="cart_item_image">
+                                    <img src="{{ detail.product.image.url }}" alt="cart">
+                                </div>
+                                <div class="cart_item_content">
+                                    <a href="product-single.html" class="book_name">{{ detail.product.title }}</a>
+                                    <div class="author_name">آرمان خسوری</div>
+                                    <div class="cart_action">
+                                        <a onclick="remove_detail({{ detail.id }})" class="cart_remove"><i class="ti-trash"></i></a>
+                                    </div>
+                                    <div class="book_available">فقط {{ detail.product.count }} نسخه موجود است</div>
+                                </div>
+                                <div class="cart_quantity">
+                                    <a onclick="count_product( {{ detail.product.id }},'minus')" class="quantity_btn minus"><i class="icon_minus-06"></i></a>
+                                    <input type="text" step="1" value="{{ detail.count }}">
+                                    <a onclick="count_product( {{ detail.product.id }}, 'plus')" class="quantity_btn plus"><i class="icon_plus"></i></a>
+                                </div>
 
-                        <div class="cart_item_content">
-                            <a href="product-single.html" class="book_name">{{ detail.product.title }}</a>
-                            <div class="author_name">آرمان خسوری</div>
-                            <div class="cart_action">
-                                <button class="cart_remove"><i class="ti-trash"></i></button>
-                                <button class="cart_wishlist"><i class="fa-regular fa-heart"></i>
-                                    لیست علاقه مندی ها
-                                </button>
-                            </div>
-                            <div class="book_available">فقط 3 نسخه موجود است</div>
-                        </div>
-                        <div class="cart_quantity">
-                            <a onclick="count_product({{ detail.id }},'minus')"><i
-                                    class="icon_minus-06"></i></a>
-                            <input type="number" min="1" max="99" step="1" value="{{ detail.count }}">
-                            <a onclick="count_product({{ detail.id }},'plus')"><i class="icon_plus"></i></a>
-                        </div>
-                        <div class="cart_item_price">
-                                    <div class="cart_item_price_discount">1,243 میلیون تومان</div>
+
+                                <div class="cart_item_price">
+                                    <div class="cart_item_price_discount">{{ detail.product.price }} میلیون تومان</div>
                                     <div class="cart_item_price_mrp">1,910 میلیون تومان</div>
-                        </div>
+                                </div>
 
-                    {% endfor %}
+                            </div>
+
+                        {% endfor %}
 
 
-
-
-
-                    {#                                <div class="cart_item_price">#}
-                    {#                                    <div class="cart_item_price_discount">1,243 میلیون تومان</div>#}
-                    {#                                    <div class="cart_item_price_mrp">1,910 میلیون تومان</div>#}
-                    {#                                </div>#}
-                    {##}
-                    {#                            </div>#}
-                    {#                            <div class="single_cart_item">#}
-                    {#                                <div class="cart_item_select">#}
-                    {#                                    <input class="form-check-input" type="checkbox" checked>#}
-                    {#                                </div>#}
-                    {#                                <div class="cart_item_image">#}
-                    {#                                    <img src="/static/img/cart/best_book2.jpg" alt="cart">#}
-                    {#                                </div>#}
-                    {#                                <div class="cart_item_content">#}
-                    {#                                    <a href="product-single.html" class="book_name">نوری که نمی توانیم ببینیم</a>#}
-                    {#                                    <div class="author_name">آرمان خسروی</div>#}
-                    {#                                    <div class="cart_action">#}
-                    {#                                        <button class="cart_remove"><i class="ti-trash"></i></button>#}
-                    {#                                        <button class="cart_wishlist"><i class="fa-regular fa-heart"></i>#}
-                    {#                                            لیست علاقه مندی ها</button>#}
-                    {#                                    </div>#}
-                    {#                                    <div class="book_available">فقط سه نسخه موجود است</div>#}
-                    {#                                </div>#}
-                    {#                                <div class="cart_quantity">#}
-                    {#                                    <button class="quantity_btn minus"><i class="icon_minus-06"></i></button>#}
-                    {#                                    <input type="number" min="1" max="99" step="1" value="1">#}
-                    {#                                    <button class="quantity_btn plus"><i class="icon_plus"></i></button>#}
-                    {#                                </div>#}
-                    {##}
-                    {##}
-                    {#                                <div class="cart_item_price">#}
-                    {#                                    <div class="cart_item_price_discount">1,243 میلیون تومان</div>#}
-                    {#                                    <div class="cart_item_price_mrp">1,910 میلیون تومان</div>#}
-                    {#                                </div>#}
-                    {##}
-                    {#                            </div>#}
-                    {#                            <div class="single_cart_item">#}
-                    {#                                <div class="cart_item_select">#}
-                    {#                                    <input class="form-check-input" type="checkbox" checked>#}
-                    {#                                </div>#}
-                    {#                                <div class="cart_item_image">#}
-                    {#                                    <img src="/static/img/cart/best_book3.jpg" alt="cart">#}
-                    {#                                </div>#}
-                    {#                                <div class="cart_item_content">#}
-                    {#                                    <a href="product-single.html" class="book_name">نوری که نمی توانیم ببینیم</a>#}
-                    {#                                    <div class="author_name">آرمان خسروی</div>#}
-                    {#                                    <div class="cart_action">#}
-                    {#                                        <button class="cart_remove"><i class="ti-trash"></i></button>#}
-                    {#                                        <button class="cart_wishlist"><i class="fa-regular fa-heart"></i>#}
-                    {#                                            لیست علاقه مندی ها</button>#}
-                    {#                                    </div>#}
-                    {#                                    <div class="book_available">فقط سه نسخه موجود است</div>#}
-                    {#                                </div>#}
-                    {#                                <div class="cart_quantity">#}
-                    {#                                    <button class="quantity_btn minus"><i class="icon_minus-06"></i></button>#}
-                    {#                                    <input type="number" min="1" max="99" step="1" value="1">#}
-                    {#                                    <button class="quantity_btn plus"><i class="icon_plus"></i></button>#}
-                    {#                                </div>#}
-                    {##}
-                    {##}
-                    {#                                <div class="cart_item_price">#}
-                    {#                                    <div class="cart_item_price_discount">1,243 میلیون تومان</div>#}
-                    {#                                    <div class="cart_item_price_mrp">1,910 میلیون تومان</div>#}
-                    {#                                </div>#}
-                    {##}
-                    {#                            </div>#}
-                    {##}
-                    {#                            <div class="single_cart_item">#}
-                    {#                                <div class="cart_item_select">#}
-                    {#                                    <input class="form-check-input" type="checkbox" checked>#}
-                    {#                                </div>#}
-                    {#                                <div class="cart_item_image">#}
-                    {#                                    <img src="/static/img/cart/best_book4.jpg" alt="cart">#}
-                    {#                                </div>#}
-                    {#                                <div class="cart_item_content">#}
-                    {#                                    <a href="product-single.html" class="book_name">نوری که نمی توانیم ببینیم</a>#}
-                    {#                                    <div class="author_name">آرمان خسروی</div>#}
-                    {#                                    <div class="cart_action">#}
-                    {#                                        <button class="cart_remove"><i class="ti-trash"></i></button>#}
-                    {#                                        <button class="cart_wishlist"><i class="fa-regular fa-heart"></i>#}
-                    {#                                            لیست علاقه مندی ها</button>#}
-                    {#                                    </div>#}
-                    {#                                    <div class="book_available">فقط سه نسخه موجود است</div>#}
-                    {#                                </div>#}
-                    {#                                <div class="cart_quantity">#}
-                    {#                                    <button class="quantity_btn minus"><i class="icon_minus-06"></i></button>#}
-                    {#                                    <input type="number" min="1" max="99" step="1" value="1">#}
-                    {#                                    <button class="quantity_btn plus"><i class="icon_plus"></i></button>#}
-                    {#                                </div>#}
-                    {##}
-                    {##}
-                    {#                                <div class="cart_item_price">#}
-                    {#                                    <div class="cart_item_price_discount">1,243 میلیون تومان</div>#}
-                    {#                                    <div class="cart_item_price_mrp">1,910 میلیون تومان</div>#}
-                    {#                                </div>#}
-
-                    </div>
                     </div>
                     <div class="cart-happy-return-parent mb-0">
                         <div class="cart-happy-return">
@@ -413,6 +316,7 @@
         </div>
     </section>
     <!-- best selling product area  -->
+
 {% endblock %}
 
 
