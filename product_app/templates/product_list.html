@@ -56,127 +56,28 @@
                                 {% for category in categories %}
                                     <li><a href="{% url 'category_page' category.slug %}">{{ category.title }}</a></li>
                                 {% endfor %}
-                                
-{#                                <li><a href="#">همه دسته بندی ها</a></li>#}
-{#                                <li><a href="#">درام</a></li>#}
-{#                                <li><a href="#">رمز و راز</a></li>#}
-{#                                <li><a href="#">رمان ها</a></li>#}
-{#                                <li><a href="#">کتاب های دستور غذا</a></li>#}
                             </ul>
-{#                            <div class="collapse" id="collapseExample">#}
-{#                                <ul class="list-unstyled shop_category_list">#}
-{#                                    <li><a href="#">همه دسته بندی ها</a></li>#}
-{#                                    <li><a href="#">درام</a></li>#}
-{#                                    <li><a href="#">رمز و راز</a></li>#}
-{#                                    <li><a href="#">رمان ها</a></li>#}
-{#                                    <li><a href="#">کتاب های دستور غذا</a></li>#}
-{#                                </ul>#}
-{#                            </div>#}
-                            <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button"
-                               aria-expanded="false" aria-controls="collapseExample">
-                                مشاهده بیشتر <i class="ti-angle-down"></i>
-                            </a>
+                            {#                            <div class="collapse" id="collapseExample">#}
+                            {#                                <ul class="list-unstyled shop_category_list">#}
+                            {#                                    <li><a href="#">همه دسته بندی ها</a></li>#}
+                            {#                                    <li><a href="#">درام</a></li>#}
+                            {#                                    <li><a href="#">رمز و راز</a></li>#}
+                            {#                                    <li><a href="#">رمان ها</a></li>#}
+                            {#                                    <li><a href="#">کتاب های دستور غذا</a></li>#}
+                            {#                                </ul>#}
+                            {#                            </div>#}
+
                         </div>
                         <div class="widget author_widget">
                             <h4 class="shop_sidebar_title_small"><i class="icon-pen"></i>نویسندگان</h4>
-                            <div class="author_choose_list">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="burt" id="burt" value="burt">
-                                    <label class="form-check-label" for="burt">بهرام گورام</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="candy" id="candy"
-                                           value="candy">
-                                    <label class="form-check-label" for="candy">کاوه اهنگر</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="drew" id="drew" value="drew">
-                                    <label class="form-check-label" for="drew">دانیال سهرابی</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="karen" id="karen"
-                                           value="karen">
-                                    <label class="form-check-label" for="karen">کمند سلیمی</label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="richard" id="richard"
-                                           value="richard">
-                                    <label class="form-check-label" for="richard">سهراب سپهری</label>
-                                </div>
-                            </div>
+                            <ul class="list-unstyled shop_category_list">
+                                {% for author in authors %}
+                                    <li><a href="{% url 'category_page' author.slug %}">{{ author.name }}</a></li>
+                                {% endfor %}
+                            </ul>
                         </div>
                         <div class="widget author_widget">
-                            <h4 class="shop_sidebar_title_small"><i class="fa-regular fa-star"></i>امتیاز</h4>
-                            <div class="author_choose_list">
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="rating_filter"
-                                           id="5_star_filter" value="5 star">
-                                    <label class="form-check-label" for="5_star_filter">
-                                            <span class="rating">
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                            </span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="rating_filter"
-                                           id="4_star_filter" value="5 star">
-                                    <label class="form-check-label" for="4_star_filter">
-                                            <span class="rating">
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star "></i>
-                                            </span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="rating_filter"
-                                           id="3_star_filter" value="5 star">
-                                    <label class="form-check-label" for="3_star_filter">
-                                            <span class="rating">
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star "></i>
-                                                <i class="fa-solid fa-star "></i>
-                                            </span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="rating_filter"
-                                           id="2_star_filter" value="5 star">
-                                    <label class="form-check-label" for="2_star_filter">
-                                            <span class="rating">
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star "></i>
-                                                <i class="fa-solid fa-star "></i>
-                                                <i class="fa-solid fa-star "></i>
-                                            </span>
-                                    </label>
-                                </div>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="rating_filter"
-                                           id="1_star_filter" value="1 star">
-                                    <label class="form-check-label" for="1_star_filter">
-                                            <span class="rating">
-                                                <i class="fa-solid fa-star filled"></i>
-                                                <i class="fa-solid fa-star "></i>
-                                                <i class="fa-solid fa-star "></i>
-                                                <i class="fa-solid fa-star "></i>
-                                                <i class="fa-solid fa-star "></i>
-                                            </span>
-                                    </label>
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="widget price_widget">
+                            <div class="widget price_widget">
                             <h4 class="shop_sidebar_title_small"><i class="icon-price"></i>قیمت</h4>
                             <div id="slider-range" data-price-min="230" data-price-max="1233"></div>
                             <div class="price-filters d-flex justify-content-between">
@@ -193,31 +94,166 @@
                                 </div>
                             </div>
                         </div>
+{#                            <h4 class="shop_sidebar_title_small"><i class="fa-regular fa-star"></i>امتیاز</h4>#}
+{#                            <div class="author_choose_list">#}
+{#                                <div class="form-check">#}
+{#                                    <input class="form-check-input" type="checkbox" name="rating_filter"#}
+{#                                           id="5_star_filter" value="5 star">#}
+{#                                    <label class="form-check-label" for="5_star_filter">#}
+{#                                            <span class="rating">#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                            </span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <div class="form-check">#}
+{#                                    <input class="form-check-input" type="checkbox" name="rating_filter"#}
+{#                                           id="4_star_filter" value="5 star">#}
+{#                                    <label class="form-check-label" for="4_star_filter">#}
+{#                                            <span class="rating">#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                            </span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <div class="form-check">#}
+{#                                    <input class="form-check-input" type="checkbox" name="rating_filter"#}
+{#                                           id="3_star_filter" value="5 star">#}
+{#                                    <label class="form-check-label" for="3_star_filter">#}
+{#                                            <span class="rating">#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                            </span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <div class="form-check">#}
+{#                                    <input class="form-check-input" type="checkbox" name="rating_filter"#}
+{#                                           id="2_star_filter" value="5 star">#}
+{#                                    <label class="form-check-label" for="2_star_filter">#}
+{#                                            <span class="rating">#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                            </span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <div class="form-check">#}
+{#                                    <input class="form-check-input" type="checkbox" name="rating_filter"#}
+{#                                           id="1_star_filter" value="1 star">#}
+{#                                    <label class="form-check-label" for="1_star_filter">#}
+{#                                            <span class="rating">#}
+{#                                                <i class="fa-solid fa-star filled"></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                                <i class="fa-solid fa-star "></i>#}
+{#                                            </span>#}
+{#                                    </label>#}
+{#                                </div>#}
+{##}
+{#                            </div>#}
+                        </div>
+{#                        <div class="widget price_widget">#}
+{#                            <h4 class="shop_sidebar_title_small"><i class="icon-price"></i>قیمت</h4>#}
+{#                            <div id="slider-range" data-price-min="230" data-price-max="1233"></div>#}
+{#                            <div class="price-filters d-flex justify-content-between">#}
+{#                                <div class="left">#}
+{#                                    <input type="number" id="price-filter-min" placeholder=230#}
+{#                                           aria-label="Minimum price for filtering products">#}
+{#                                    <label for="price-filter-min">تومان </label>#}
+{##}
+{#                                </div>#}
+{#                                <div class="right">#}
+{##}
+{#                                    <input type="number" id="price-filter-max" placeholder=1233>#}
+{#                                    <label for="price-filter-max" aria-label="Maximum price for filtering products">تومان </label>#}
+{#                                </div>#}
+{#                            </div>#}
+{#                        </div>#}
                     </div>
                 </div>
                 <div class="col-lg-9">
-                    <form role="search" method="get" class="pr_search_form input-group" action="#">
-                        <input type="text" name="s" value="" class="form-control search-field" id="search"
+                    <form role="search" method="post" class="pr_search_form input-group" >
+                        {% csrf_token %}
+                        <input type="text" name="product_name" value="" class="form-control search-field" id="search"
                                placeholder="کتاب مورد علاقه خودرا جستجو کنید..">
                         <button type="submit"><i class="ti-search"></i></button>
                     </form>
                     <div class="shop_top d-flex align-items-center justify-content-between">
                         <div class="shop_menu_left">{{ products.count }} کتاب</div>
-                        <div class="shop_menu_right d-flex align-items-center justify-content-end">
-                            ترتیب براساس
-                            <form class="woocommerce-ordering" method="get">
-                                <select name="orderby" class="orderby selectpickers">
-                                    <option value="menu_order" selected='selected'>دسته بندی</option>
-                                    <option value="popularity">مرتب سازی بر اساس محبوبیت</option>
-                                    <option value="rating">مرتب سازی بر اساس رتبه بندی متوسط</option>
-                                    <option value="date"> مرتب سازی بر اساس آخرین</option>
-                                    <option value="price">مرتب سازی بر اساس قیمت: کم به زیاد</option>
-                                    <option value="price-desc">مرتب سازی بر اساس قیمت: زیاد به پایین</option>
-                                </select>
-                            </form>
-                        </div>
+{#                        <div class="shop_menu_right d-flex align-items-center justify-content-end">#}
+{#                            ترتیب براساس#}
+{#                            <form class="woocommerce-ordering" method="get">#}
+{#                                <select name="orderby" class="orderby selectpickers">#}
+{#                                    <option value="menu_order" selected='selected'>دسته بندی</option>#}
+{#                                    <option value="popularity">مرتب سازی بر اساس محبوبیت</option>#}
+{#                                    <option value="rating">مرتب سازی بر اساس رتبه بندی متوسط</option>#}
+{#                                    <option value="date"> مرتب سازی بر اساس آخرین</option>#}
+{#                                    <option value="price">مرتب سازی بر اساس قیمت: کم به زیاد</option>#}
+{#                                    <option value="price-desc">مرتب سازی بر اساس قیمت: زیاد به پایین</option>#}
+{#                                </select>#}
+{#                            </form>#}
+{#                        </div>#}
                     </div>
                     <div class="row">
+                    {% if product %}
+                        <div class="col-xl-3 col-lg-4 col-sm-6 projects_item">
+                                <div class="best_product_item best_product_item_two shop_product">
+                                    <div class="img">
+                                        <a href="#"><img src="{{ product.image.url }}" alt="book"></a>
+                                        <div class="pr_ribbon">
+                                            <span class="product-badge">جدید</span>
+                                            <div class="ratting">
+                                                <img src="/static/img/star-1.png" alt="">4.9
+                                            </div>
+                                        </div>
+                                        <div class="hover_item">
+                                            <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip"
+                                               data-bs-placement="right" title="علاقه مندی"><i
+                                                    class="icon_heart_alt"></i></a>
+                                            <span data-bs-toggle="tooltip" data-bs-placement="right"
+                                                  title="مشاهده سریع"><button
+                                                    class="quick_button" data-bs-toggle="modal"
+                                                    data-bs-target="#productQuickView"><i
+                                                    class="arrow_move"></i></button></span>
+                                            <a class="quick_button" href="#" data-bs-toggle="tooltip"
+                                               data-bs-placement="right" title="مقایسه"><i
+                                                    class="ti-control-shuffle"></i></a>
+                                        </div>
+                                        <a onclick="add_to_basket({{ product.id }})"
+                                           class="bj_theme_btn add-to-cart-automated"
+                                           data-name="کتاب کار داستان سرایی"
+                                           data-img="/static/img/author_book1.jpg"
+                                           data-price="25" data-mrp="120">
+                                            <i class="icon_cart_alt"></i>سبد خرید اضافه شود
+                                        </a>
+                                    </div>
+                                    <div class="bj_new_pr_content">
+                                        <a href="{% url 'products_details' product.slug %}">
+                                            <h4 class="bj_new_pr_title">{{ product.title }}</h4>
+                                        </a>
+                                        <div class="bj_pr_meta d-flex">
+                                            <div class="book_price">
+                                                <del>120</del>
+                                                {{ product.seprator }} تومان
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    {% else %}
                         {% for product in products %}
                             <div class="col-xl-3 col-lg-4 col-sm-6 projects_item">
                                 <div class="best_product_item best_product_item_two shop_product">
@@ -242,10 +278,11 @@
                                                data-bs-placement="right" title="مقایسه"><i
                                                     class="ti-control-shuffle"></i></a>
                                         </div>
-                                        <a  onclick="add_to_basket({{ product.id }})" class="bj_theme_btn add-to-cart-automated"
-                                                data-name="کتاب کار داستان سرایی"
-                                                data-img="/static/img/author_book1.jpg"
-                                                data-price="25" data-mrp="120">
+                                        <a onclick="add_to_basket({{ product.id }})"
+                                           class="bj_theme_btn add-to-cart-automated"
+                                           data-name="کتاب کار داستان سرایی"
+                                           data-img="/static/img/author_book1.jpg"
+                                           data-price="25" data-mrp="120">
                                             <i class="icon_cart_alt"></i>سبد خرید اضافه شود
                                         </a>
                                     </div>
@@ -265,24 +302,76 @@
 
                         {% endfor %}
                         <div class="text-center">
+                    {% endif %}
+{#                        {% for product in products %}#}
+{#                            <div class="col-xl-3 col-lg-4 col-sm-6 projects_item">#}
+{#                                <div class="best_product_item best_product_item_two shop_product">#}
+{#                                    <div class="img">#}
+{#                                        <a href="#"><img src="{{ product.image.url }}" alt="book"></a>#}
+{#                                        <div class="pr_ribbon">#}
+{#                                            <span class="product-badge">جدید</span>#}
+{#                                            <div class="ratting">#}
+{#                                                <img src="/static/img/star-1.png" alt="">4.9#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                        <div class="hover_item">#}
+{#                                            <a class="quick_button" href="my-wishlist.html" data-bs-toggle="tooltip"#}
+{#                                               data-bs-placement="right" title="علاقه مندی"><i#}
+{#                                                    class="icon_heart_alt"></i></a>#}
+{#                                            <span data-bs-toggle="tooltip" data-bs-placement="right"#}
+{#                                                  title="مشاهده سریع"><button#}
+{#                                                    class="quick_button" data-bs-toggle="modal"#}
+{#                                                    data-bs-target="#productQuickView"><i#}
+{#                                                    class="arrow_move"></i></button></span>#}
+{#                                            <a class="quick_button" href="#" data-bs-toggle="tooltip"#}
+{#                                               data-bs-placement="right" title="مقایسه"><i#}
+{#                                                    class="ti-control-shuffle"></i></a>#}
+{#                                        </div>#}
+{#                                        <a onclick="add_to_basket({{ product.id }})"#}
+{#                                           class="bj_theme_btn add-to-cart-automated"#}
+{#                                           data-name="کتاب کار داستان سرایی"#}
+{#                                           data-img="/static/img/author_book1.jpg"#}
+{#                                           data-price="25" data-mrp="120">#}
+{#                                            <i class="icon_cart_alt"></i>سبد خرید اضافه شود#}
+{#                                        </a>#}
+{#                                    </div>#}
+{#                                    <div class="bj_new_pr_content">#}
+{#                                        <a href="{% url 'products_details' product.slug %}">#}
+{#                                            <h4 class="bj_new_pr_title">{{ product.title }}</h4>#}
+{#                                        </a>#}
+{#                                        <div class="bj_pr_meta d-flex">#}
+{#                                            <div class="book_price">#}
+{#                                                <del>120</del>#}
+{#                                                {{ product.seprator }} تومان#}
+{#                                            </div>#}
+{#                                        </div>#}
+{#                                    </div>#}
+{#                                </div>#}
+{#                            </div>#}
+{##}
+{#                        {% endfor %}#}
+{#                        <div class="text-center">#}
                             <nav aria-label="...">
                                 <ul class="pagination pagi-content">
                                     {% if products.has_previous %}
                                         <li class="page-item">
-                                            <a class="page-link" href="?page={{ products.previous_page_number }}"><i class="ti-angle-left"></i>قبلی</a>
+                                            <a class="page-link" href="?page={{ products.previous_page_number }}"><i
+                                                    class="ti-angle-left"></i>قبلی</a>
                                         </li>
                                     {% endif %}
 
-{#                                    <li class="page-item active" aria-current="page"><span class="page-link">1</span>#}
-{#                                    </li>#}
+                                    {#                                    <li class="page-item active" aria-current="page"><span class="page-link">1</span>#}
+                                    {#                                    </li>#}
                                     {% for page in products.paginator.page_range %}
-                                        <li class="{% if products.number == page%}page-item active{% endif %} "><a class="page-link " href="?page={{ page }}">{{ page }}</a></li>
+                                        <li class="{% if products.number == page %}page-item active{% endif %} "><a
+                                                class="page-link " href="?page={{ page }}">{{ page }}</a></li>
 
                                     {% endfor %}
 
                                     {% if products.has_next %}
                                         <li class="page-item">
-                                            <a class="page-link" href="?page={{ products.next_page_number }}">بعدی<i class="ti-angle-right"></i></a>
+                                            <a class="page-link" href="?page={{ products.next_page_number }}">بعدی<i
+                                                    class="ti-angle-right"></i></a>
                                         </li>
                                     {% endif %}
 

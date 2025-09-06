@@ -11,104 +11,128 @@
     <!-- Cart area  -->
     <div class="cart-header-alert pt-3" data-bg-color="#f5f5f5">
         <div class="container rtl">
-            <div class="alert alert-warning alert-dismissible fade show  mb-0" role="alert">
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                <h6>مشتری گرامی</h6>
-
-                <p>از این جعبه هشدار برای اشتراک‌گذاری به‌روزرسانی‌های مهم، مانند تأخیر در تحویل به دلیل سیل یا موارد
-                    دیگر استفاده کنید
-                    رویدادها
-                    مشتریان خود را با پیام های بلادرنگ در جریان بگذارید و شفافیت را در مدت موقت حفظ کنید
-                    اختلالات آن را مطابق با نیازهای خود سفارشی کنید و ارتباطات را شفاف نگه دارید.</p>
-
-                <p class="mb-0">ما صمیمانه از ناراحتی موقت عذرخواهی می کنیم.</p>
-            </div>
+            {#            <div class="alert alert-warning alert-dismissible fade show  mb-0" role="alert">#}
+            {#                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>#}
+            {#                <h6>مشتری گرامی</h6>#}
+            {##}
+            {#                <p>از این جعبه هشدار برای اشتراک‌گذاری به‌روزرسانی‌های مهم، مانند تأخیر در تحویل به دلیل سیل یا موارد#}
+            {#                    دیگر استفاده کنید#}
+            {#                    رویدادها#}
+            {#                    مشتریان خود را با پیام های بلادرنگ در جریان بگذارید و شفافیت را در مدت موقت حفظ کنید#}
+            {#                    اختلالات آن را مطابق با نیازهای خود سفارشی کنید و ارتباطات را شفاف نگه دارید.</p>#}
+            {##}
+            {#                <p class="mb-0">ما صمیمانه از ناراحتی موقت عذرخواهی می کنیم.</p>#}
+            {#            </div>#}
         </div>
     </div>
+
 
     <section class="bj_cart_area" data-bg-color="#f5f5f5">
         <div class="container rtl">
             <div class="row gy-lg-0 gy-3">
                 <div class="col-lg-8">
-                    <div class="bj_cart_content_header">
-                        <div class="form-check cart_total_select">
-                            <input class="form-check-input" type="checkbox" value="" id="cart_total_select_check"
-                                   checked>
-                            <label class="form-check-label" for="cart_total_select_check">
-                                انتخاب همه(4 آیتم)
-                            </label>
-                        </div>
-                        <div>
-                            <span> مبلغ </span>جمع انتخاب شما: <span class="cart_total_mrp">1,910 میلیون تومان</span>
-                            <span class="cart_total_price">1,243 میلیون تومان</span>
-                        </div>
-                    </div>
-                    <div class="cart_item_wrapper">
-                        {% for detail in details %}
-                            <div class="single_cart_item">
-                                <div class="cart_item_select">
-                                    <input class="form-check-input" type="checkbox" checked>
+
+                    {% if request.user.is_authenticated %}
+                        {% if basket.sum_basket == 0 %}
+                            <div class="container rtl">
+                                <div class="alert alert-warning alert-dismissible fade show  mb-0" role="alert">
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    <h6>مشتری گرامی</h6>
+
+                                    <p>سبد خرید شما خالی است</p>
+
+
                                 </div>
-                                <div class="cart_item_image">
-                                    <img src="{{ detail.product.image.url }}" alt="cart">
+
+                                <div class="cart-empty" style="margin-right: 200px">
+                                    <img src="/static/img/cart-placeholder.png" alt="سبد خرید"
+                                         class="img-fluid mx-auto d-block"
+                                         style="max-width: 800px; opacity: 0.8;">
                                 </div>
-                                <div class="cart_item_content">
-                                    <a href="product-single.html" class="book_name">{{ detail.product.title }}</a>
-                                    <div class="author_name">آرمان خسوری</div>
-                                    <div class="cart_action">
-                                        <a onclick="remove_detail({{ detail.id }})" class="cart_remove"><i class="ti-trash"></i></a>
+                            </div>
+                        {% else %}
+{#                            <div class="bj_cart_content_header">#}
+{#                                <div class="form-check cart_total_select">#}
+{#                                    <input class="form-check-input" type="checkbox" value=""#}
+{#                                           id="cart_total_select_check"#}
+{#                                           checked>#}
+{#                                    <label class="form-check-label" for="cart_total_select_check">#}
+{#                                        انتخاب همه(4 آیتم)#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                                <div>#}
+                                    {#                                    <span> مبلغ </span>جمع انتخاب شما: <span#}
+                                    {#                                        class="cart_total_mrp">{{ basket.sum_basket }} تومان</span>#}
+{#                                    <span class="cart_total_price">{{ basket.sum_basket }} تومان</span>#}
+{#                                </div>#}
+{#                            </div>#}
+                            <div class="cart_item_wrapper">
+                            {% for detail in details %}
+                                <div class="single_cart_item">
+                                    {#                                <div class="cart_item_select">#}
+                                    {#                                    <input class="form-check-input" type="checkbox" checked>#}
+                                    {#                                </div>#}
+                                    <div class="cart_item_image">
+                                        <img src="{{ detail.product.image.url }}" alt="cart">
                                     </div>
-                                    <div class="book_available">فقط {{ detail.product.count }} نسخه موجود است</div>
-                                </div>
-                                <div class="cart_quantity">
-                                    <a onclick="count_product( {{ detail.product.id }},'minus')" class="quantity_btn minus"><i class="icon_minus-06"></i></a>
-                                    <input type="text" step="1" value="{{ detail.count }}">
-                                    <a onclick="count_product( {{ detail.product.id }}, 'plus')" class="quantity_btn plus"><i class="icon_plus"></i></a>
-                                </div>
+                                    <div class="cart_item_content">
+                                        <a href="product-single.html" class="book_name">{{ detail.product.title }}</a>
+                                        <div class="author_name">{{ detail.product.author.name }} </div>
+                                        <div class="cart_action">
+                                            <a onclick="remove_detail({{ detail.id }})" class="cart_remove"><i
+                                                    class="ti-trash"></i></a>
+                                        </div>
+                                        <div class="book_available">فقط {{ detail.product.count }} نسخه موجود است</div>
+                                    </div>
+                                    <div class="cart_quantity">
+                                        <a onclick="count_product( {{ detail.product.id }},'minus')"
+                                           class="quantity_btn minus"><i class="icon_minus-06"></i></a>
+                                        <input type="text" step="1" value="{{ detail.count }}">
+                                        <a onclick="count_product( {{ detail.product.id }}, 'plus')"
+                                           class="quantity_btn plus"><i class="icon_plus"></i></a>
+                                    </div>
 
 
-                                <div class="cart_item_price">
-                                    <div class="cart_item_price_discount">{{ detail.product.price }} میلیون تومان</div>
-                                    <div class="cart_item_price_mrp">1,910 میلیون تومان</div>
+                                    <div class="cart_item_price">
+                                        <div class="cart_item_price_discount">{{ detail.final_product_price }} میلیون
+                                            تومان
+                                        </div>
+                                        <div class="cart_item_price_mrp">1,910 میلیون تومان</div>
+                                    </div>
+
                                 </div>
+                            {% endfor %}
+                        {% endif %}
+
+                    {% else %}
+                        <div class="container rtl">
+                            <div class="alert alert-warning alert-dismissible fade show  mb-0" role="alert">
+                                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                <h6>مشتری گرامی</h6>
+
+                                <p>لطفا ابتدا وارد <a href="{% url 'login_page' %}"> حساب کاربری </a>خود شوید </p>
+
 
                             </div>
 
-                        {% endfor %}
+                            <div class="cart-empty" style="margin-right: 200px">
+                                <img src="/static/img/cart-placeholder.png" alt="سبد خرید"
+                                     class="img-fluid mx-auto d-block"
+                                     style="max-width: 800px; opacity: 0.8;">
+                                {#                                <p class="mt-3">سبد خرید شما خالی است</p>#}
+                            </div>
+                        </div>
+
+                    {% endif %}
 
 
                     </div>
-                    <div class="cart-happy-return-parent mb-0">
-                        <div class="cart-happy-return">
-                            <img src="/static/img/cart/happy-return-new.webp" alt="">
-                            <p>7 روز بازگشت مبارک</p>
-                        </div>
-                        <div class="cart-happy-return">
-                            <img src="/static/img/cart/earn-points.svg" alt="">
-                            <p>خرید و کسب امتیاز</p>
-                        </div>
-                    </div>
+                    {#                    {% endif %}#}
                 </div>
-                <div class="col-lg-4">
-                    <div class="bj_checkout_sidebar">
-                        <div class="cart_address_select mb-3">
-                            <div class="widget_title">آدرس فروشگاه
-
-                                <button class="addres_sidebar_cart_trigger">ویرایش</button>
-                            </div>
-                            <div class="short_address">
-                                <div class="select_address_radio">
-                                    <div></div>
-                                </div>
-                                نیویورک آمریکا
-
-                            </div>
-                            <div class="acc_info">
-                                <p>نام: مازیار ملکی</p>
-                                <p>موبایل: 0123456789,</p>
-                            </div>
-                            <div class="location">تجریش بلوار سعدی کوچه مظفری ساختمان الماس</div>
-                        </div>
+                {% if basket.sum_basket != 0 %}
+                    <div class="col-lg-4">
                         <div class="cart_checkout_summary">
                             <div class="cart_checkout_header">
                                 <h5>خلاصه پرداخت</h5>
@@ -116,11 +140,12 @@
                             <div class="cart_checkout_body">
                                 <div class="checkout_item">
                                     <span>جمع فرعی</span>
-                                    <span>1,243 میلیون تومان</span>
+                                    <span>{{ basket.sum_basket }} تومان</span>
                                 </div>
                                 <div class="checkout_item">
                                         <span>ارسال <button type="button" class="tooltip-btn" data-bs-toggle="tooltip"
-                                                            data-bs-placement="top" title="راهنمای بابت ارسال">
+                                                            data-bs-placement="top" title=""
+                                                            data-bs-original-title="راهنمای بابت ارسال">
                                                 <i class="icon_info_alt"></i>
                                             </button></span>
                                     <span>57 تومان </span>
@@ -131,7 +156,7 @@
                                 </div>
                                 <div class="checkout_item strong">
                                     <span>جمع پرداختی</span>
-                                    <span>1,243 میلیون تومان</span>
+                                    <span> {{ basket.sum_basket }} تومان   </span>
                                 </div>
                             </div>
                         </div>
@@ -144,177 +169,176 @@
                                     class="arrow_right"></i></a>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
+                    </div>
+                {% endif %}
     </section>
     <!-- Cart area  -->
 
 
     <!-- best selling product area  -->
-    <section class="best_selling_pr_area sec_padding" data-bg-color="#f5f5f5">
-        <div class="container">
-            <div class="section_title  text-start wow fadeInUp" data-wow-delay="0.2s">
-                <h3 class=" title_two">محصولات محبوبی که ممکن است دوست داشته باشید</h3>
-                <p>خواندن کتاب به شما کمک می کند تا مهارت های ارتباطی خود را توسعه دهید</p>
-            </div>
-
-            <div class="best_slider">
-                <div class="item">
-                    <div class="bj_new_pr_item rtl">
-                        <a href="product-single.html" class="img">
-                            <img src="/static/img/home/choice-4.png" alt="book">
-                        </a>
-                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>
-                        <div class="bj_new_pr_content_two">
-                            <div class="d-flex justify-content-between">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">پژواک های ابدیت</h4>
-                                </a>
-                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>
-                            </div>
-                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان
-                                موسوی</a></div>
-                            <div class="ratting">
-                                <div class="ratting_icon">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <span>(252)</span>
-                            </div>
-                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="bj_new_pr_item rtl">
-                        <a href="product-single.html" class="img">
-
-                            <img src="/static/img/home/choice-2.png" alt="book">
-
-                        </a>
-                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>
-                        <div class="bj_new_pr_content_two">
-                            <div class="d-flex justify-content-between">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">خیانت</h4>
-                                </a>
-                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>
-                            </div>
-                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان
-                                موسوی</a></div>
-                            <div class="ratting">
-                                <div class="ratting_icon">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <span>(252)</span>
-                            </div>
-                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="bj_new_pr_item rtl">
-                        <a href="product-single.html" class="img">
-                            <img src="/static/img/home/choice-3.png" alt="book">
-                        </a>
-                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>
-                        <div class="bj_new_pr_content_two">
-                            <div class="d-flex justify-content-between">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">نگهداری از کودک</h4>
-                                </a>
-                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>
-                            </div>
-                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان
-                                موسوی</a></div>
-                            <div class="ratting">
-                                <div class="ratting_icon">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <span>(252)</span>
-                            </div>
-                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="bj_new_pr_item rtl">
-                        <a href="product-single.html" class="img">
-                            <img src="/static/img/home/choice-1.png" alt="book">
-                        </a>
-                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>
-                        <div class="bj_new_pr_content_two">
-                            <div class="d-flex justify-content-between">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">با کمال تعجب سارا</h4>
-                                </a>
-                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>
-                            </div>
-                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان
-                                موسوی</a></div>
-                            <div class="ratting">
-                                <div class="ratting_icon">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <span>(252)</span>
-                            </div>
-                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="bj_new_pr_item rtl">
-                        <a href="product-single.html" class="img">
-                            <img src="/static/img/home/choice-2.png" alt="book">
-                        </a>
-                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"
-                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>
-                        <div class="bj_new_pr_content_two">
-                            <div class="d-flex justify-content-between">
-                                <a href="product-single.html">
-                                    <h4 class="bj_new_pr_title">با کمال تعجب سارا</h4>
-                                </a>
-                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>
-                            </div>
-                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان
-                                موسوی</a></div>
-                            <div class="ratting">
-                                <div class="ratting_icon">
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                    <i class="fa-solid fa-star"></i>
-                                </div>
-                                <span>(252)</span>
-                            </div>
-                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    {#    <section class="best_selling_pr_area sec_padding" data-bg-color="#f5f5f5">#}
+    {#        <div class="container">#}
+    {#            <div class="section_title  text-start wow fadeInUp" data-wow-delay="0.2s">#}
+    {#                <h3 class=" title_two">محصولات محبوبی که ممکن است دوست داشته باشید</h3>#}
+    {#                <p>خواندن کتاب به شما کمک می کند تا مهارت های ارتباطی خود را توسعه دهید</p>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="best_slider">#}
+    {#                <div class="item">#}
+    {#                    <div class="bj_new_pr_item rtl">#}
+    {#                        <a href="product-single.html" class="img">#}
+    {#                            <img src="/static/img/home/choice-4.png" alt="book">#}
+    {#                        </a>#}
+    {#                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"#}
+    {#                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>#}
+    {#                        <div class="bj_new_pr_content_two">#}
+    {#                            <div class="d-flex justify-content-between">#}
+    {#                                <a href="product-single.html">#}
+    {#                                    <h4 class="bj_new_pr_title">پژواک های ابدیت</h4>#}
+    {#                                </a>#}
+    {#                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>#}
+    {#                            </div>#}
+    {#                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان#}
+    {#                                موسوی</a></div>#}
+    {#                            <div class="ratting">#}
+    {#                                <div class="ratting_icon">#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                </div>#}
+    {#                                <span>(252)</span>#}
+    {#                            </div>#}
+    {#                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="item">#}
+    {#                    <div class="bj_new_pr_item rtl">#}
+    {#                        <a href="product-single.html" class="img">#}
+    {##}
+    {#                            <img src="/static/img/home/choice-2.png" alt="book">#}
+    {##}
+    {#                        </a>#}
+    {#                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"#}
+    {#                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>#}
+    {#                        <div class="bj_new_pr_content_two">#}
+    {#                            <div class="d-flex justify-content-between">#}
+    {#                                <a href="product-single.html">#}
+    {#                                    <h4 class="bj_new_pr_title">خیانت</h4>#}
+    {#                                </a>#}
+    {#                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>#}
+    {#                            </div>#}
+    {#                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان#}
+    {#                                موسوی</a></div>#}
+    {#                            <div class="ratting">#}
+    {#                                <div class="ratting_icon">#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                </div>#}
+    {#                                <span>(252)</span>#}
+    {#                            </div>#}
+    {#                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="item">#}
+    {#                    <div class="bj_new_pr_item rtl">#}
+    {#                        <a href="product-single.html" class="img">#}
+    {#                            <img src="/static/img/home/choice-3.png" alt="book">#}
+    {#                        </a>#}
+    {#                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"#}
+    {#                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>#}
+    {#                        <div class="bj_new_pr_content_two">#}
+    {#                            <div class="d-flex justify-content-between">#}
+    {#                                <a href="product-single.html">#}
+    {#                                    <h4 class="bj_new_pr_title">نگهداری از کودک</h4>#}
+    {#                                </a>#}
+    {#                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>#}
+    {#                            </div>#}
+    {#                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان#}
+    {#                                موسوی</a></div>#}
+    {#                            <div class="ratting">#}
+    {#                                <div class="ratting_icon">#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                </div>#}
+    {#                                <span>(252)</span>#}
+    {#                            </div>#}
+    {#                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="item">#}
+    {#                    <div class="bj_new_pr_item rtl">#}
+    {#                        <a href="product-single.html" class="img">#}
+    {#                            <img src="/static/img/home/choice-1.png" alt="book">#}
+    {#                        </a>#}
+    {#                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"#}
+    {#                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>#}
+    {#                        <div class="bj_new_pr_content_two">#}
+    {#                            <div class="d-flex justify-content-between">#}
+    {#                                <a href="product-single.html">#}
+    {#                                    <h4 class="bj_new_pr_title">با کمال تعجب سارا</h4>#}
+    {#                                </a>#}
+    {#                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>#}
+    {#                            </div>#}
+    {#                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان#}
+    {#                                موسوی</a></div>#}
+    {#                            <div class="ratting">#}
+    {#                                <div class="ratting_icon">#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                </div>#}
+    {#                                <span>(252)</span>#}
+    {#                            </div>#}
+    {#                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#                <div class="item">#}
+    {#                    <div class="bj_new_pr_item rtl">#}
+    {#                        <a href="product-single.html" class="img">#}
+    {#                            <img src="/static/img/home/choice-2.png" alt="book">#}
+    {#                        </a>#}
+    {#                        <a class="wish_btn" href="my-wishlist.html" data-bs-toggle="tooltip" data-bs-placement="top"#}
+    {#                           title="علاقه مندی"><i class="icon_heart_alt"></i></a>#}
+    {#                        <div class="bj_new_pr_content_two">#}
+    {#                            <div class="d-flex justify-content-between">#}
+    {#                                <a href="product-single.html">#}
+    {#                                    <h4 class="bj_new_pr_title">با کمال تعجب سارا</h4>#}
+    {#                                </a>#}
+    {#                                <div class="book_price"><sup>250</sup> <sup>تومان</sup></div>#}
+    {#                            </div>#}
+    {#                            <div class="writer_name"><i class="icon-user"></i> <a href="author-single.html">اشکان#}
+    {#                                موسوی</a></div>#}
+    {#                            <div class="ratting">#}
+    {#                                <div class="ratting_icon">#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                    <i class="fa-solid fa-star"></i>#}
+    {#                                </div>#}
+    {#                                <span>(252)</span>#}
+    {#                            </div>#}
+    {#                            <a href="checkout.html" class="bj_theme_btn">اکنون بخرید</a>#}
+    {#                        </div>#}
+    {#                    </div>#}
+    {#                </div>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </section>#}
     <!-- best selling product area  -->
 
 {% endblock %}

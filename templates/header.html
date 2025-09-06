@@ -1,4 +1,4 @@
-<header class="header_area header_relative header_blue">
+<header class="header_area header_relative header_blue" xmlns="http://www.w3.org/1999/html">
     <nav class="navbar navbar-expand-lg menu_one menu_white" id="header">
         <div class="container rtl">
             <a class="navbar-brand sticky_logo" href="index.html">
@@ -442,12 +442,14 @@
                                                 <p class="cart-title">
                                                     <a href="{% url 'products_details' detail.product.slug %}">{{ detail.product.title }}</a>
                                                 </p>
-                                                    {{ detail.product.price }}تومان
-                                                <p>
+
+
+                                                    <p>{{ detail.product.price }}تومان</p>
+
                                                 </p>
                                             </div>
                                             <div class="cart-remove">
-                                                <a href="#" class="action"><span class="ti-close"></span></a>
+                                                <a onclick="remove_detail({{ detail.id }})" href="#" class="action"><span class="ti-close"></span></a>
                                             </div>
                                         </li>
                                     {% endfor %}
@@ -470,11 +472,11 @@
 {#                                        </div>#}
 {#                                    </li>#}
                                     <li class="cart_f">
-                                        <div class="cart-pricing">
-                                            <p class="total">
-                                                جمع فرعی :<span class="p-total text-end">تومان{{ basket.sum_basket }}</span>
-                                            </p>
-                                        </div>
+{#                                        <div class="cart-pricing">#}
+{#                                            <p class="total">#}
+{#                                                جمع فرعی :<span class="p-total text-end">تومان{{ basket.sum_basket }}</span>#}
+{#                                            </p>#}
+{#                                        </div>#}
                                         <div class="cart-button text-center">
                                             <a href="{% url 'order_page' %}" class="btn btn-cart get_btn pink">سبد
                                                 خرید</a>

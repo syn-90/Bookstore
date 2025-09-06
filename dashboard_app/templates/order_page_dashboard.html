@@ -1,0 +1,196 @@
+{% extends '_layout.html' %}
+
+{% block title %}
+    سفارشات من
+{% endblock %}
+
+{% block content %}
+    <section class="bj_account_dashboard" data-bg-color="#f5f5f5">
+        <div class="container rtl">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="account_dashboard_sidebar">
+                        <div class="sidebar_widget_body d-flex account_dashboard_sidebar_profile">
+                            <div class="">
+                                <img src="{{ user.avatar.url }}" alt="account">
+                            </div>
+                            <div class="">
+                                <div class="greetings">درود</div>
+                                <div class="name">{{ user.username }}</div>
+
+                            </div>
+                        </div>
+                        <div class="sidebar_widget_body p-0">
+                            <ul class="sidebar_widget_menu">
+
+                                <li><a href="{% url 'dashboard_page' %}">پروفایل من</a></li>
+                                <li><a href="{% url 'change_password' %}">تغییر رمز عبور</a></li>
+                                <li><a href="my-address.html">آدرس من</a></li>
+                                <li><a class="active " href="{% url 'order_page_dashboard' %}">سفارشات من</a></li>
+                                <li><a href="my-ebook-library.html">کتاب خانه الکتورنیکی من </a></li>
+                                <li><a href="my-list.html">لیست های من</a></li>
+                                <li><a href="my-wishlist.html">علاقه مندی های من</a></li>
+                                <li><a href="my-rating-reviews.html">رتبه بندی و نظرات من</a></li>
+                                <li><a href="my-following-authors.html">نویسندگان بعدی من</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-9">
+                    <div class="account_dashboard_body">
+                        <div class="account_dashboard_content">
+                            <div class="account_dashboard_content_header">
+                                سفارشات من <span>(کل سفارش شما: 12)</span>
+
+                            </div>
+                            <div class="content_body">
+                                <div class="product_filter_search mb-4">
+                                    <form action="#" class="search_form">
+                                        <input type="text" placeholder="جستجو بر اساس شناسه سفارش" class="form-control">
+                                        <button type="submit" class="search_btn"><i class="ti-search"></i></button>
+                                    </form>
+
+
+                                    <form class="woocommerce-ordering" method="get">
+                                        دسته بندی براساس
+                                        <select name="orderby" class="orderby selectpickers">
+                                            <option value="menu_order" selected='selected'>دسته بندی</option>
+                                            <option value="popularity">پردازش</option>
+                                            <option value="rating">تکمیل شد</option>
+                                            <option value="date">لغو شده</option>
+                                            <option value="price">بازپرداخت شد</option>
+                                        </select>
+                                    </form>
+
+                                </div>
+                                <div class="my_order_list">
+                                    {% for basket in baskets %}
+                                        <div class="single_order_block">
+                                            <div class="order_info">شناسه سفارش شما: <span class="order_no"><em>47162275294678</em></span>
+{#                                                ({{ basket.details.count }} آیتم ها)#}
+                                            </div>
+                                            <div class="order_action">
+                                                <div class="order_status success">تکمیل شد</div>
+                                                <a href="order-track.html" class="bj_theme_btn">سفارش من را پیگیری کنید
+                                                    <i class="arrow_right"></i></a>
+                                            </div>
+                                            <div class="d-flex flex-wrap gap-sm-5 justify-content-between justify-content-sm-start">
+                                                {% for detail in basket.orderdetailmodel_set.all %}
+                                                    <div class="my_account_book">
+                                                        <div class="my_account_book_img">
+                                                            <img src="{{ detail.product.image.url }}" alt="cart">
+                                                        </div>
+                                                        <div class="my_account_book_content">
+
+                                                            <a href="{% url 'products_details' detail.product.slug %}">
+                                                                <div class="my_account_book_title">{{ detail.product.title }}
+                                                                </div>
+                                                            </a>
+
+                                                            <div class="book_price">
+                                                            <span class="discount_amount">
+                                                                تومان190.000
+                                                            </span>
+                                                                <span class="mrp_amount">
+                                                                تومان290.000
+                                                            </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+
+                                    {#                                        <div class="single_order_block">#}
+                                    {#                                            <div class="order_info">شناسه سفارش شما: <span class="order_no"><em>47162275294678</em></span> (2 آیتم ها)</div>#}
+                                    {#                                            <div class="order_action">#}
+                                    {#                                                <div class="order_status success">بازپرداخت شد</div>#}
+                                    {#                                            </div>#}
+                                    {#                                            <div class="d-flex flex-wrap gap-5">#}
+                                    {##}
+                                    {#                                                <div class="my_account_book">#}
+                                    {#                                                    <div class="my_account_book_img">#}
+                                    {#                                                        <img src="/static/img/cart/best_book3.jpg" alt="cart">#}
+                                    {#                                                    </div>#}
+                                    {#                                                    <div class="my_account_book_content">#}
+                                    {#                                                        <a href="product-single.html">#}
+                                    {#                                                            <div class="my_account_book_title">داستان های تاتا#}
+                                    {#                                                            </div>#}
+                                    {#                                                        </a>#}
+                                    {##}
+                                    {#                                                        <div class="book_price">#}
+                                    {#                                                            <span class="discount_amount">#}
+                                    {#                                                                تومان190.000#}
+                                    {#                                                            </span>#}
+                                    {#                                                            <span class="mrp_amount">#}
+                                    {#                                                                تومان290.000#}
+                                    {#                                                            </span>#}
+                                    {#                                                        </div>#}
+                                    {#                                                    </div>#}
+                                    {#                                                </div>#}
+                                    {#                                            </div>#}
+                                    {#                                        </div>#}
+                                    {##}
+                                    {#                                        <div class="single_order_block">#}
+                                    {#                                            <div class="order_info">شناسه سفارش شما: <span class="order_no"><em>47162275294678</em></span> (2 آیتم ها)</div>#}
+                                    {#                                            <div class="order_action">#}
+                                    {#                                                <div class="order_status warning">لغوشده</div>#}
+                                    {#                                                <a href="order-track.html" class="bj_theme_btn">سفارش من را پیگیری کنید <i class="arrow_right"></i></a>#}
+                                    {#                                            </div>#}
+                                    {#                                            <div class="d-flex flex-wrap gap-5">#}
+                                    {#                                                <div class="my_account_book">#}
+                                    {#                                                    <div class="my_account_book_img">#}
+                                    {#                                                        <img src="/static/img/home-two/best_book1.jpg" alt="cart">#}
+                                    {#                                                    </div>#}
+                                    {#                                                    <div class="my_account_book_content">#}
+                                    {#                                                        <a href="product-single.html">#}
+                                    {#                                                            <div class="my_account_book_title">داستان های تاتا#}
+                                    {#                                                            </div>#}
+                                    {#                                                        </a>#}
+                                    {##}
+                                    {#                                                        <div class="book_price">#}
+                                    {#                                                            <span class="discount_amount">#}
+                                    {#                                                                تومان190.000#}
+                                    {#                                                            </span>#}
+                                    {#                                                            <span class="mrp_amount">#}
+                                    {#                                                                تومان290.000#}
+                                    {#                                                            </span>#}
+                                    {#                                                        </div>#}
+                                    {#                                                    </div>#}
+                                    {#                                                </div>#}
+                                    {#                                                <div class="my_account_book">#}
+                                    {#                                                    <div class="my_account_book_img">#}
+                                    {#                                                        <img src="/static/img/home-two/best_book2.jpg" alt="cart">#}
+                                    {#                                                    </div>#}
+                                    {#                                                    <div class="my_account_book_content">#}
+                                    {#                                                        <a href="product-single.html">#}
+                                    {#                                                            <div class="my_account_book_title">داستان های تاتا#}
+                                    {#                                                            </div>#}
+                                    {#                                                        </a>#}
+                                    {##}
+                                    {#                                                        <div class="book_price">#}
+                                    {#                                                            <span class="discount_amount">#}
+                                    {#                                                                تومان190.000#}
+                                    {#                                                            </span>#}
+                                    {#                                                            <span class="mrp_amount">#}
+                                    {#                                                                تومان290.000#}
+                                    {#                                                            </span>#}
+                                    {#                                                        </div>#}
+                                    {#                                                    </div>#}
+                                    {#                                                </div>#}
+                                    {#                                            </div>#}
+                                    {#                                        </div>#}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <!-- Account Dashboard area -->
+{% endblock %}

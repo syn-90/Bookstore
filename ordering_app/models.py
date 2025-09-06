@@ -12,7 +12,7 @@ class BasketOrderModel(models.Model):
         final_price = 0
         try:
             for detail in self.orderdetailmodel_set.all():
-                final_price += detail.product.price
+                final_price += detail.final_product_price()
             return final_price
         except:
             return 0
@@ -22,3 +22,6 @@ class OrderDetailModel(models.Model):
     product = models.ForeignKey(ProductModel, on_delete=models.CASCADE)
     count = models.PositiveIntegerField()
     off = models.FloatField()
+    def final_product_price(self):
+        res = (self.product.price - ((self.off/100) * self.product.price)) * self.count
+        return round(res)

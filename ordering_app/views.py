@@ -11,12 +11,20 @@ from product_app.models import ProductModel
 
 class OrderView(View):
     def get(self, request):
-        user = request.user
-        details = OrderDetailModel.objects.filter(basket__user=user, basket__is_paid=False)
-        return render(request, 'order_page.html', {
-            'details' : details
+        try:
+            user = request.user
+            basket = BasketOrderModel.objects.filter(user= user, is_paid=False).first()
+            details =basket.orderdetailmodel_set.all()
+            return render(request, 'order_page.html', {
+                'details' : details ,
+                'basket' : basket
 
-        })
+            })
+        except:
+            return render(request, 'order_page.html', {
+
+
+            })
 
 
 def add_to_order(request):

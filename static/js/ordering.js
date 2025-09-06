@@ -37,27 +37,27 @@ function count_product(detail_id,status){
 }
 
 
-// function remove_detail(detail_id){
-//     let basket_content = $('#basket_content')
-//     $.post('order/remove_detail/', {
-//         'detail_id' : detail_id
-//     },
-//         function (response){
-//         alert('با موفقیت حذف شد ')
-//         basket_content.html(response)
-//         })
-//
-// }
+function remove_detail(detail_id){
+    let basket_content = $('#basket_content')
+    $.post('remove_detail/', {
+        'detail_id' : detail_id
+    },
+        function (response){
+        alert('با موفقیت حذف شد ')
+        basket_content.html(response)
+        })
 
-function remove_detail(detail_id) {
-    $.post("/order/remove_detail/", {
-        'detail_id': detail_id
-    }, function (response) {
-        if (response.message === 'success') {
-            $("#detail-" + detail_id).remove();  // حذف از DOM
-        } else {
-            alert("آیتم پیدا نشد!");
-        }
-    });
 }
+
+// function remove_detail(detail_id) {
+//     $.post("/order/remove_detail/", {
+//         'detail_id': detail_id
+//     }, function (response) {
+//         if (response.message === 'success') {
+//             $("#detail-" + detail_id).remove();  // حذف از DOM
+//         } else {
+//             alert("آیتم پیدا نشد!");
+//         }
+//     });
+// }
 

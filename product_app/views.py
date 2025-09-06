@@ -8,9 +8,13 @@ from django.views import View
 
 class ProductView(View):
     categories = CategoryModel.objects.all()
+    authors = AuthorModel.objects.all()
+    products = ProductModel.objects.all()
+
     def get(self, request):
-        products = ProductModel.objects.all()
+        products = ProductView.products
         categories = ProductView.categories
+        authors = ProductView.authors
         paginator = Paginator(products,4)
         page_number = request.GET.get('page')
         try:
@@ -22,8 +26,22 @@ class ProductView(View):
 
         return render(request, 'product_list.html', {
             'products': products ,
-            'categories':categories
+            'categories':categories,
+            'authors' : authors
         })
+    def post(self, request):
+        product_name = request.POST['product_name']
+        product = ProductView.products.filter(title=product_name).first()
+        print(product)
+        categories = ProductView.categories
+        authors = ProductView.authors
+        if product is not None:
+            return render(request, 'product_list.html', {
+                'product': product,
+                'categories': categories,
+                'authors': authors
+            })
+
 # class ProductView(TemplateView):
 #     template_name = 'product_list.html'
 #     def get_context_data(self, **kwargs):
@@ -44,12 +62,16 @@ class ProductDetailsView(View):
 
 class CategoryView(View):
     def get(self, request, slug):
-        products = ProductModel.objects.filter(category__slug=slug)
+        try:
+            products = ProductModel.objects.filter(category__slug=slug)
+        except:
+            products = ProductModel.objects.filter(author__slug=slug)
         categories = ProductView.categories
         if products is not None:
             return render(request, 'product_list.html',{
                 'products':products ,
-                'categories' : categories
+                'categories' : categories,
+                'authors' : ProductView.authors
             })
 
         else :
@@ -68,5 +90,4 @@ class AuthorsView(View):
 
         else :
             redirect('home_page')
-
 

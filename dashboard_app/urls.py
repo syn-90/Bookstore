@@ -5,5 +5,6 @@ from django.urls import path
 
 urlpatterns = [
    path('', DashboardView.as_view(), name='dashboard_page'),
-   path('change_password',ChangePasswordView.as_view(), name='change_password' )
+   path('change_password/',ChangePasswordView.as_view(), name='change_password' ),
+   path('order/' , OrderDashboardView.as_view() , name = 'order_page_dashboard')
 ]
