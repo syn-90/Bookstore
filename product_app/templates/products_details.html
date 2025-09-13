@@ -1,4 +1,5 @@
 {% extends '_layout.html' %}
+{% load poll_extras %}
 {% block title %}
     جزِییات محصول
 {% endblock %}
@@ -45,15 +46,21 @@
                             <div class="front"><img class="img-fluid" src="{{ product.image.url }}" alt="">
                             </div>
                             <div class="back"><img class="img-fluid" src="{{ product.image.url }}" alt=""></div>
-                            <div class="pr_ribbon">
-                                <span class="product-badge">جدید</span>
-                            </div>
+                            {% if new_product %}
+                                <div class="pr_ribbon">
+                                    <span class="product-badge">جدید</span>
+                                </div>
+                            {% endif %}
                         </div>
                         <div class="bj_book_details">
                             <h2>{{ product.title }}</h2>
                             <ul class="list-unstyled book_meta">
-                                <li>اثری از:<a href="{% url 'authors_page' product.author.slug %}">{{ product.author.name }}</a></li>
-                                <li>دسته بندی:<a href="{% url 'category_page' product.category.slug %}">{{ product.category.title }}</a></li>
+                                <li>اثری از:<a
+                                        href="{% url 'authors_page' product.author.slug %}">{{ product.author.name }}</a>
+                                </li>
+                                <li>دسته بندی:<a
+                                        href="{% url 'category_page' product.category.slug %}">{{ product.category.title }}</a>
+                                </li>
                                 <li>برچسب بزنید:<a href="shop-sidebar.html">پرفروش ترین ها</a></li>
                             </ul>
                             <div class="ratting review">
@@ -69,9 +76,9 @@
                                     <span class="count"> 50 </span>بررسی ها
                                 </a>
                             </div>
-                            <div class="price">{{ product.seprator }}تومان</div>
-                            <p>{{ product.description}}
-                                </p>
+                            <div class="price">{{ product.price|number_seprator }}تومان</div>
+                            <p>{{ product.description }}
+                            </p>
                             <ul class="product_meta list-unstyled">
                                 <li><span>ناشر:</span> {{ product.publisher }}</li>
                                 <li><span>تاریخ انتشار:</span>{{ product.publication_date }}</li>
@@ -79,12 +86,12 @@
                                 <li><span>شابک:</span>{{ product.ISBN }}</li>
                                 <li><span>زبان:</span>{{ product.language }}</li>
                             </ul>
-{#                            <div class="d-flex">#}
-{#                                <a href="#" class="bj_theme_btn strock_btn flip_btn">برگشت به عقب</a>#}
-{#                                <a href="http://www.googleguide.com/print/adv_op_ref.pdf"#}
-{#                                   class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i>#}
-{#                                    به داخل نگاه کن</a>#}
-{#                            </div>#}
+                            {#                            <div class="d-flex">#}
+                            {#                                <a href="#" class="bj_theme_btn strock_btn flip_btn">برگشت به عقب</a>#}
+                            {#                                <a href="http://www.googleguide.com/print/adv_op_ref.pdf"#}
+                            {#                                   class="bj_theme_btn strock_btn gallerypdf"><i class="fa-regular fa-eye"></i>#}
+                            {#                                    به داخل نگاه کن</a>#}
+                            {#                            </div>#}
 
 
                             <div class="single_product_price_variation">
@@ -481,7 +488,7 @@
                 </div>
                 <div class="col-xl-3">
                     <div class="product_sidbar">
-                        <div class="price_head">خرید جدید: <span class="price">{{ product.seprator }}تومان</span></div>
+                        <div class="price_head">خرید جدید: <span class="price">{{ product.price|number_seprator }}تومان</span></div>
                         <div class="discount_price">لیست قیمت:
                             <del>150.000&nbsp;تومان</del>
                         </div>
@@ -507,21 +514,22 @@
                                 موقعیت تحویل را انتخاب کنید
                             </li>
                         </ul>
-{#                        <h3>در انبار.</h3>#}
-{#                        <div class="product-qty">#}
-{#                            تعداد:#}
-{#                            <div class="cart_quantity">#}
-{#                                <a onclick="count_product({{ product.id }},'minus')" class="quantity_btn minus" ><i class="icon_minus-06"></i></a>#}
-{#                                <input id="count_product" type="number" min="1" max="99" step="1" value="{{ response.count }}">#}
-{#                                <a onclick="count_product({{ product.id }},'plus')" class="quantity_btn plus" ><i class="icon_plus"></i></a>#}
-{#                            </div>#}
-{#                        </div>#}
+                        {#                        <h3>در انبار.</h3>#}
+                        {#                        <div class="product-qty">#}
+                        {#                            تعداد:#}
+                        {#                            <div class="cart_quantity">#}
+                        {#                                <a onclick="count_product({{ product.id }},'minus')" class="quantity_btn minus" ><i class="icon_minus-06"></i></a>#}
+                        {#                                <input id="count_product" type="number" min="1" max="99" step="1" value="{{ response.count }}">#}
+                        {#                                <a onclick="count_product({{ product.id }},'plus')" class="quantity_btn plus" ><i class="icon_plus"></i></a>#}
+                        {#                            </div>#}
+                        {#                        </div>#}
 
                         <div class="d-flex flex-column gap-3">
                             <a class="bj_theme_btn" href="{% url 'order_page' %}"> اکنون خرید کنید</a>
-                            <a onclick="add_to_basket({{ product.id }})" class="bj_theme_btn add-to-cart-automated" type="button"
-                                    data-name="کتاب کار داستان سرایی" data-price="10"
-                                    data-img="/static/img/book-single1.jpg" data-mrp="15"><i class="icon_cart_alt"></i>اضافه
+                            <a onclick="add_to_basket({{ product.id }})" class="bj_theme_btn add-to-cart-automated"
+                               type="button"
+                               data-name="کتاب کار داستان سرایی" data-price="10"
+                               data-img="/static/img/book-single1.jpg" data-mrp="15"><i class="icon_cart_alt"></i>اضافه
                                 کردن به سبد خرید
                             </a>
                         </div>

@@ -1,3 +1,4 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 
 # Create your models here.
@@ -48,13 +49,10 @@ class ProductModel(models.Model) :
     category = models.ForeignKey(to=CategoryModel, on_delete=models.CASCADE, verbose_name="دسته بندی کتاب")
     description = models.TextField(verbose_name="توضیحات")
     seller = models.CharField(max_length=50, verbose_name="فروشنده")
-    is_off = models.IntegerField(blank=True, verbose_name="تخفیف(بصورت درصد)")
+    is_off = models.PositiveSmallIntegerField(blank=True,null=True, validators=[MinValueValidator(0), MaxValueValidator(100)], verbose_name="تخفیف(بصورت درصد)")
     is_active = models.BooleanField(default=True, verbose_name="فعال/غیر فعال")
     count = models.PositiveIntegerField(null=True , verbose_name='تعداد')
     slug = models.SlugField(verbose_name= "عنوان در مرورگر", allow_unicode=True)
-    def seprator(self):
-        return "{:,}".format(self.price)
-
     def __str__(self):
         return self.title
     class Meta:

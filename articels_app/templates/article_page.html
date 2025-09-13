@@ -1,5 +1,5 @@
 {% extends '_layout.html' %}
-
+{% load poll_extras %}
 {% block title %}
 
     مقالات
@@ -55,9 +55,9 @@
                     </a>
                     <div class="blog-sub-text">
                       <img src="/static/img/blog/face-04.png" alt="Face" />
-                      <a href="author-single.html">سهراب نادری</a>
+                      <a href="author-single.html">{{ article.author.username }}</a>
                       <i class="fa-solid fa-calendar-days"></i>
-                      <span>08 آبان1403</span>
+                      <span>{{ article.create_at|persian_time }}</span>
                     </div>
                   </div>
                 </div>

@@ -140,23 +140,30 @@
                     </div>
                     {% if request.user.is_authenticated %}
                         <div class="comments-item round-box mb-30 wow fadeInUp">
-                            <h4 class="mb-35">{{ article.articlecommentmodel_set|filter_by_publish:article.id }} نظر داده شده</h4>
+                            <h4 class="mb-35">{{ article.articlecommentmodel_set|filter_by_publish:article.id }} نظر
+                                داده شده</h4>
                             {% for comment in  article.articlecommentmodel_set.all %}
                                 {% if comment.is_publish %}
                                     <div class="comments-content">
                                     <div>
-                                        <img src="/static/img/blog/face-03.png" alt="Face">
+                                        {% if comment.user.avatar %}
+                                            <img src="{{ comment.user.avatar.url }}" alt="Face"
+                                                 style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                                        {% else %}
+                                            <img src="/static/img/User%20Profile%20Icon.png" alt="Face"
+                                                 style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                                        {% endif %}
                                     </div>
                                     <div class="comments-text">
                                         <div class="d-flex flex-wrap justify-content-between mb-20">
                                             <div>
                                                 <a href="#" class="admin-title"> {{ comment.user }}</a>
-                                                <p class="post-time">13 مهر 1403</p>
+                                                <p class="post-time">{{ comment.create_at|persian_time }}  </p>
                                             </div>
-                                            <a class="sub-bold-1 comment-reply" data-bs-toggle="collapse"
-                                               href="#replyColllapse03" role="button" aria-expanded="false"
-                                               aria-controls="replyColllapse03">پاسخ دادن<i
-                                                    class="fa-solid fa-arrow-right"></i></a>
+{#                                            <a class="sub-bold-1 comment-reply" data-bs-toggle="collapse"#}
+{#                                               href="#replyColllapse03" role="button" aria-expanded="false"#}
+{#                                               aria-controls="replyColllapse03">پاسخ دادن<i#}
+{#                                                    class="fa-solid fa-arrow-right"></i></a>#}
                                         </div>
                                         <p class="small-2">
                                             {{ comment.text }}
@@ -200,7 +207,7 @@
                         <div class="col-md-12 form-group reply-text d-flex">
                         </div>
                         <div class="col-md-12 form-group">
-                            <a onclick="send_comment({{article.id }})" class="thm_btn">ارسال نظر</a>
+                            <a onclick="send_comment({{ article.id }})" class="thm_btn">ارسال نظر</a>
                         </div>
                         {#                        {% if login_error %}#}
 
@@ -311,18 +318,18 @@
 
 {% block scripts %}
     <script src="/static/js/article_details.js"></script>
-{#        <script>function send_comment(article_id){#}
-{#                   let text = $("#text_content")#}
-{#                        $.get('/articels/send_comment/',{#}
-{#                        'article_id' : article_id,#}
-{#                        'text':text.val()#}
-{#                    }).then(res =>{#}
-{#                        if(res.status ==='success'){#}
-{#                            alert('کامنت شما ثبت شد')#}
-{#                        }else if (res.status ==='field'){#}
-{#                             alert('مشکلی پیش امده لطفا دوباره تلاش کنید')#}
-{#                        }#}
-{#                    })#}
-{#                        ;}#}
-{#        </script>#}
+    {#        <script>function send_comment(article_id){#}
+    {#                   let text = $("#text_content")#}
+    {#                        $.get('/articels/send_comment/',{#}
+    {#                        'article_id' : article_id,#}
+    {#                        'text':text.val()#}
+    {#                    }).then(res =>{#}
+    {#                        if(res.status ==='success'){#}
+    {#                            alert('کامنت شما ثبت شد')#}
+    {#                        }else if (res.status ==='field'){#}
+    {#                             alert('مشکلی پیش امده لطفا دوباره تلاش کنید')#}
+    {#                        }#}
+    {#                    })#}
+    {#                        ;}#}
+    {#        </script>#}
 {% endblock %}

@@ -1,0 +1,101 @@
+{% extends '_layout.html' %}
+{% block title %}
+    علاقه مندی ها
+{% endblock %}
+
+
+{% block content %}
+    <div class="cart-header-separator"></div>
+    <section class="bj_account_dashboard" data-bg-color="#f5f5f5">
+        <div class="container rtl">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="account_dashboard_sidebar">
+                        <div class="sidebar_widget_body d-flex account_dashboard_sidebar_profile">
+                            <div class="">
+                                <img src="/static/img/profile-img.png" alt="account">
+                            </div>
+                            <div class="">
+                                <div class="greetings">درود</div>
+                                <div class="name">مازیار منوچهری</div>
+
+                            </div>
+                        </div>
+                        <div class="sidebar_widget_body p-0">
+                            <ul class="sidebar_widget_menu">
+                                <li><a href="{% url 'dashboard_page' %}">پروفایل من</a></li>
+                                <li><a href="my-address.html">آدرس من</a></li>
+                                <li><a href="{% url 'order_page_dashboard' %}">سفارشات من</a></li>
+                                <li><a href="my-ebook-library.html">کتابخانه الکترونیکی </a></li>
+                                <li><a href="my-list.html">لیست من</a></li>
+                                <li><a class="active" href="{% url 'favorite_page' %}">لیست علاقه مندی من</a></li>
+                                <li><a href="my-rating-reviews.html">نظرات و امتیازات من</a></li>
+                                <li><a href="my-following-authors.html">نویسندگان مورد علاقه من</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-lg-9">
+                    <div class="account_dashboard_body">
+                        <div class="account_dashboard_content">
+                            <div class="account_dashboard_content_header">
+                                لیست علاقه مندی من
+                                <p>شما 3 محصول در لیست علاقه مندی های خود دارید</p>
+                            </div>
+                            {% for favorite in favorites %}
+                                <div class="content_body">
+                                    <div class="wishlist_product_list">
+                                        <div class="my_account_book list-view">
+                                            <div class="my_account_book_img">
+                                                <img src="{{ favorite.product.image.url }}" alt="cart">
+                                            </div>
+                                            <div class="my_account_book_content">
+                                                <a href="product-single.html">
+                                                    <div class="my_account_book_title">{{ favorite.product.title }}
+                                                    </div>
+                                                </a>
+
+                                                <div class="author_name">{{ favorite.product.author.name }}</div>
+                                                <div class="book_price">
+                                                    <span class="discount_amount">
+                                                        تومان190.000
+                                                    </span>
+                                                    <span class="mrp_amount">
+                                                        تومان290.000
+                                                    </span>
+                                                </div>
+
+                                                <div class="book_rating_info">
+                                                    <a href="#">1 رتبه بندی ها</a>
+                                                    <div class="separator"></div>
+                                                    <a href="#">1 بررسی ها</a>
+                                                </div>
+                                                <a onclick="add_to_basket({{ favorite.product.id }})" class="bj_theme_btn strock_btn add-to-cart-automated"
+                                                        data-name="زمزمه های نیمه شب" data-price="19.99"
+                                                        data-img="/static/img/cart/best_book1.jpg" data-mrp="29.99"><i
+                                                        class="fa-solid fa-cart-plus"></i> اضافه کردن به سبد خرید
+                                                </a>
+                                            </div>
+                                            <div class="my_account_book_action">
+                                                <a onclick="remove_detail({{ favorite.product.id }})" class="remove_btn"><i class="ti-trash"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block scripts %}
+    <script src="/static/js/ordering.js"></script>
+    <script src="/static/js/products.js"></script>
+{% endblock %}

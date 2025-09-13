@@ -10,12 +10,15 @@ class ProductView(View):
     categories = CategoryModel.objects.all()
     authors = AuthorModel.objects.all()
     products = ProductModel.objects.all()
+    new_products = products.order_by('-id')[:3]
+    print(new_products)
 
     def get(self, request):
         products = ProductView.products
         categories = ProductView.categories
         authors = ProductView.authors
-        paginator = Paginator(products,4)
+        new_products = ProductView.new_products
+        paginator = Paginator(products,8)
         page_number = request.GET.get('page')
         try:
             products = paginator.page(page_number)
@@ -27,7 +30,8 @@ class ProductView(View):
         return render(request, 'product_list.html', {
             'products': products ,
             'categories':categories,
-            'authors' : authors
+            'authors' : authors,
+            'new_products' : new_products
         })
     def post(self, request):
         product_name = request.POST['product_name']
@@ -41,6 +45,14 @@ class ProductView(View):
                 'categories': categories,
                 'authors': authors
             })
+        else:
+            return render(request, 'product_list.html', {
+                'product': product,
+                'categories': categories,
+                'authors': authors ,
+                'not_found' : True
+            })
+
 
 # class ProductView(TemplateView):
 #     template_name = 'product_list.html'
@@ -52,20 +64,29 @@ class ProductView(View):
 class ProductDetailsView(View):
     def get(self, request, slug):
         product = ProductModel.objects.filter(slug=slug).first()
+
         if product is not None:
-            return render(request, 'products_details.html',{
-                'product':product
-            })
+            if product in ProductView.new_products:
+                return render(request, 'products_details.html',{
+                    'product':product,
+                    'new_product' : True
+                })
+            else:
+                return render(request, 'products_details.html', {
+                    'product': product
+                })
+
 
         else :
             redirect('home_page')
 
 class CategoryView(View):
     def get(self, request, slug):
-        try:
-            products = ProductModel.objects.filter(category__slug=slug)
-        except:
+        products = ProductModel.objects.filter(category__slug=slug)
+        if products is None:
             products = ProductModel.objects.filter(author__slug=slug)
+            print('if')
+        print(products)
         categories = ProductView.categories
         if products is not None:
             return render(request, 'product_list.html',{

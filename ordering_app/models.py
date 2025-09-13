@@ -23,5 +23,5 @@ class OrderDetailModel(models.Model):
     count = models.PositiveIntegerField()
     off = models.FloatField()
     def final_product_price(self):
-        res = (self.product.price - ((self.off/100) * self.product.price)) * self.count
+        res = int(self.product.price  * self.count)
         return round(res)

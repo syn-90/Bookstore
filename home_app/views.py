@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from product_app.models import CategoryModel
+from product_app.models import CategoryModel, ProductModel
 from ordering_app.models import BasketOrderModel
 
 
@@ -12,6 +12,8 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data( **kwargs)
         context['categories'] = CategoryModel.objects.all()
+        context['new_products'] = ProductModel.objects.order_by('-id')[:3]
+        context['off_products'] = ProductModel.objects.filter(is_off__isnull = False )[:4]
         return context
 
 

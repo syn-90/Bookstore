@@ -1,5 +1,5 @@
 {% extends '_layout.html' %}
-
+{% load poll_extras %}
 {% block title %}
     سبد خرید
 {% endblock %}
@@ -95,7 +95,7 @@
 
 
                                     <div class="cart_item_price">
-                                        <div class="cart_item_price_discount">{{ detail.final_product_price }} میلیون
+                                        <div class="cart_item_price_discount">{{ detail.final_product_price|number_seprator }} میلیون
                                             تومان
                                         </div>
                                         <div class="cart_item_price_mrp">1,910 میلیون تومان</div>

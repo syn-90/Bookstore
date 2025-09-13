@@ -10032,6 +10032,37 @@ input::-webkit-inner-spin-button {
   background: #fff;
 }
 
+.heart-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    transition: all 0.3s ease;
+    padding: 5px;
+}
+
+.heart-btn .fa-heart-o {
+    color: #ccc; /* رنگ قلب خالی */
+}
+
+.heart-btn.favorite .fa-heart {
+    color: #ff0000; /* رنگ قلب پر */
+    transform: scale(1.1); /* انیمیشن کوچک برای تأکید */
+}
+
+.heart-btn:hover {
+    transform: scale(1.1);
+}
+
+.quick_button i {
+    color: #999; /* پیشفرض خاکستری */
+    transition: color 0.3s ease;
+}
+
+.quick_button i.active {
+    color: red; /* وقتی کلیک شد */
+}
+
 /*---------------------------------------------------- */
 
 /*# sourceMappingURL=style.css.map */
