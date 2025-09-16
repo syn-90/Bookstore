@@ -1,0 +1,136 @@
+{% load poll_extras %}
+<div class="col-lg-8" id="basket_content">
+
+    {% if request.user.is_authenticated %}
+        {% if basket.sum_basket == 0 or empty_basket %}
+            <div class="container rtl">
+                <div class="alert alert-warning alert-dismissible fade show  mb-0" role="alert">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close"></button>
+                    <h6>مشتری گرامی</h6>
+
+                    <p>سبد خرید شما خالی است</p>
+
+
+                </div>
+
+                <div class="cart-empty" style="margin-right: 200px">
+                    <img src="/static/img/cart-placeholder.png" alt="سبد خرید"
+                         class="img-fluid mx-auto d-block"
+                         style="max-width: 800px; opacity: 0.8;">
+                </div>
+            </div>
+        {% else %}
+
+            <div class="cart_item_wrapper">
+            {% for detail in details %}
+                <div class="single_cart_item">
+                    {#                                <div class="cart_item_select">#}
+                    {#                                    <input class="form-check-input" type="checkbox" checked>#}
+                    {#                                </div>#}
+                    <div class="cart_item_image">
+                        <img src="{{ detail.product.image.url }}" alt="cart">
+                    </div>
+                    <div class="cart_item_content">
+                        <a href="product-single.html" class="book_name">{{ detail.product.title }}</a>
+                        <div class="author_name">{{ detail.product.author.name }} </div>
+                        <div class="cart_action">
+                            <a onclick="remove_detail({{ detail.id }})" class="cart_remove"><i
+                                    class="ti-trash"></i></a>
+                        </div>
+                        <div class="book_available">فقط {{ detail.product.count }} نسخه موجود است</div>
+                    </div>
+                    <div class="cart_quantity">
+                        <a onclick="count_product( {{ detail.product.id }},'minus')"
+                           class="quantity_btn minus"><i class="icon_minus-06"></i></a>
+                        <input type="text" step="1" value="{{ detail.count }}">
+                        <a onclick="count_product( {{ detail.product.id }}, 'plus')"
+                           class="quantity_btn plus"><i class="icon_plus"></i></a>
+                    </div>
+
+
+                    {% if detail.product.is_off %}
+                        <div class="cart_item_price">
+                            <div class="cart_item_price_discount">{{ detail.final_product_price_with_off|number_seprator }}
+
+                                تومان
+                            </div>
+                            <div class="cart_item_price_mrp">{{ detail.final_product_price|number_seprator }}  تومان</div>
+                        </div>
+                    {% else %}
+                        <div class="cart_item_price_discount">{{ detail.final_product_price|number_seprator }}
+
+                                تومان
+                            </div>
+                    {% endif %}
+
+                </div>
+            {% endfor %}
+        {% endif %}
+
+    {% else %}
+        <div class="container rtl">
+            <div class="alert alert-warning alert-dismissible fade show  mb-0" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"
+                        aria-label="Close"></button>
+                <h6>مشتری گرامی</h6>
+
+                <p>لطفا ابتدا وارد <a href="{% url 'login_page' %}"> حساب کاربری </a>خود شوید </p>
+
+
+            </div>
+
+            <div class="cart-empty" style="margin-right: 200px">
+                <img src="/static/img/cart-placeholder.png" alt="سبد خرید"
+                     class="img-fluid mx-auto d-block"
+                     style="max-width: 800px; opacity: 0.8;">
+                {#                                <p class="mt-3">سبد خرید شما خالی است</p>#}
+            </div>
+        </div>
+
+    {% endif %}
+
+
+    </div>
+    {#                    {% endif %}#}
+</div>
+{% if basket.sum_basket != 0 %}
+    <div class="col-lg-4">
+        <div class="cart_checkout_summary">
+            <div class="cart_checkout_header">
+                <h5>خلاصه پرداخت</h5>
+            </div>
+            <div class="cart_checkout_body">
+                <div class="checkout_item">
+                    <span>جمع محصولات</span>
+                    <span>{{ basket.sum_basket|number_seprator }} تومان</span>
+                </div>
+                <div class="checkout_item">
+                                        <span>ارسال <button type="button" class="tooltip-btn" data-bs-toggle="tooltip"
+                                                            data-bs-placement="top" title=""
+                                                            data-bs-original-title="راهنمای بابت ارسال">
+                                                <i class="icon_info_alt"></i>
+                                            </button></span>
+                    <span>57 تومان </span>
+                </div>
+{#                <div class="checkout_item">#}
+{#                    <span>جمع</span>#}
+{#                    <span>777 هزار تومان</span>#}
+{#                </div>#}
+                <div class="checkout_item strong">
+                    <span>جمع پرداختی</span>
+                    <span> {{ basket.sum_basket|number_seprator }} تومان   </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="cart_proceed_checkout mt-3">
+            <a href="checkout-gift.html" class="bj_theme_btn strock_btn w-100 ">سفارش به عنوان
+                هدیه</a>
+
+            <a href="checkout.html" class="bj_theme_btn w-100 border-0 mt-2">به تسویه حساب بروید <i
+                    class="arrow_right"></i></a>
+        </div>
+    </div>
+    </div>
+{% endif %}

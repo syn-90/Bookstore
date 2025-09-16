@@ -47,12 +47,7 @@
                     <div class="account_dashboard_sidebar">
                         <div class="sidebar_widget_body d-flex account_dashboard_sidebar_profile">
                             <div class="">
-                                {% if user.avatar %}
                                     <img src="{{ user.avatar.url }}" alt="account">
-                                {% else %}
-                                    <img src="/static/img/User%20Profile%20Icon.png">
-                                {% endif %}
-                                {#                                    <img src="{{ user.avatar.url }}" alt="account">#}
                             </div>
                             <div class="">
                                 <div class="greetings">درود</div>
@@ -62,15 +57,10 @@
                         </div>
                         <div class="sidebar_widget_body p-0">
                             <ul class="sidebar_widget_menu">
-                                <li><a class="active " href="my-account.html">پروفایل من</a></li>
+                                <li><a class="active " href="{% url 'dashboard_page' %}">پروفایل من</a></li>
                                 <li><a href="{% url 'change_password' %}">تغییر رمز عبور</a></li>
-                                <li><a href="my-address.html">آدرس من</a></li>
                                 <li><a href="{% url 'order_page_dashboard' %}">سفارشات من</a></li>
-                                <li><a href="my-ebook-library.html">کتاب خانه الکتورنیکی من </a></li>
-                                <li><a href="my-list.html">لیست های من</a></li>
                                 <li><a href="{% url 'favorite_page' %}">علاقه مندی های من</a></li>
-                                <li><a href="my-rating-reviews.html">رتبه بندی و نظرات من</a></li>
-                                <li><a href="my-following-authors.html">نویسندگان بعدی من</a></li>
                             </ul>
                         </div>
                     </div>

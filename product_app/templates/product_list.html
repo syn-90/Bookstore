@@ -243,10 +243,16 @@
                                             <h4 class="bj_new_pr_title">{{ product.title }}</h4>
                                         </a>
                                         <div class="bj_pr_meta d-flex">
-                                            <div class="book_price">
-                                                <del>120</del>
-                                                {{ product.price|number_seprator }} تومان
-                                            </div>
+                                            {% if product.is_off %}
+                                                <div class="book_price">
+                                                    <del>{{ product.price|number_seprator }}</del>
+                                                    {{ product.price|price_with_off:product.is_off|number_seprator }} تومان
+                                                </div>
+                                            {% else %}
+                                                <div class="book_price">
+                                                    {{ product.price|number_seprator }} تومان
+                                                </div>
+                                            {% endif %}
                                         </div>
                                     </div>
                                 </div>
@@ -269,11 +275,11 @@
                                                    data-bs-toggle="tooltip"
                                                    data-bs-placement="right" title="علاقه مندی"><i
                                                         class="icon_heart_alt"></i></a>
-{#                                                <a id="heart-{{ product.id }}"#}
-{#                                                        onclick="add_to_favorite({{ product.id }})"#}
-{#                                                        class="heart-btn {% if product.is_favorite %}favorite{% endif %}">#}
-{#                                                    <i class="fa {% if product.is_favorite %}fa-heart{% else %}icon_heart_alt{% endif %}"></i>#}
-{#                                                </a>#}
+                                                {#                                                <a id="heart-{{ product.id }}"#}
+                                                {#                                                        onclick="add_to_favorite({{ product.id }})"#}
+                                                {#                                                        class="heart-btn {% if product.is_favorite %}favorite{% endif %}">#}
+                                                {#                                                    <i class="fa {% if product.is_favorite %}fa-heart{% else %}icon_heart_alt{% endif %}"></i>#}
+                                                {#                                                </a>#}
                                                 <span data-bs-toggle="tooltip" data-bs-placement="right"
                                                       title="مشاهده سریع"><button
                                                         class="quick_button" data-bs-toggle="modal"

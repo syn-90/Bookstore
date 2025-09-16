@@ -1,0 +1,36 @@
+<li class="nav-item shpping-cart dropdown submenu" id="add_basket_content">
+    <a class="cart-btn nav-link dropdown-toggle" href="{% url "order_page" %}" role="button"
+       data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="icon-shopping-basket"></i><span
+            class="num">{{ basket.orderdetailmodel_set.all.count }}</span></a>
+    <ul class="dropdown-menu">
+        {% for detail in basket.orderdetailmodel_set.all %}
+            <li class="cart-single-item clearfix">
+                <div class="cart-img">
+                    <img src="{{ detail.product.image.url }}" alt="styler"/>
+                </div>
+                <div class="cart-content text-left">
+                    <p class="cart-title">
+                        <a href="{% url 'products_details' detail.product.slug %}">{{ detail.product.title }}</a>
+                    </p>
+
+
+                    <p>{{ detail.product.price }}تومان</p>
+
+                    </p>
+                </div>
+                <div class="cart-remove">
+                    <a onclick="remove_detail({{ detail.id }})" href="#" class="action"><span
+                            class="ti-close"></span></a>
+                </div>
+            </li>
+        {% endfor %}
+        <li class="cart_f">
+            <div class="cart-button text-center">
+                <a href="{% url 'order_page' %}" class="btn btn-cart get_btn pink">سبد
+                    خرید</a>
+                <a href="checkout.html" class="btn btn-cart get_btn dark">تسویه حساب</a>
+            </div>
+        </li>
+    </ul>
+</li>

@@ -31,7 +31,7 @@ class DashboardView(View):
             })
         else:
             user.username = user_name
-            if new_avatar:   # اگر کاربر عکس جدید انتخاب کرده باشه
+            if new_avatar:
                 user.avatar = new_avatar
                 change_avatar = True
             user.save()

@@ -12,8 +12,12 @@ class BasketOrderModel(models.Model):
         final_price = 0
         try:
             for detail in self.orderdetailmodel_set.all():
-                final_price += detail.final_product_price()
-            return final_price
+                if detail.product.is_off is not None:
+                    final_price += detail.final_product_price_with_off()
+                else:
+                    final_price +=detail.final_product_price()
+
+            return int(final_price)
         except:
             return 0
 
@@ -24,4 +28,7 @@ class OrderDetailModel(models.Model):
     off = models.FloatField()
     def final_product_price(self):
         res = int(self.product.price  * self.count)
+        return round(res)
+    def final_product_price_with_off(self):
+        res = int(self.product.price - (self.product.price * (self.product.is_off / 100))) * self.count
         return round(res)

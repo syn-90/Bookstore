@@ -43,7 +43,9 @@ def add_to_order(request):
             order_detail = OrderDetailModel(basket=basket, product_id=product_id,count=1, off=5)
             print(order_detail.count)
             order_detail.save()
-            return JsonResponse({'status': 'success'})
+            return render(request, 'template_service/icon_basket.html', {
+                'basket' : basket
+            })
 
     else:
         return JsonResponse({'status': 'not_login'})
@@ -53,6 +55,8 @@ def change_count_basket(request):
         detail_id = int(request.GET.get('detail_id'))
         state = request.GET.get('state')
         user = request.user
+        basket = BasketOrderModel.objects.filter(user=user, is_paid=False).first()
+        details = OrderDetailModel.objects.filter(basket__user_id=user.id, basket__is_paid=False)
         detail = OrderDetailModel.objects.filter(
             basket__user=user, basket__is_paid=False, product_id=detail_id
         ).first()
@@ -69,19 +73,24 @@ def change_count_basket(request):
             else:
                 detail.save()
                 basket = detail.basket
-                return render(request, 'order_page.html', {
-                    'details' : basket.orderdetailmodel_set.all
+                return render(request, 'basket.html', {
+                    'details' : basket.orderdetailmodel_set.all,
+                    'basket':basket
                 })
 
         elif state == 'minus':
             detail.count -= 1
             if detail.count < 1:
                 detail.delete()
-                return JsonResponse({'status': 'removed'})
+                return render(request, 'basket.html', {
+                    "basket" : basket,
+                    'details': details
+                })
             else:
                 detail.save()
                 basket = detail.basket
-                return render(request, 'order_page.html', {
+                return render(request, 'basket.html', {
+                    "basket": basket,
                     'details': basket.orderdetailmodel_set.all
                 })
 
@@ -99,11 +108,22 @@ def remove_detail(request):
     if request.method == 'POST':
         detail_id = int(request.POST.get('detail_id'))
         user = request.user
-        # basket = BasketOrderModel.objects.filter(is_paid=False, user = user).first()
+        basket = BasketOrderModel.objects.filter(is_paid=False, user = user).first()
+        details = OrderDetailModel.objects.filter(basket__user_id=user.id, basket__is_paid=False)
         detail = OrderDetailModel.objects.filter(basket__user= user, id= detail_id, basket__is_paid=False).first()
         if detail is not None:
             detail.delete()
-            return JsonResponse({'message' : 'success'} , status=201)
+            if details is not None:
+                return render(request, 'basket.html', {
+                    "basket" : basket,
+                    'details' : details
+                })
+            else:
+                return render(request, 'basket.html', {
+                    "basket" : basket,
+                    'empty_basket':  True
+                })
+
         else:
             return JsonResponse({'message' : 'not_found'} , status=404)
         # if detail is not None:
