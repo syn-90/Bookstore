@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'articels_app',
     'ordering_app',
     'dashboard_app',
+    'sitesettings_app',
 ]
 
 MIDDLEWARE = [

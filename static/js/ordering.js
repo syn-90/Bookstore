@@ -13,7 +13,7 @@ function add_to_basket(product_id){
             alert('لطفا ابتدا وارد شوید')
         }else{
             alert('به سبد خرید اضافه شد')
-            add_basket_content.html(response)
+            // add_basket_content.html(response)
         }
 
 
@@ -41,7 +41,7 @@ function count_product(detail_id,status){
 
 function remove_detail(detail_id){
     let basket_content = $('#basket_content')
-    $.post('remove_detail/', {
+    $.post('/order/remove_detail/', {
         'detail_id' : detail_id
     },
         function (response){

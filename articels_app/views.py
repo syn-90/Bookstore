@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import Http404, JsonResponse
 from django.shortcuts import render
 from django.views import View
@@ -8,6 +9,14 @@ from .models import ArticleModel, ArticleCommentModel
 class ArticelsPage(View):
     def get(self,request):
         articels = ArticleModel.objects.filter(is_active=True)
+        paginator = Paginator(articels, 3)
+        page_number = request.GET.get('page')
+        try:
+            articels = paginator.page(page_number)
+        except PageNotAnInteger:
+            articels = paginator.page(1)
+        except EmptyPage:
+            articels = paginator.page(paginator.num_pages)
         return render(request, 'article_page.html',{
             'articels' : articels
 

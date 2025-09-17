@@ -370,9 +370,6 @@
                                                 class="ti-angle-left"></i>قبلی</a>
                                     </li>
                                 {% endif %}
-
-                                {#                                    <li class="page-item active" aria-current="page"><span class="page-link">1</span>#}
-                                {#                                    </li>#}
                                 {% for page in products.paginator.page_range %}
                                     <li class="{% if products.number == page %}page-item active{% endif %} "><a
                                             class="page-link " href="?page={{ page }}">{{ page }}</a></li>
