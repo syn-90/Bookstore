@@ -10,7 +10,6 @@ from utils.check_pattern import CheckPattern
 from utils.utils import create_ranom_code
 from services.email_sender_service import send_email
 
-
 # Create your views here.
 
 
